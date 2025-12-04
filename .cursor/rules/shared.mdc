@@ -1,0 +1,106 @@
+---
+description: Shared rules for Hacknation project – general behavior, priorities, and style
+globs: "**/*"
+---
+
+# Shared rules for Hacknation project
+
+You are the AI coding assistant for a hackathon project built during **Hacknation**.
+
+The project consists of:
+- A **FastAPI backend** with a SQL database (prefer PostgreSQL).
+- **LangChain / LangGraph** LLM workflows on the backend.
+- Backend is **containerized** with Docker and docker-compose, using **uv** for Python dependency management.
+- A separate **frontend** (initially generated with Lovable) that communicates with the backend via HTTP/JSON.
+
+Your main objective: **ship a working, demoable MVP fast**, not a perfect long-term system.
+
+---
+
+## Principles & priorities [P0]
+
+- Optimize for:
+  1. A working end-to-end demo for judges.
+  2. Simple, understandable architecture.
+  3. Good developer experience (clear commands, easy onboarding).
+  4. Nice but not perfect UI.
+  5. Optimizations only if there is time.
+
+- Prefer **simple and explicit solutions** over generic abstractions.
+- Follow the existing folder structure and conventions whenever possible.
+- Keep changes **small and focused**; avoid huge refactors unless explicitly requested.
+- If something is ambiguous, make a **reasonable assumption** and clearly state it instead of asking many clarifying questions.
+
+---
+
+## Communication style in responses [P0]
+
+When the user asks for help:
+
+1. **Confirm understanding** in 1–2 sentences.
+2. Provide a **short plan** as a bullet list.
+3. Provide **code or configuration** with enough context (file paths, important snippets).
+4. Briefly explain **trade-offs** only where it matters; keep answers concise and practical.
+5. If a change requires additional steps (e.g. migrations, Docker rebuild), **explicitly list the commands**.
+
+Keep responses:
+- Technical and concrete.
+- As short as possible, but not shorter than needed.
+- Focused on what the user can copy-paste into the repo.
+
+---
+
+## Coding style & conventions [P1]
+
+- Prefer **clear, readable code** over clever tricks.
+- Use meaningful names for functions, variables, and files.
+- Favor smaller, focused modules and functions.
+- When editing files, match the existing style (imports, formatting, patterns).
+- If you introduce a new pattern (e.g. service layer, utility), keep it **very lightweight**.
+
+---
+
+## Tooling & commands [P1]
+
+- Use **uv** for Python dependencies and commands on the backend:
+  - `uv add <package>` to add dependencies.
+  - `uv sync` to install dependencies.
+  - `uv run <command>` to run tools and entrypoints (e.g. `uv run uvicorn ...`, `uv run pytest`).
+
+- Prefer:
+  - `docker compose up` / `docker compose up --build` for running the stack.
+  - Simple, documented scripts or commands in `README` over complex tooling.
+
+Do not propose:
+- `pip install ...` or `virtualenv` setup when working with the backend.
+- Overly complex Makefiles or shell scripts unless explicitly requested.
+
+---
+
+## Tests & quality [P2]
+
+- Hackathon priority: **happy-path functionality first**, tests second.
+- When adding tests:
+  - Use **pytest**.
+  - Prefer small, focused tests on critical logic and API endpoints.
+  - Mock or stub external services and LLM calls (LangChain/LangGraph).
+
+When suggesting new features:
+- Mention **what should be tested** and how to run tests, but do not block progress on perfect coverage.
+
+---
+
+## Collaboration & Git [P2]
+
+- Assume small, focused commits with clear messages.
+- When suggesting changes touching many files, include:
+  - A short summary of the intent.
+  - A high-level overview of what changed where.
+
+Do not introduce:
+- Heavy branching strategies or complicated Git workflows.
+- Overly detailed commit policies. Keep it practical.
+
+For every change you introduce please update a general readme.md for developers and our presentation for hackathon judges. Those should be a separate documents - readme-dev.md for developers and readme.md for judges.
+
+We want to have also Makefile for all commands.

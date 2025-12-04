@@ -1,0 +1,269 @@
+---
+description: Rules for FastAPI backend with LangChain/LangGraph, uv, Docker, and SQL database
+globs: "app/**/*.py, backend/**/*.py, tests/**/*.py, Dockerfile, Dockerfile.*, docker-compose*.yml, **/docker-compose*.yml"
+---
+
+# Backend rules: FastAPI + LangChain/LangGraph + uv + Docker
+
+You are the AI coding assistant for the **backend** of this Hacknation project.
+
+The backend is built with:
+- **FastAPI** as the web framework.
+- A **SQL database** (prefer PostgreSQL).
+- **LangChain / LangGraph** for LLM workflows.
+- **uv** for Python dependency management and command execution.
+- **Docker** and **docker-compose** for containerization.
+- A separate frontend (e.g. Lovable-generated app) that calls this backend via HTTP/JSON.
+
+Your goal: build a **simple, robust backend** that can be easily run locally and in demo environments.
+
+---
+
+## Backend structure & architecture [P0]
+
+Preferred structure (adapt to existing layout):
+
+- `app/`
+  - `app/main.py` – FastAPI app and startup code.
+  - `app/api/` – API routers and endpoints.
+    - e.g. `app/api/v1/__init__.py`
+    - e.g. `app/api/v1/routes_chat.py`
+  - `app/schemas/` – Pydantic models (request/response DTOs).
+  - `app/models/` – ORM models (SQLAlchemy, SQLModel, etc.).
+  - `app/services/` – business logic and database operations.
+  - `app/llm/` – LangChain/LangGraph logic:
+    - `app/llm/chains/`
+    - `app/llm/graphs/`
+    - `app/llm/prompts/`
+  - `app/core/` – configuration, dependencies, security, DB session, settings.
+- `tests/` – pytest tests mirroring app structure.
+
+Guidelines:
+
+- Keep API handlers **thin** – they should mainly:
+  1. Validate input via Pydantic.
+  2. Call service/LLM functions.
+  3. Return responses.
+
+- Avoid:
+  - Over-architected patterns (clean architecture / DDD) for the hackathon.
+  - Multiple ORMs or redundant abstractions around the DB.
+
+---
+
+## FastAPI conventions [P0]
+
+- Use **APIRouter** for grouping endpoints:
+  - `router = APIRouter(prefix="/api/v1/chat", tags=["chat"])`
+  - Include routers in `app/main.py` with `app.include_router(...)`.
+
+- Use **Pydantic models** in `app/schemas/` for:
+  - Request bodies.
+  - Response models.
+
+- Return values:
+  - Prefer explicit response models for public endpoints.
+  - Use standard HTTP status codes (`200`, `201`, `400`, `404`, `500`, etc.).
+
+- Errors:
+  - Raise `HTTPException` with clear messages.
+  - For common patterns, you may define small helpers but keep them simple.
+
+---
+
+## Database & persistence [P0]
+
+- Assume **PostgreSQL** or another SQL DB accessed via ORM (e.g. SQLAlchemy/SQLModel).
+- DB config:
+  - Use `DATABASE_URL` from environment variables.
+  - Place DB engine and session creation in `app/core/db.py` (or similar).
+
+- DB session handling:
+  - Use FastAPI dependency injection for a per-request DB session.
+  - Ensure sessions are closed or disposed properly.
+
+- Migrations:
+  - If migrations are used, prefer **Alembic**.
+  - When changing models, suggest migration steps but keep them straightforward.
+
+For hackathon scope:
+- Keep schemas minimal and focused on what the app needs now.
+- Avoid premature optimization or over-normalization.
+
+---
+
+## LangChain / LangGraph integration [P0]
+
+- Place all LLM-related logic under `app/llm/`.
+
+Suggested layout:
+
+- `app/llm/chains/` – standard LangChain chains and tools.
+- `app/llm/graphs/` – LangGraph graphs and state machines.
+- `app/llm/prompts/` – prompt templates and system instructions.
+- `app/llm/config.py` – model provider configuration/helpers if needed.
+
+Rules:
+
+- Do not hard-code API keys or model names in code.
+  - Read them from environment variables via a config/settings object.
+- Design chains/graphs so that:
+  - FastAPI endpoints pass in validated input.
+  - The chain/graph returns structured results that can be serialized to JSON.
+
+Testing:
+
+- When writing tests, prefer mocking LLM calls:
+  - Provide fake responses for the chains/graphs.
+  - Avoid calling real external APIs in test runs.
+
+---
+
+## API design for frontend integration [P0]
+
+The frontend will consume the backend via HTTP/JSON.
+
+- Paths:
+  - Use `/api/v1/...` prefix for all public API endpoints.
+  - Use resource-oriented or action-oriented endpoints, e.g.:
+    - `/api/v1/chat/complete`
+    - `/api/v1/items`
+    - `/api/v1/users/me`
+
+- Request & response shape:
+  - Keep responses consistent; either:
+    - `{"data": ..., "error": null}` on success and `{"data": null, "error": {...}}` on error,
+    - or direct objects with clear docs – but keep one style throughout.
+
+- CORS:
+  - Enable CORS for local frontend development origin(s).
+  - Configure with FastAPI’s `CORSMiddleware`.
+
+- Auth (if needed):
+  - Prefer the simplest solution that matches requirements (e.g. JWT, API keys).
+  - Keep auth implementation minimal and focused.
+
+---
+
+## Package management with uv [P0]
+
+The backend uses **uv** for dependency management.
+
+Rules:
+
+- Do not use raw `pip install` or `requirements.txt` in new code or instructions unless the repo explicitly does.
+- Prefer:
+  - `uv add <package>` to add dependencies.
+  - `uv sync` to install/update dependencies.
+  - `uv run <command>` to run application and tools.
+
+Examples:
+
+- Add FastAPI + Uvicorn:
+  - `uv add fastapi uvicorn[standard]`
+- Run the app locally:
+  - `uv run uvicorn app.main:app --reload --host 0.0.0.0 --port 8000`
+- Run tests:
+  - `uv run pytest`
+
+When providing instructions, always show the **uv version** of the command.
+
+---
+
+## Docker & docker-compose [P0]
+
+The backend runs in Docker; use **uv** inside the container where possible.
+
+Guidelines for Dockerfile (patterns to prefer):
+
+1. Base image:
+   - `python:3.11-slim` or `python:3.12-slim`.
+
+2. Install uv:
+   - Use the recommended installation method (e.g. curl or pip, depending on project practices).
+
+3. Use layering for caching:
+   - Copy only `pyproject.toml` and `uv.lock` first.
+   - Run `uv sync --frozen` to install dependencies.
+   - Then copy the application code.
+
+4. Entrypoint:
+   - Use `uv run` to start the app, for example:
+     - `CMD ["uv", "run", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]`
+
+Guidelines for docker-compose:
+
+- Define at least:
+  - `api` service (the FastAPI backend).
+  - `db` service (Postgres or other SQL DB).
+
+- `api` service:
+  - Build from the Dockerfile in the backend directory.
+  - Expose port `8000` (or configured API port).
+  - Load environment variables from `.env` (or `.env.backend`), not hard-coded.
+
+- `db` service:
+  - Use official Postgres image.
+  - Configure `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_DB` via env vars.
+  - Expose port `5432` for local access (if needed).
+  - Use a named volume for persistence.
+
+When you modify Docker/Docker Compose:
+
+- Keep commands simple and explicit.
+- Mention how to rebuild and run the stack, e.g.:
+  - `docker compose up --build`
+  - `docker compose up -d api db`
+
+---
+
+## Configuration & environment [P1]
+
+- Use a central config module, e.g. `app/core/config.py`, with a `BaseSettings` class for:
+  - `DATABASE_URL`
+  - LLM provider keys (e.g. `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, etc.)
+  - `ENV`, `DEBUG`, `API_PREFIX`, `FRONTEND_ORIGIN`, etc.
+
+Rules:
+
+- Never commit real secrets or keys.
+- It is allowed to provide a `.env.example` or documented list of required variables.
+
+When adding new settings:
+- Document them in comments or `README`.
+- Use sensible defaults for local development where possible.
+
+---
+
+## Tests for backend [P1]
+
+- Use **pytest**; place tests under `tests/`.
+- For API tests:
+  - Use FastAPI’s `TestClient`.
+  - Test main happy-path flows (e.g. key endpoints, main LLM integration entrypoints).
+
+- For LLM-related logic:
+  - Mock/stub LLM calls and graph execution.
+  - Focus on logic around them (e.g. data preparation, post-processing).
+
+Commands (using uv):
+
+- Run tests:
+  - `uv run pytest`
+- Optionally run with coverage (if needed):
+  - `uv run pytest --maxfail=1 --disable-warnings -q`
+
+---
+
+## How to respond for backend-related requests [P0]
+
+When the user asks for backend changes:
+
+1. **Confirm intent** (1–2 sentences).
+2. Provide a **short plan** with bullets.
+3. Show **code snippets** with paths (e.g. `app/api/v1/routes_chat.py`) and explain where they go.
+4. If Docker, env vars, or DB are affected:
+   - Explicitly mention required env vars.
+   - Provide commands to apply changes (`uv sync`, `docker compose up --build`, migrations).
+
+Keep answers focused on what can be **directly pasted into the project** and run with minimal friction.
