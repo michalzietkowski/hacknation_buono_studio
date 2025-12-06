@@ -1,11 +1,15 @@
-FROM node:20-alpine AS base
+FROM node:20-alpine AS deps
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci
+RUN npm ci --ignore-scripts
 
-FROM base AS build
+FROM node:20-alpine AS build
+WORKDIR /app
+ENV NODE_ENV=production
 ARG VITE_API_BASE_URL=http://localhost:8000/api/v1
 ENV VITE_API_BASE_URL=${VITE_API_BASE_URL}
+COPY --from=deps /app/package*.json ./
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN npm run build
 
