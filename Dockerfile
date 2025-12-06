@@ -9,8 +9,10 @@ WORKDIR /app
 COPY pyproject.toml ./
 COPY uv.lock* ./
 
-# Copy app directory (needed for package build)
+# Copy app code and migrations/config for Alembic
 COPY app/ ./app/
+COPY alembic.ini ./
+COPY migrations/ ./migrations/
 
 # Install dependencies (--frozen only if lock file exists)
 RUN if [ -f uv.lock ]; then uv sync --frozen; else uv sync; fi

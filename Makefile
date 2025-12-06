@@ -6,6 +6,12 @@ backend-dev:
 backend-test:
 	uv run pytest
 
+alembic-revision:
+	uv run alembic revision --autogenerate -m "$(msg)"
+
+migrate:
+	uv run alembic upgrade head
+
 frontend-install:
 	cd frontend && npm install
 
@@ -20,4 +26,10 @@ compose-up:
 
 compose-down:
 	docker compose down
+
+compose-up-migrate:
+	docker compose up -d --build db
+	docker compose build api
+	docker compose run --rm api uv run alembic upgrade head
+	docker compose up --build api frontend
 
