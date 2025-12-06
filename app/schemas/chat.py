@@ -33,6 +33,7 @@ class FieldAssistRequest(BaseModel):
     message: str
     form_state: Optional[Dict[str, Any]] = None
     history: Optional[List[AgentMessage]] = None
+    session_id: Optional[str] = None
 
 
 class FieldAssistResponse(BaseModel):

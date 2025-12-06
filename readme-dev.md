@@ -29,11 +29,12 @@ Run services:
   - `DATABASE_URL` (compose default: `postgresql+psycopg://user:password@db:5432/app`)
   - `OPENAI_API_KEY` (needed for real LLM responses)
   - `FRONTEND_ORIGIN` (default `http://localhost:3000`)
+  - `ASSIST_HISTORY_LIMIT` (optional, default 30) – how many turns to retain per session
 - Frontend: `.env.example` → `.env.local`
   - `VITE_API_BASE_URL` (default `http://localhost:8000/api/v1`; compose build uses `http://api:8000/api/v1`)
 
 ## LLM endpoints
-- `/api/v1/assist/field` – form support assistant (body: `field_id`, `message`, optional `form_state`, optional `history` of `{role, content}`); returns `reply` string.
+- `/api/v1/assist/field` – form support assistant (body: `field_id`, `message`, optional `form_state`, optional `history` of `{role, content}`, optional `session_id` to persist context server-side); returns `reply` string.
 - `/api/v1/agent-chat/completion` – general agent chat (existing).
 - `/api/v1/chat/completion` – basic echo/LLM chat (stub unless `OPENAI_API_KEY` set).
 

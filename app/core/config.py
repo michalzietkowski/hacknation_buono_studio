@@ -14,6 +14,7 @@ class Settings(BaseSettings):
     
     # LLM
     OPENAI_API_KEY: str | None = None
+    ASSIST_HISTORY_LIMIT: int = 30
     
     # LangSmith / LangChain tracing
     LANGCHAIN_TRACING_V2: str | None = None
