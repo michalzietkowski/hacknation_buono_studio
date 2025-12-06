@@ -4,6 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { AIFieldHelper } from '../AIFieldHelper';
 import { cn } from '@/lib/utils';
 
 const accidentContextOptions = [
@@ -33,7 +34,10 @@ export function Step5AccidentBasic() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="accidentDate">Data wypadku *</Label>
+              <div className="flex items-center gap-1">
+                <Label htmlFor="accidentDate">Data wypadku *</Label>
+                <AIFieldHelper fieldId="accidentDate" fieldLabel="Data wypadku" />
+              </div>
               <Input
                 id="accidentDate"
                 type="date"
@@ -43,7 +47,10 @@ export function Step5AccidentBasic() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="accidentTime">Godzina wypadku *</Label>
+              <div className="flex items-center gap-1">
+                <Label htmlFor="accidentTime">Godzina wypadku *</Label>
+                <AIFieldHelper fieldId="accidentTime" fieldLabel="Godzina wypadku" />
+              </div>
               <Input
                 id="accidentTime"
                 type="time"
@@ -63,7 +70,10 @@ export function Step5AccidentBasic() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="plannedWorkStart">Planowana godzina rozpoczęcia pracy</Label>
+              <div className="flex items-center gap-1">
+                <Label htmlFor="plannedWorkStart">Planowana godzina rozpoczęcia pracy</Label>
+                <AIFieldHelper fieldId="plannedWorkStart" fieldLabel="Planowana godzina rozpoczęcia pracy" />
+              </div>
               <Input
                 id="plannedWorkStart"
                 type="time"
@@ -72,7 +82,10 @@ export function Step5AccidentBasic() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="plannedWorkEnd">Planowana godzina zakończenia pracy</Label>
+              <div className="flex items-center gap-1">
+                <Label htmlFor="plannedWorkEnd">Planowana godzina zakończenia pracy</Label>
+                <AIFieldHelper fieldId="plannedWorkEnd" fieldLabel="Planowana godzina zakończenia pracy" />
+              </div>
               <Input
                 id="plannedWorkEnd"
                 type="time"
@@ -88,7 +101,10 @@ export function Step5AccidentBasic() {
           <h3 className="font-semibold text-foreground">Gdzie doszło do wypadku?</h3>
 
           <div className="space-y-2">
-            <Label htmlFor="accidentPlace">Miejsce wypadku *</Label>
+            <div className="flex items-center gap-1">
+              <Label htmlFor="accidentPlace">Miejsce wypadku *</Label>
+              <AIFieldHelper fieldId="accidentPlace" fieldLabel="Miejsce wypadku" />
+            </div>
             <Textarea
               id="accidentPlace"
               value={accidentBasic.accidentPlace}

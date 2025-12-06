@@ -4,6 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Switch } from '@/components/ui/switch';
+import { AIFieldHelper } from '../AIFieldHelper';
 import {
   Select,
   SelectContent,
@@ -45,7 +46,10 @@ export function Step6Injury() {
           <h3 className="font-semibold text-foreground">Rodzaj urazu</h3>
 
           <div className="space-y-2">
-            <Label htmlFor="injuryType">Typ urazu *</Label>
+            <div className="flex items-center gap-1">
+              <Label htmlFor="injuryType">Typ urazu *</Label>
+              <AIFieldHelper fieldId="injuryType" fieldLabel="Typ urazu" />
+            </div>
             <Select
               value={injury.injuryType}
               onValueChange={(value) => updateField('injury.injuryType', value)}
@@ -64,7 +68,10 @@ export function Step6Injury() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="injuryDescription">Opis urazu *</Label>
+            <div className="flex items-center gap-1">
+              <Label htmlFor="injuryDescription">Opis urazu *</Label>
+              <AIFieldHelper fieldId="injuryDescription" fieldLabel="Opis urazu" />
+            </div>
             <Textarea
               id="injuryDescription"
               value={injury.injuryDescription}
@@ -98,7 +105,10 @@ export function Step6Injury() {
           {injury.firstAidProvided && (
             <div className="space-y-4 animate-fade-in">
               <div className="space-y-2">
-                <Label htmlFor="medicalFacilityName">Nazwa placówki medycznej *</Label>
+                <div className="flex items-center gap-1">
+                  <Label htmlFor="medicalFacilityName">Nazwa placówki medycznej *</Label>
+                  <AIFieldHelper fieldId="medicalFacilityName" fieldLabel="Nazwa placówki medycznej" />
+                </div>
                 <Input
                   id="medicalFacilityName"
                   value={injury.medicalFacilityName || ''}
@@ -108,7 +118,10 @@ export function Step6Injury() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="medicalFacilityAddress">Adres placówki</Label>
+                <div className="flex items-center gap-1">
+                  <Label htmlFor="medicalFacilityAddress">Adres placówki</Label>
+                  <AIFieldHelper fieldId="medicalFacilityAddress" fieldLabel="Adres placówki medycznej" />
+                </div>
                 <Input
                   id="medicalFacilityAddress"
                   value={injury.medicalFacilityAddress || ''}

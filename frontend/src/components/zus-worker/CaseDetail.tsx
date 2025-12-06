@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { AccidentCase, CaseStatus } from '@/types/zus-worker';
+import { AccidentCase, CaseStatus, HistoryEntry } from '@/types/zus-worker';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -19,6 +19,7 @@ import { CaseActionsTab } from './tabs/CaseActionsTab';
 import { CaseOpinionTab } from './tabs/CaseOpinionTab';
 import { CaseCardTab } from './tabs/CaseCardTab';
 import { CaseDocumentsTab } from './tabs/CaseDocumentsTab';
+import { CaseHistoryTab } from './tabs/CaseHistoryTab';
 
 interface CaseDetailProps {
   case: AccidentCase;
@@ -36,10 +37,29 @@ const statusLabels: Record<CaseStatus, string> = {
 export function CaseDetail({ case: caseData, onBack, onUpdate }: CaseDetailProps) {
   const [activeTab, setActiveTab] = useState('summary');
 
+  const addHistoryEntry = (action: HistoryEntry['action'], description: string, details?: HistoryEntry['details']) => {
+    const entry: HistoryEntry = {
+      id: `history-${Date.now()}`,
+      timestamp: new Date().toISOString(),
+      userId: 'user-1',
+      userName: 'Jan Kowalski',
+      action,
+      description,
+      details,
+    };
+    return [...(caseData.history || []), entry];
+  };
+
   const handleStatusChange = (newStatus: CaseStatus) => {
+    const history = addHistoryEntry('status_changed', `Zmieniono status sprawy`, {
+      field: 'Status',
+      oldValue: statusLabels[caseData.status],
+      newValue: statusLabels[newStatus],
+    });
     onUpdate({
       ...caseData,
       status: newStatus,
+      history,
       lastModified: new Date().toISOString(),
       modifiedBy: 'Jan Kowalski',
     });
@@ -56,9 +76,15 @@ export function CaseDetail({ case: caseData, onBack, onUpdate }: CaseDetailProps
   };
 
   const handleMarkReady = () => {
+    const history = addHistoryEntry('status_changed', 'Oznaczono sprawę jako gotową do decyzji', {
+      field: 'Status',
+      oldValue: statusLabels[caseData.status],
+      newValue: statusLabels['ready_for_decision'],
+    });
     onUpdate({
       ...caseData,
       status: 'ready_for_decision',
+      history,
       lastModified: new Date().toISOString(),
       modifiedBy: 'Jan Kowalski',
     });
@@ -173,6 +199,14 @@ export function CaseDetail({ case: caseData, onBack, onUpdate }: CaseDetailProps
             <TabsTrigger value="documents" className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent py-3 px-4">
               Dokumenty
             </TabsTrigger>
+            <TabsTrigger value="history" className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent py-3 px-4">
+              Historia
+              {((caseData.history?.length || 0) + (caseData.comments?.length || 0)) > 0 && (
+                <Badge variant="secondary" className="ml-2 h-5 min-w-5 p-0 text-xs">
+                  {(caseData.history?.length || 0) + (caseData.comments?.length || 0)}
+                </Badge>
+              )}
+            </TabsTrigger>
           </TabsList>
         </div>
 
@@ -197,6 +231,9 @@ export function CaseDetail({ case: caseData, onBack, onUpdate }: CaseDetailProps
           </TabsContent>
           <TabsContent value="documents" className="m-0 h-full">
             <CaseDocumentsTab caseData={caseData} />
+          </TabsContent>
+          <TabsContent value="history" className="m-0 h-full">
+            <CaseHistoryTab caseData={caseData} onUpdate={onUpdate} />
           </TabsContent>
         </div>
       </Tabs>

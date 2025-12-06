@@ -7,6 +7,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Switch } from '@/components/ui/switch';
 import { Button } from '@/components/ui/button';
+import { AIFieldHelper } from '../AIFieldHelper';
 import { MessageSquare, AlertTriangle } from 'lucide-react';
 import {
   Select,
@@ -152,7 +153,10 @@ export function Step7Circumstances() {
         {showOpenMode ? (
           /* Open mode - free text */
           <div className="step-card space-y-4">
-            <h3 className="font-semibold text-foreground">Opis okoliczności wypadku</h3>
+            <div className="flex items-center gap-1">
+              <h3 className="font-semibold text-foreground">Opis okoliczności wypadku</h3>
+              <AIFieldHelper fieldId="freeTextDescription" fieldLabel="Opis okoliczności wypadku" />
+            </div>
             <div className="bg-secondary/50 rounded-lg p-4 space-y-2">
               <p className="text-sm font-medium text-foreground">W opisie uwzględnij:</p>
               <ul className="text-sm text-muted-foreground space-y-1">
@@ -178,9 +182,12 @@ export function Step7Circumstances() {
           <>
             {/* Activity before accident */}
             <div className="step-card space-y-4">
-              <h3 className="font-semibold text-foreground">
-                1. Co dokładnie robiłeś tuż przed wypadkiem?
-              </h3>
+              <div className="flex items-center gap-1">
+                <h3 className="font-semibold text-foreground">
+                  1. Co dokładnie robiłeś tuż przed wypadkiem?
+                </h3>
+                <AIFieldHelper fieldId="activityBeforeAccident" fieldLabel="Czynność przed wypadkiem" />
+              </div>
               {business.pkd && (
                 <p className="text-sm text-muted-foreground">
                   Podpowiedzi dla PKD: {business.pkd} - {business.pkdDescription || business.businessScope}
@@ -220,9 +227,12 @@ export function Step7Circumstances() {
 
             {/* Direct event */}
             <div className="step-card space-y-4">
-              <h3 className="font-semibold text-foreground">
-                2. Co było bezpośrednim zdarzeniem?
-              </h3>
+              <div className="flex items-center gap-1">
+                <h3 className="font-semibold text-foreground">
+                  2. Co było bezpośrednim zdarzeniem?
+                </h3>
+                <AIFieldHelper fieldId="directEvent" fieldLabel="Bezpośrednie zdarzenie" />
+              </div>
               <Select
                 value={circumstances.directEvent}
                 onValueChange={(value) => updateField('circumstances.directEvent', value)}
@@ -257,9 +267,12 @@ export function Step7Circumstances() {
 
             {/* External cause */}
             <div className="step-card space-y-4">
-              <h3 className="font-semibold text-foreground">
-                3. Jaka była przyczyna zewnętrzna?
-              </h3>
+              <div className="flex items-center gap-1">
+                <h3 className="font-semibold text-foreground">
+                  3. Jaka była przyczyna zewnętrzna?
+                </h3>
+                <AIFieldHelper fieldId="externalCause" fieldLabel="Przyczyna zewnętrzna" />
+              </div>
               <Select
                 value={circumstances.externalCause}
                 onValueChange={(value) => updateField('circumstances.externalCause', value)}
@@ -294,9 +307,12 @@ export function Step7Circumstances() {
 
             {/* Machine usage */}
             <div className="step-card space-y-4">
-              <h3 className="font-semibold text-foreground">
-                4. Czy używałeś maszyny lub urządzenia?
-              </h3>
+              <div className="flex items-center gap-1">
+                <h3 className="font-semibold text-foreground">
+                  4. Czy używałeś maszyny lub urządzenia?
+                </h3>
+                <AIFieldHelper fieldId="usedMachine" fieldLabel="Używanie maszyny/urządzenia" />
+              </div>
 
               <div className="flex items-center justify-between p-4 bg-secondary/50 rounded-lg">
                 <Label htmlFor="usedMachine" className="font-medium">
@@ -326,7 +342,10 @@ export function Step7Circumstances() {
                 <div className="space-y-4 animate-fade-in">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label htmlFor="machineName">Nazwa maszyny/urządzenia *</Label>
+                      <div className="flex items-center gap-1">
+                        <Label htmlFor="machineName">Nazwa maszyny/urządzenia *</Label>
+                        <AIFieldHelper fieldId="machineName" fieldLabel="Nazwa maszyny/urządzenia" />
+                      </div>
                       <Input
                         id="machineName"
                         value={circumstances.machineName || ''}
@@ -397,9 +416,12 @@ export function Step7Circumstances() {
 
             {/* Protective equipment */}
             <div className="step-card space-y-4">
-              <h3 className="font-semibold text-foreground">
-                5. Czy stosowałeś środki ochrony osobistej?
-              </h3>
+              <div className="flex items-center gap-1">
+                <h3 className="font-semibold text-foreground">
+                  5. Czy stosowałeś środki ochrony osobistej?
+                </h3>
+                <AIFieldHelper fieldId="protectiveEquipment" fieldLabel="Środki ochrony osobistej" />
+              </div>
 
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                 {protectiveEquipmentOptions.map((equipment) => (

@@ -2,6 +2,8 @@ import { useFormContext } from '@/context/FormContext';
 import { Header } from './Header';
 import { ProgressBar } from './ProgressBar';
 import { SummaryPanel } from './SummaryPanel';
+import { StepEntryMethod } from './steps/StepEntryMethod';
+import { StepImportData } from './steps/StepImportData';
 import { Step0Start } from './steps/Step0Start';
 import { Step1Role } from './steps/Step1Role';
 import { Step2InjuredPerson } from './steps/Step2InjuredPerson';
@@ -14,27 +16,41 @@ import { Step8Witnesses } from './steps/Step8Witnesses';
 import { Step9Documents } from './steps/Step9Documents';
 import { Step10Summary } from './steps/Step10Summary';
 
-const steps: Record<number, React.ComponentType> = {
-  0: Step0Start,
-  1: Step1Role,
-  2: Step2InjuredPerson,
-  3: Step3Business,
-  4: Step4Representative,
-  5: Step5AccidentBasic,
-  6: Step6Injury,
-  7: Step7Circumstances,
-  8: Step8Witnesses,
-  9: Step9Documents,
-  10: Step10Summary,
+// Steps for manual entry path
+const manualSteps: Record<number, React.ComponentType> = {
+  0: StepEntryMethod,
+  1: Step0Start,       // Document type selection
+  2: Step1Role,        // Role selection
+  3: Step2InjuredPerson,
+  4: Step3Business,
+  5: Step4Representative,
+  6: Step5AccidentBasic,
+  7: Step6Injury,
+  8: Step7Circumstances,
+  9: Step8Witnesses,
+  10: Step9Documents,
+  11: Step10Summary,
+};
+
+// Steps for import path
+const importSteps: Record<number, React.ComponentType> = {
+  0: StepEntryMethod,
+  1: Step0Start,       // Document type selection
+  2: StepImportData,   // Import with role selection and basic data
+  3: Step10Summary,    // Go directly to summary
 };
 
 export function FormWizard() {
   const { state } = useFormContext();
-  const { currentStep, userRole } = state;
+  const { currentStep, userRole, entryMethod } = state;
 
-  // Skip step 4 (representative) if user is the injured person
+  // Get the appropriate steps based on entry method
+  const steps = entryMethod === 'import' ? importSteps : manualSteps;
+  const totalSteps = Object.keys(steps).length;
+
+  // Skip step 5 (representative) if user is the injured person (only in manual mode)
   const shouldShowStep = (step: number) => {
-    if (step === 4 && userRole === 'injured') return false;
+    if (entryMethod === 'manual' && step === 5 && userRole === 'injured') return false;
     return true;
   };
 
@@ -44,12 +60,13 @@ export function FormWizard() {
     return null;
   }
 
-  const showSidePanel = currentStep > 0 && currentStep < 10;
+  const showSidePanel = entryMethod === 'manual' && currentStep > 1 && currentStep < totalSteps - 1;
+  const showProgressBar = currentStep > 0;
 
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      {currentStep > 0 && <ProgressBar />}
+      {showProgressBar && <ProgressBar />}
 
       <main className="container mx-auto px-4 py-8">
         {currentStep === 0 ? (

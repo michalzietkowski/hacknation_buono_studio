@@ -75,11 +75,25 @@ export function FormProvider({ children }: { children: ReactNode }) {
 
   const nextStep = () => {
     dispatch({ type: 'MARK_STEP_COMPLETED', payload: state.currentStep });
-    dispatch({ type: 'SET_STEP', payload: state.currentStep + 1 });
+    let nextStepNum = state.currentStep + 1;
+    
+    // Skip step 5 (representative) if user is the injured person in manual mode
+    if (state.entryMethod === 'manual' && nextStepNum === 5 && state.userRole === 'injured') {
+      nextStepNum = 6;
+    }
+    
+    dispatch({ type: 'SET_STEP', payload: nextStepNum });
   };
 
   const prevStep = () => {
-    dispatch({ type: 'SET_STEP', payload: Math.max(0, state.currentStep - 1) });
+    let prevStepNum = state.currentStep - 1;
+    
+    // Skip step 5 (representative) when going back if user is the injured person in manual mode
+    if (state.entryMethod === 'manual' && prevStepNum === 5 && state.userRole === 'injured') {
+      prevStepNum = 4;
+    }
+    
+    dispatch({ type: 'SET_STEP', payload: Math.max(0, prevStepNum) });
   };
 
   const addOverride = (field: string, reason: string) => {

@@ -4,6 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { AIFieldHelper } from '../AIFieldHelper';
 import { Plus, Trash2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Witness } from '@/types/form';
@@ -130,14 +131,20 @@ export function Step8Witnesses() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label>Imię</Label>
+                    <div className="flex items-center gap-1">
+                      <Label>Imię</Label>
+                      <AIFieldHelper fieldId={`witness-${witness.id}-firstName`} fieldLabel="Imię świadka" />
+                    </div>
                     <Input
                       value={witness.firstName}
                       onChange={(e) => updateWitness(witness.id, 'firstName', e.target.value)}
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label>Nazwisko</Label>
+                    <div className="flex items-center gap-1">
+                      <Label>Nazwisko</Label>
+                      <AIFieldHelper fieldId={`witness-${witness.id}-lastName`} fieldLabel="Nazwisko świadka" />
+                    </div>
                     <Input
                       value={witness.lastName}
                       onChange={(e) => updateWitness(witness.id, 'lastName', e.target.value)}
@@ -146,7 +153,10 @@ export function Step8Witnesses() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label>Telefon kontaktowy</Label>
+                  <div className="flex items-center gap-1">
+                    <Label>Telefon kontaktowy</Label>
+                    <AIFieldHelper fieldId={`witness-${witness.id}-phone`} fieldLabel="Telefon świadka" />
+                  </div>
                   <Input
                     type="tel"
                     value={witness.phone || ''}

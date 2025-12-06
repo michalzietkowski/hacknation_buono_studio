@@ -40,36 +40,14 @@ export function Step0Start() {
           <FileText className="w-10 h-10 text-primary" />
         </div>
         <h1 className="text-3xl font-bold text-foreground">
-          Witaj w asystencie zgłoszenia wypadku
+          Co chcesz przygotować?
         </h1>
         <p className="text-lg text-muted-foreground max-w-lg mx-auto">
-          ZANT pomoże Ci krok po kroku przygotować dokumenty potrzebne do zgłoszenia
-          wypadku przy pracy do ZUS.
+          Wybierz rodzaj dokumentów, które chcesz wygenerować
         </p>
       </div>
 
-      <div className="bg-secondary/50 rounded-xl p-6 space-y-3">
-        <h3 className="font-semibold text-foreground">Przygotuj przed rozpoczęciem:</h3>
-        <ul className="space-y-2 text-sm text-muted-foreground">
-          <li className="flex items-start gap-2">
-            <span className="text-primary">•</span>
-            Dokumentację medyczną (karty informacyjne, zaświadczenia)
-          </li>
-          <li className="flex items-start gap-2">
-            <span className="text-primary">•</span>
-            Dane działalności gospodarczej (NIP, REGON)
-          </li>
-          <li className="flex items-start gap-2">
-            <span className="text-primary">•</span>
-            Informacje o świadkach wypadku (jeśli byli)
-          </li>
-        </ul>
-      </div>
-
       <div className="space-y-4">
-        <h3 className="font-semibold text-foreground text-center">
-          Co chcesz przygotować?
-        </h3>
         <div className="grid gap-4">
           {documentOptions.map((option) => {
             const Icon = option.icon;
@@ -111,7 +89,7 @@ export function Step0Start() {
           disabled={!documentType}
           className="px-8"
         >
-          Rozpocznij zgłoszenie
+          Kontynuuj
         </Button>
       </div>
     </div>

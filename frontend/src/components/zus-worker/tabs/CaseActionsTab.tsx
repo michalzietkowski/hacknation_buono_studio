@@ -10,6 +10,24 @@ interface CaseActionsTabProps {
 }
 
 export function CaseActionsTab({ caseData, onUpdate }: CaseActionsTabProps) {
+  const handleToggleAction = (actionId: string) => {
+    const updatedActions = caseData.suggestedActions?.map(action => {
+      if (action.id === actionId) {
+        return {
+          ...action,
+          completed: !action.completed,
+          completedDate: !action.completed ? new Date().toISOString().split('T')[0] : undefined,
+        };
+      }
+      return action;
+    });
+
+    onUpdate({
+      ...caseData,
+      suggestedActions: updatedActions,
+    });
+  };
+
   return (
     <Card>
       <CardHeader>
@@ -22,7 +40,10 @@ export function CaseActionsTab({ caseData, onUpdate }: CaseActionsTabProps) {
           <div className="space-y-2">
             {caseData.suggestedActions.map(action => (
               <div key={action.id} className="flex items-start gap-3 p-3 bg-muted rounded-lg">
-                <Checkbox checked={action.completed} />
+                <Checkbox 
+                  checked={action.completed}
+                  onCheckedChange={() => handleToggleAction(action.id)}
+                />
                 <div className="flex-1">
                   <p className={`text-sm ${action.completed ? 'line-through text-muted-foreground' : ''}`}>
                     {action.description}

@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
 import { ValidationWarning } from '../ValidationWarning';
+import { AIFieldHelper } from '../AIFieldHelper';
 import {
   Select,
   SelectContent,
@@ -75,7 +76,10 @@ export function Step2InjuredPerson() {
 
           {!showNoPesel ? (
             <div className="space-y-2">
-              <Label htmlFor="pesel">PESEL *</Label>
+              <div className="flex items-center gap-1">
+                <Label htmlFor="pesel">PESEL *</Label>
+                <AIFieldHelper fieldId="pesel" fieldLabel="PESEL" />
+              </div>
               <Input
                 id="pesel"
                 value={injuredPerson.pesel || ''}
@@ -151,7 +155,10 @@ export function Step2InjuredPerson() {
           <h3 className="font-semibold text-foreground">Dane osobowe</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="firstName">Imię *</Label>
+              <div className="flex items-center gap-1">
+                <Label htmlFor="firstName">Imię *</Label>
+                <AIFieldHelper fieldId="firstName" fieldLabel="Imię poszkodowanego" />
+              </div>
               <Input
                 id="firstName"
                 value={injuredPerson.firstName}
@@ -169,7 +176,10 @@ export function Step2InjuredPerson() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="birthDate">Data urodzenia *</Label>
+              <div className="flex items-center gap-1">
+                <Label htmlFor="birthDate">Data urodzenia *</Label>
+                <AIFieldHelper fieldId="birthDate" fieldLabel="Data urodzenia" />
+              </div>
               <Input
                 id="birthDate"
                 type="date"

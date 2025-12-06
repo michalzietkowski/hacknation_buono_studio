@@ -2,28 +2,38 @@ import { useFormContext } from '@/context/FormContext';
 import { cn } from '@/lib/utils';
 import { Check } from 'lucide-react';
 
-const steps = [
+const manualSteps = [
   { id: 0, label: 'Start' },
-  { id: 1, label: 'Rola' },
-  { id: 2, label: 'Dane poszkodowanego' },
-  { id: 3, label: 'Działalność' },
-  { id: 4, label: 'Pełnomocnik' },
-  { id: 5, label: 'Wypadek' },
-  { id: 6, label: 'Uraz' },
-  { id: 7, label: 'Okoliczności' },
-  { id: 8, label: 'Świadkowie' },
-  { id: 9, label: 'Dokumenty' },
-  { id: 10, label: 'Podsumowanie' },
+  { id: 1, label: 'Dokumenty' },
+  { id: 2, label: 'Rola' },
+  { id: 3, label: 'Dane poszkodowanego' },
+  { id: 4, label: 'Działalność' },
+  { id: 5, label: 'Pełnomocnik' },
+  { id: 6, label: 'Wypadek' },
+  { id: 7, label: 'Uraz' },
+  { id: 8, label: 'Okoliczności' },
+  { id: 9, label: 'Świadkowie' },
+  { id: 10, label: 'Załączniki' },
+  { id: 11, label: 'Podsumowanie' },
+];
+
+const importSteps = [
+  { id: 0, label: 'Start' },
+  { id: 1, label: 'Dokumenty' },
+  { id: 2, label: 'Import danych' },
+  { id: 3, label: 'Podsumowanie' },
 ];
 
 export function ProgressBar() {
   const { state, goToStep } = useFormContext();
-  const { currentStep, completedSteps, userRole } = state;
+  const { currentStep, completedSteps, userRole, entryMethod } = state;
 
-  // Skip step 4 (representative) if user is the injured person
-  const visibleSteps = steps.filter(
-    (step) => step.id !== 4 || userRole === 'representative'
-  );
+  const steps = entryMethod === 'import' ? importSteps : manualSteps;
+
+  // Skip step 5 (representative) if user is the injured person (only in manual mode)
+  const visibleSteps = entryMethod === 'manual' 
+    ? steps.filter((step) => step.id !== 5 || userRole === 'representative')
+    : steps;
 
   const progress = (currentStep / (visibleSteps.length - 1)) * 100;
 

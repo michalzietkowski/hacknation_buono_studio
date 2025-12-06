@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { ValidationWarning } from '../ValidationWarning';
+import { AIFieldHelper } from '../AIFieldHelper';
 import { Search, CheckCircle2, AlertCircle, Factory, X } from 'lucide-react';
 import {
   Select,
@@ -152,7 +153,10 @@ export function Step3Business() {
 
           <div className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="nip">NIP *</Label>
+              <div className="flex items-center gap-1">
+                <Label htmlFor="nip">NIP *</Label>
+                <AIFieldHelper fieldId="nip" fieldLabel="NIP" />
+              </div>
               <div className="flex gap-2">
                 <Input
                   id="nip"
@@ -205,7 +209,10 @@ export function Step3Business() {
             )}
 
             <div className="space-y-2">
-              <Label htmlFor="regon">REGON (opcjonalnie)</Label>
+              <div className="flex items-center gap-1">
+                <Label htmlFor="regon">REGON (opcjonalnie)</Label>
+                <AIFieldHelper fieldId="regon" fieldLabel="REGON" />
+              </div>
               <Input
                 id="regon"
                 value={business.regon || ''}
@@ -222,7 +229,10 @@ export function Step3Business() {
           <h3 className="font-semibold text-foreground">Dane firmy</h3>
 
           <div className="space-y-2">
-            <Label htmlFor="companyName">Nazwa firmy *</Label>
+            <div className="flex items-center gap-1">
+              <Label htmlFor="companyName">Nazwa firmy *</Label>
+              <AIFieldHelper fieldId="companyName" fieldLabel="Nazwa firmy" />
+            </div>
             <Input
               id="companyName"
               value={business.companyName}
@@ -232,7 +242,10 @@ export function Step3Business() {
 
           <div className="space-y-4">
             <div className="space-y-2">
-              <Label>PKD</Label>
+              <div className="flex items-center gap-1">
+                <Label>PKD</Label>
+                <AIFieldHelper fieldId="pkd" fieldLabel="PKD (Polska Klasyfikacja Działalności)" />
+              </div>
               <Popover open={pkdOpen} onOpenChange={setPkdOpen}>
                 <PopoverTrigger asChild>
                   <Button
@@ -320,7 +333,10 @@ export function Step3Business() {
             )}
 
             <div className="space-y-2">
-              <Label htmlFor="phone">Telefon firmowy (opcjonalnie)</Label>
+              <div className="flex items-center gap-1">
+                <Label htmlFor="phone">Telefon firmowy (opcjonalnie)</Label>
+                <AIFieldHelper fieldId="phone" fieldLabel="Telefon firmowy" />
+              </div>
               <Input
                 id="phone"
                 type="tel"
@@ -331,7 +347,10 @@ export function Step3Business() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="businessScope">Zakres działalności</Label>
+            <div className="flex items-center gap-1">
+              <Label htmlFor="businessScope">Zakres działalności</Label>
+              <AIFieldHelper fieldId="businessScope" fieldLabel="Zakres działalności" />
+            </div>
             <Input
               id="businessScope"
               value={business.businessScope || ''}
@@ -347,7 +366,10 @@ export function Step3Business() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="md:col-span-2 space-y-2">
-              <Label htmlFor="businessStreet">Ulica *</Label>
+              <div className="flex items-center gap-1">
+                <Label htmlFor="businessStreet">Ulica *</Label>
+                <AIFieldHelper fieldId="businessStreet" fieldLabel="Ulica (adres firmy)" />
+              </div>
               <Input
                 id="businessStreet"
                 value={business.address.street}

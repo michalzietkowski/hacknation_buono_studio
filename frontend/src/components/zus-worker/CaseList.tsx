@@ -4,6 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Search, Filter, RefreshCw, AlertTriangle, Skull, Plane, Clock } from 'lucide-react';
+import { NewCaseDialog } from './NewCaseDialog';
 import {
   Select,
   SelectContent,
@@ -158,6 +159,7 @@ export function CaseList({ cases, filters, onFiltersChange, selectedCaseId, onCa
           <Button variant="outline" size="icon">
             <RefreshCw className="w-4 h-4" />
           </Button>
+          <NewCaseDialog />
         </div>
 
         <div className="flex gap-2 flex-wrap">

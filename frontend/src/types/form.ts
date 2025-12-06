@@ -2,6 +2,8 @@ export type UserRole = 'injured' | 'representative';
 
 export type DocumentType = 'notification' | 'explanation' | 'both';
 
+export type EntryMethod = 'manual' | 'import';
+
 export interface Address {
   street: string;
   houseNumber: string;
@@ -117,9 +119,11 @@ export interface ValidationOverride {
 
 export interface FormState {
   currentStep: number;
+  entryMethod: EntryMethod | null;
   userRole: UserRole | null;
   documentType: DocumentType | null;
-  injuredPerson: PersonData;
+  importedFiles: UploadedFile[];
+  injuredPerson: PersonData & { email?: string };
   representative?: PersonData;
   business: BusinessData;
   accidentBasic: AccidentBasicData;
@@ -134,8 +138,10 @@ export interface FormState {
 
 export const initialFormState: FormState = {
   currentStep: 0,
+  entryMethod: null,
   userRole: null,
   documentType: null,
+  importedFiles: [],
   injuredPerson: {
     firstName: '',
     lastName: '',

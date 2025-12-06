@@ -23,6 +23,31 @@ export interface AccidentCase {
   sourceDocuments?: SourceDocument[];
   lastModified?: string;
   modifiedBy?: string;
+  history?: HistoryEntry[];
+  comments?: CaseComment[];
+}
+
+export interface HistoryEntry {
+  id: string;
+  timestamp: string;
+  userId: string;
+  userName: string;
+  action: 'created' | 'status_changed' | 'field_updated' | 'document_added' | 'comment_added' | 'analysis_changed';
+  description: string;
+  details?: {
+    field?: string;
+    oldValue?: string;
+    newValue?: string;
+  };
+}
+
+export interface CaseComment {
+  id: string;
+  timestamp: string;
+  userId: string;
+  userName: string;
+  content: string;
+  isInternal: boolean;
 }
 
 export interface CaseAnalysis {
