@@ -1,0 +1,8 @@
+from pathlib import Path
+from typing import Iterable
+
+
+def ensure_dirs(paths: Iterable[Path]) -> None:
+    for path in paths:
+        path.mkdir(parents=True, exist_ok=True)
+

@@ -46,6 +46,14 @@ Run services:
 - `make alembic-revision msg="..."` – autogenerate migration
 - `make compose-up-migrate` – uruchom db, wykonaj migracje, podnieś api+frontend
 
+## ZANT II – pipeline OCR/LLM (szkielet)
+- Schemat danych: `docs/DATA_SCHEMA.md`, Pydantic: `app/pipeline/extraction/schema.py`.
+- Struktura: `app/pipeline/{ingestion,extraction,analysis,generation,utils}` + dane w `data/`.
+- Tesseract + poppler: wymagane (`tesseract-ocr`, `libtesseract-dev`, `poppler-utils`); Dockerfile je instaluje.
+- OCR stub: `app/pipeline/ingestion/ocr_pipeline.py` (pytesseract).
+- Prompt/runner stub: extractor/legal/opinion/card w `app/pipeline/...`.
+- Skrypt OCR: `scripts/run_ocr_examples.sh` (domyślne źródło `/app/data/raw/zus_examples`, wyniki w `data/ocr/zus_examples`), używa `uv run` + pdf2image.
+
 ## Schemat bazy (ZUS wypadki)
 - Dokument: `docs/db_schema.md` – ERD, tabele (multi-tenant), mapowanie SQLAlchemy i notatki migracyjne.
 - Modele dodane w `app/models/` (Base + enumy + wypadki, pytania dynamiczne, załączniki).
