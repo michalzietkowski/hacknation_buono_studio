@@ -13,6 +13,9 @@ docker compose up --build
 
 Environment defaults are embedded for local compose. To enable real LLM responses, provide `OPENAI_API_KEY` in your environment (e.g., export before `docker compose up`).
 
+## New demo: form support chat
+- Endpoint: `POST /api/v1/assist/field` with `field_id`, `message`, optional `form_state` and prior `history`; returns a guided reply to help fill the ZUS form fields.
+
 ## Deploys
 
 - Backend Render deploy: `.github/workflows/deploy-render.yml` (secrets: `RENDER_API_KEY`, `RENDER_SERVICE_ID`, optional `RENDER_BRANCH`).

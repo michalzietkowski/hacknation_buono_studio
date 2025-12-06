@@ -32,6 +32,11 @@ Run services:
 - Frontend: `.env.example` → `.env.local`
   - `VITE_API_BASE_URL` (default `http://localhost:8000/api/v1`; compose build uses `http://api:8000/api/v1`)
 
+## LLM endpoints
+- `/api/v1/assist/field` – form support assistant (body: `field_id`, `message`, optional `form_state`, optional `history` of `{role, content}`); returns `reply` string.
+- `/api/v1/agent-chat/completion` – general agent chat (existing).
+- `/api/v1/chat/completion` – basic echo/LLM chat (stub unless `OPENAI_API_KEY` set).
+
 ## Render deploys
 - Backend workflow: `.github/workflows/deploy-render.yml` expects `RENDER_API_KEY`, `RENDER_SERVICE_ID`, optional `RENDER_BRANCH`.
 - Frontend workflow: `.github/workflows/deploy-frontend-render.yml` expects `RENDER_FRONTEND_API_KEY`, `RENDER_FRONTEND_SERVICE_ID`, optional `RENDER_FRONTEND_BRANCH`.
