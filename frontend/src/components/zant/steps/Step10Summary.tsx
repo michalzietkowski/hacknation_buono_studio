@@ -10,6 +10,8 @@ import {
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
+import { submitAccidentForm } from '@/lib/api';
+import { useState } from 'react';
 
 interface SummarySection {
   title: string;
@@ -19,6 +21,7 @@ interface SummarySection {
 
 export function Step10Summary() {
   const { state, goToStep } = useFormContext();
+  const [submitting, setSubmitting] = useState(false);
   const {
     injuredPerson,
     business,
@@ -179,6 +182,22 @@ export function Step10Summary() {
     });
   };
 
+  const handleSubmitForm = async () => {
+    try {
+      setSubmitting(true);
+      const res = await submitAccidentForm(state);
+      toast.success('Zgłoszenie zapisane', {
+        description: `ID: ${res.id}`,
+      });
+    } catch (error: any) {
+      toast.error('Nie udało się zapisać zgłoszenia', {
+        description: error?.message || 'Sprawdź połączenie i spróbuj ponownie.',
+      });
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   const getDocumentTypeLabel = () => {
     switch (documentType) {
       case 'notification':
@@ -311,6 +330,9 @@ export function Step10Summary() {
               <Button variant="ghost" onClick={() => window.print()} className="gap-2">
                 <Printer className="w-4 h-4" />
                 Drukuj
+              </Button>
+              <Button variant="default" onClick={handleSubmitForm} className="gap-2" disabled={submitting}>
+                {submitting ? 'Wysyłanie...' : 'Wyślij zgłoszenie'}
               </Button>
             </div>
           </div>

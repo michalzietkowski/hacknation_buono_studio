@@ -7,6 +7,7 @@ class Settings(BaseSettings):
     DEBUG: bool = True
     API_PREFIX: str = "/api/v1"
     FRONTEND_ORIGIN: str = "http://localhost:3000"
+    API_BEARER_TOKEN: str | None = None
     
     # Database (default for docker-compose; override with env var for local)
     DATABASE_URL: str = "postgresql+psycopg://user:password@localhost:5432/app"
