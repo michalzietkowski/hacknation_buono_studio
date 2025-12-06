@@ -12,7 +12,7 @@ interface Message {
   content: string;
 }
 
-const OPENAI_API_KEY = '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';
+const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
 
 const STEP_LABELS: Record<number, string> = {
   0: 'Wybór metody wprowadzania',
@@ -159,6 +159,10 @@ ZASADY:
     setIsLoading(true);
 
     try {
+      if (!OPENAI_API_KEY) {
+        throw new Error('Brak klucza API OpenAI. Ustaw zmienną VITE_OPENAI_API_KEY.');
+      }
+      
       const response = await fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
         headers: {

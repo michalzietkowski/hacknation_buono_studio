@@ -35,7 +35,9 @@ export function ProgressBar() {
     ? steps.filter((step) => step.id !== 5 || userRole === 'representative')
     : steps;
 
-  const progress = (currentStep / (visibleSteps.length - 1)) * 100;
+  // Find current step index in visible steps
+  const currentStepIndex = visibleSteps.findIndex((s) => s.id === currentStep);
+  const progress = currentStepIndex >= 0 ? (currentStepIndex / (visibleSteps.length - 1)) * 100 : 0;
 
   return (
     <div className="bg-card border-b border-border py-4">
@@ -53,12 +55,19 @@ export function ProgressBar() {
           {visibleSteps.map((step, index) => {
             const isCompleted = completedSteps.includes(step.id);
             const isCurrent = currentStep === step.id;
-            const isAccessible = isCompleted || currentStep >= step.id;
+            const isAccessible = isCompleted || currentStepIndex >= index;
+
+            // Calculate the correct step to navigate to
+            const handleStepClick = () => {
+              if (isAccessible) {
+                goToStep(step.id);
+              }
+            };
 
             return (
               <button
                 key={step.id}
-                onClick={() => isAccessible && goToStep(step.id)}
+                onClick={handleStepClick}
                 disabled={!isAccessible}
                 className={cn(
                   'flex flex-col items-center gap-1 transition-all',
@@ -96,7 +105,7 @@ export function ProgressBar() {
         {/* Mobile step indicator */}
         <div className="md:hidden flex items-center justify-between">
           <span className="text-sm text-muted-foreground">
-            Krok {currentStep + 1} z {visibleSteps.length}
+            Krok {currentStepIndex + 1} z {visibleSteps.length}
           </span>
           <span className="text-sm font-medium text-foreground">
             {visibleSteps.find((s) => s.id === currentStep)?.label}

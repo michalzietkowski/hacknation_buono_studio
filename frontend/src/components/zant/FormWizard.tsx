@@ -1,3 +1,4 @@
+import React from 'react';
 import { useFormContext } from '@/context/FormContext';
 import { Header } from './Header';
 import { ProgressBar } from './ProgressBar';
@@ -41,18 +42,19 @@ const importSteps: Record<number, React.ComponentType> = {
 };
 
 export function FormWizard() {
-  const { state } = useFormContext();
+  const { state, goToStep } = useFormContext();
   const { currentStep, userRole, entryMethod } = state;
 
   // Get the appropriate steps based on entry method
   const steps = entryMethod === 'import' ? importSteps : manualSteps;
   const totalSteps = Object.keys(steps).length;
 
-  // Skip step 5 (representative) if user is the injured person (only in manual mode)
-  const shouldShowStep = (step: number) => {
-    if (entryMethod === 'manual' && step === 5 && userRole === 'injured') return false;
-    return true;
-  };
+  // Redirect if user is on step 5 (representative) but is the injured person
+  React.useEffect(() => {
+    if (entryMethod === 'manual' && currentStep === 5 && userRole === 'injured') {
+      goToStep(6);
+    }
+  }, [entryMethod, currentStep, userRole, goToStep]);
 
   const StepComponent = steps[currentStep];
 

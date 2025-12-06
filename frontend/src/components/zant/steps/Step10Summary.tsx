@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useFormContext } from '@/context/FormContext';
 import { useCases } from '@/context/CasesContext';
 import { Button } from '@/components/ui/button';
@@ -9,6 +10,8 @@ import {
   Download,
   Printer,
   Send,
+  ChevronDown,
+  ChevronUp,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
@@ -19,6 +22,99 @@ interface SummarySection {
   title: string;
   step: number;
   fields: { label: string; value: string | undefined; hasOverride?: boolean }[];
+}
+
+interface MissingField {
+  label: string;
+  value: string | undefined;
+  hasOverride?: boolean;
+  section: string;
+}
+
+interface MissingFieldsAlertProps {
+  fields: MissingField[];
+  goToStep: (step: number) => void;
+  sections: SummarySection[];
+}
+
+function MissingFieldsAlert({ fields, goToStep, sections }: MissingFieldsAlertProps) {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const displayedFields = isExpanded ? fields : fields.slice(0, 5);
+  const hasMore = fields.length > 5;
+
+  // Group fields by section
+  const groupedFields = fields.reduce((acc, field) => {
+    if (!acc[field.section]) {
+      acc[field.section] = [];
+    }
+    acc[field.section].push(field);
+    return acc;
+  }, {} as Record<string, MissingField[]>);
+
+  const getSectionStep = (sectionTitle: string) => {
+    const section = sections.find(s => s.title === sectionTitle);
+    return section?.step ?? 0;
+  };
+
+  return (
+    <div className="bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 rounded-xl p-4">
+      <div className="flex items-start gap-3">
+        <AlertTriangle className="w-5 h-5 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" />
+        <div className="flex-1">
+          <p className="font-medium text-foreground">
+            Brakujące informacje ({fields.length})
+          </p>
+          <div className="text-sm text-muted-foreground mt-2 space-y-3">
+            {isExpanded ? (
+              // Expanded view - grouped by section
+              Object.entries(groupedFields).map(([sectionTitle, sectionFields]) => (
+                <div key={sectionTitle} className="space-y-1">
+                  <button
+                    onClick={() => goToStep(getSectionStep(sectionTitle))}
+                    className="font-medium text-amber-700 dark:text-amber-400 hover:underline"
+                  >
+                    {sectionTitle}:
+                  </button>
+                  <ul className="ml-4 space-y-0.5">
+                    {sectionFields.map((field, i) => (
+                      <li key={i}>• {field.label}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))
+            ) : (
+              // Collapsed view - simple list
+              <ul className="space-y-1">
+                {displayedFields.map((field, i) => (
+                  <li key={i}>
+                    • {field.section}: {field.label}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+          {hasMore && (
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="flex items-center gap-1 mt-3 text-sm text-amber-700 dark:text-amber-400 hover:underline font-medium"
+            >
+              {isExpanded ? (
+                <>
+                  <ChevronUp className="w-4 h-4" />
+                  Zwiń listę
+                </>
+              ) : (
+                <>
+                  <ChevronDown className="w-4 h-4" />
+                  Pokaż wszystkie ({fields.length - 5} więcej)
+                </>
+              )}
+            </button>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export function Step10Summary() {
@@ -246,24 +342,11 @@ export function Step10Summary() {
       {(missingRequiredFields.length > 0 || overriddenFields.length > 0) && (
         <div className="space-y-4 mb-8">
           {missingRequiredFields.length > 0 && (
-            <div className="validation-error">
-              <div className="flex items-start gap-3">
-                <AlertTriangle className="w-5 h-5 text-destructive flex-shrink-0 mt-0.5" />
-                <div>
-                  <p className="font-medium text-foreground">Brakujące informacje</p>
-                  <ul className="text-sm text-muted-foreground mt-1 space-y-1">
-                    {missingRequiredFields.slice(0, 5).map((field, i) => (
-                      <li key={i}>
-                        • {field.section}: {field.label}
-                      </li>
-                    ))}
-                    {missingRequiredFields.length > 5 && (
-                      <li>...i {missingRequiredFields.length - 5} więcej</li>
-                    )}
-                  </ul>
-                </div>
-              </div>
-            </div>
+            <MissingFieldsAlert 
+              fields={missingRequiredFields} 
+              goToStep={goToStep}
+              sections={sections}
+            />
           )}
 
           {overriddenFields.length > 0 && (
