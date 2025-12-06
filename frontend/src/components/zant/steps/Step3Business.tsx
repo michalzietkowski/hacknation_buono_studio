@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useFormContext } from '@/context/FormContext';
 import { FormNavigation } from '../FormNavigation';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { ValidationWarning } from '../ValidationWarning';
-import { Search, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Search, CheckCircle2, AlertCircle, Factory, X } from 'lucide-react';
 import {
   Select,
   SelectContent,
@@ -13,7 +13,21 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from '@/components/ui/command';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
 import { toast } from 'sonner';
+import { getRandomMachineUsePKD, pkdData, PKDEntry } from '@/data/pkdData';
 
 function validateNip(nip: string): boolean {
   const cleanNip = nip.replace(/[\s-]/g, '');
@@ -26,12 +40,51 @@ function validateNip(nip: string): boolean {
   return sum % 11 === parseInt(cleanNip[9]);
 }
 
+const mockAddresses = [
+  { street: 'ul. Przemysłowa', houseNumber: '15', postalCode: '00-001', city: 'Warszawa' },
+  { street: 'ul. Fabryczna', houseNumber: '42A', postalCode: '30-215', city: 'Kraków' },
+  { street: 'ul. Metalurgiczna', houseNumber: '8', postalCode: '40-123', city: 'Katowice' },
+  { street: 'ul. Hutnicza', houseNumber: '23', postalCode: '80-298', city: 'Gdańsk' },
+  { street: 'ul. Robotnicza', houseNumber: '101', postalCode: '50-416', city: 'Wrocław' },
+];
+
+function getRandomAddress() {
+  return mockAddresses[Math.floor(Math.random() * mockAddresses.length)];
+}
+
 export function Step3Business() {
   const { state, updateField, addOverride, nextStep } = useFormContext();
   const { business, userRole } = state;
   const [nipWarning, setNipWarning] = useState<string | null>(null);
   const [isSearching, setIsSearching] = useState(false);
   const [ceidgResult, setCeidgResult] = useState<'success' | 'error' | null>(null);
+  const [pkdOpen, setPkdOpen] = useState(false);
+  const [pkdSearch, setPkdSearch] = useState('');
+
+  const filteredPkd = useMemo(() => {
+    if (!pkdSearch) return pkdData.slice(0, 20);
+    const search = pkdSearch.toLowerCase();
+    return pkdData.filter(
+      (entry) =>
+        entry.pkd.toLowerCase().includes(search) ||
+        entry.description.toLowerCase().includes(search)
+    ).slice(0, 20);
+  }, [pkdSearch]);
+
+  const handlePkdSelect = (entry: PKDEntry) => {
+    updateField('business.pkd', entry.pkd);
+    updateField('business.pkdDescription', entry.description);
+    updateField('business.pkdMachineUse', entry.machineUse);
+    updateField('business.businessScope', entry.description);
+    setPkdOpen(false);
+    setPkdSearch('');
+  };
+
+  const handlePkdClear = () => {
+    updateField('business.pkd', '');
+    updateField('business.pkdDescription', '');
+    updateField('business.pkdMachineUse', false);
+  };
 
   const handleNipChange = (value: string) => {
     const cleaned = value.replace(/[\s-]/g, '');
@@ -54,20 +107,22 @@ export function Step3Business() {
     // Simulate CEIDG API call
     await new Promise((resolve) => setTimeout(resolve, 1500));
 
-    // Mock response - in real app this would be an API call
-    const mockSuccess = Math.random() > 0.3; // 70% success rate for demo
+    // Get random PKD with machineUse = 1
+    const randomPKD = getRandomMachineUsePKD();
+    const randomAddress = getRandomAddress();
 
-    if (mockSuccess) {
-      updateField('business.companyName', 'Przykładowa Firma Jan Kowalski');
-      updateField('business.pkd', '41.20.Z');
-      updateField('business.businessScope', 'Roboty budowlane związane ze wznoszeniem budynków');
-      updateField('business.ceidgVerified', true);
-      setCeidgResult('success');
-      toast.success('Dane pobrane z CEIDG');
-    } else {
-      setCeidgResult('error');
-      toast.error('Nie znaleziono firmy w CEIDG');
-    }
+    updateField('business.companyName', 'Przykładowa Firma Produkcyjna Sp. z o.o.');
+    updateField('business.pkd', randomPKD.pkd);
+    updateField('business.pkdDescription', randomPKD.description);
+    updateField('business.pkdMachineUse', randomPKD.machineUse);
+    updateField('business.businessScope', randomPKD.description);
+    updateField('business.address.street', randomAddress.street);
+    updateField('business.address.houseNumber', randomAddress.houseNumber);
+    updateField('business.address.postalCode', randomAddress.postalCode);
+    updateField('business.address.city', randomAddress.city);
+    updateField('business.ceidgVerified', true);
+    setCeidgResult('success');
+    toast.success('Dane pobrane z CEIDG');
 
     setIsSearching(false);
   };
@@ -175,16 +230,95 @@ export function Step3Business() {
             />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="pkd">PKD</Label>
-              <Input
-                id="pkd"
-                value={business.pkd || ''}
-                onChange={(e) => updateField('business.pkd', e.target.value)}
-                placeholder="np. 41.20.Z"
-              />
+              <Label>PKD</Label>
+              <Popover open={pkdOpen} onOpenChange={setPkdOpen}>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    role="combobox"
+                    aria-expanded={pkdOpen}
+                    className="w-full justify-between font-normal h-auto min-h-10 py-2"
+                  >
+                    {business.pkd ? (
+                      <div className="flex items-center gap-2 text-left flex-1 min-w-0">
+                        <span className="font-medium shrink-0">{business.pkd}</span>
+                        <span className="text-muted-foreground truncate text-sm">
+                          {business.pkdDescription}
+                        </span>
+                      </div>
+                    ) : (
+                      <span className="text-muted-foreground">Wyszukaj PKD...</span>
+                    )}
+                    <div className="flex items-center gap-1 shrink-0">
+                      {business.pkd && (
+                        <X
+                          className="h-4 w-4 text-muted-foreground hover:text-foreground"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handlePkdClear();
+                          }}
+                        />
+                      )}
+                      <Search className="h-4 w-4 text-muted-foreground" />
+                    </div>
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-[500px] p-0" align="start">
+                  <Command shouldFilter={false}>
+                    <CommandInput
+                      placeholder="Wpisz kod PKD lub opis..."
+                      value={pkdSearch}
+                      onValueChange={setPkdSearch}
+                    />
+                    <CommandList>
+                      <CommandEmpty>Nie znaleziono PKD.</CommandEmpty>
+                      <CommandGroup>
+                        {filteredPkd.map((entry) => (
+                          <CommandItem
+                            key={entry.pkd}
+                            value={entry.pkd}
+                            onSelect={() => handlePkdSelect(entry)}
+                            className="flex flex-col items-start gap-1 py-3"
+                          >
+                            <div className="flex items-center gap-2 w-full">
+                              <span className="font-medium">{entry.pkd}</span>
+                              {entry.machineUse && (
+                                <span className="text-xs bg-warning/20 text-warning px-1.5 py-0.5 rounded">
+                                  Maszyny
+                                </span>
+                              )}
+                            </div>
+                            <span className="text-sm text-muted-foreground line-clamp-2">
+                              {entry.description}
+                            </span>
+                          </CommandItem>
+                        ))}
+                      </CommandGroup>
+                    </CommandList>
+                  </Command>
+                </PopoverContent>
+              </Popover>
             </div>
+            
+            {business.pkdDescription && (
+              <div className="p-4 bg-secondary/50 rounded-lg border border-border/50 animate-fade-in">
+                <div className="flex items-start gap-3">
+                  <Factory className="w-5 h-5 text-primary mt-0.5" />
+                  <div className="space-y-1">
+                    <p className="font-medium text-foreground">{business.pkd}</p>
+                    <p className="text-sm text-muted-foreground">{business.pkdDescription}</p>
+                    {business.pkdMachineUse && (
+                      <p className="text-xs text-warning font-medium mt-2">
+                        ⚠️ Branża związana z obsługą maszyn i urządzeń
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
+
             <div className="space-y-2">
               <Label htmlFor="phone">Telefon firmowy (opcjonalnie)</Label>
               <Input

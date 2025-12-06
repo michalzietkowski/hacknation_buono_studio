@@ -1,4 +1,5 @@
 import { useFormContext } from '@/context/FormContext';
+import { useCases } from '@/context/CasesContext';
 import { Button } from '@/components/ui/button';
 import {
   AlertTriangle,
@@ -7,11 +8,12 @@ import {
   FileText,
   Download,
   Printer,
+  Send,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
-import { submitAccidentForm } from '@/lib/api';
-import { useState } from 'react';
+import { AccidentCase } from '@/types/zus-worker';
+import { useNavigate } from 'react-router-dom';
 
 interface SummarySection {
   title: string;
@@ -21,7 +23,8 @@ interface SummarySection {
 
 export function Step10Summary() {
   const { state, goToStep } = useFormContext();
-  const [submitting, setSubmitting] = useState(false);
+  const { addCase } = useCases();
+  const navigate = useNavigate();
   const {
     injuredPerson,
     business,
@@ -176,26 +179,45 @@ export function Step10Summary() {
   );
 
   const handleGenerateDocuments = () => {
-    // In a real app, this would generate actual documents
     toast.success('Dokumenty zostały wygenerowane!', {
       description: 'Za chwilę rozpocznie się pobieranie.',
     });
   };
 
-  const handleSubmitForm = async () => {
-    try {
-      setSubmitting(true);
-      const res = await submitAccidentForm(state);
-      toast.success('Zgłoszenie zapisane', {
-        description: `ID: ${res.id}`,
-      });
-    } catch (error: any) {
-      toast.error('Nie udało się zapisać zgłoszenia', {
-        description: error?.message || 'Sprawdź połączenie i spróbuj ponownie.',
-      });
-    } finally {
-      setSubmitting(false);
-    }
+  const handleSubmitToZus = () => {
+    const newCase: AccidentCase = {
+      id: `case-${Date.now()}`,
+      caseNumber: `ZUS/WYP/${new Date().getFullYear()}/${String(Math.floor(Math.random() * 900000) + 100000)}`,
+      submissionDate: new Date().toISOString().split('T')[0],
+      zusUnit: 'I Oddział w Warszawie',
+      injuredLastName: injuredPerson.lastName || 'Brak danych',
+      injuredFirstName: injuredPerson.firstName || 'Brak danych',
+      caseType: 'standard',
+      status: 'new',
+      daysRemaining: 14,
+      formData: state,
+      sourceDocuments: documents.filter(doc => doc.files && doc.files.length > 0).map((doc, idx) => ({
+        id: `doc-${idx}`,
+        type: doc.documentType === 'notification' ? 'notification' : doc.documentType === 'explanation' ? 'explanation' : 'other',
+        name: doc.files?.[0]?.name || doc.documentType,
+        source: 'system' as const,
+        uploadDate: new Date().toISOString().split('T')[0],
+        ocrStatus: 'read' as const,
+        pageCount: 1,
+      })),
+      lastModified: new Date().toISOString(),
+      modifiedBy: 'System ZANT',
+    };
+
+    addCase(newCase);
+    
+    toast.success('Dokumenty zostały przesłane do ZUS!', {
+      description: `Numer sprawy: ${newCase.caseNumber}`,
+      action: {
+        label: 'Zobacz w module ZUS',
+        onClick: () => navigate('/zus'),
+      },
+    });
   };
 
   const getDocumentTypeLabel = () => {
@@ -331,10 +353,31 @@ export function Step10Summary() {
                 <Printer className="w-4 h-4" />
                 Drukuj
               </Button>
-              <Button variant="default" onClick={handleSubmitForm} className="gap-2" disabled={submitting}>
-                {submitting ? 'Wysyłanie...' : 'Wyślij zgłoszenie'}
-              </Button>
             </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Submit to ZUS section */}
+      <div className="mt-6 step-card bg-green-500/10 border-green-500/30">
+        <div className="flex items-start gap-4">
+          <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
+            <Send className="w-6 h-6 text-white" />
+          </div>
+          <div className="flex-1 space-y-4">
+            <div>
+              <h3 className="font-semibold text-foreground">Prześlij dokumenty do ZUS</h3>
+              <p className="text-sm text-muted-foreground">
+                Wszystkie dane zostaną przesłane elektronicznie do modułu pracownika ZUS
+              </p>
+            </div>
+            <Button 
+              onClick={handleSubmitToZus} 
+              className="gap-2 bg-green-600 hover:bg-green-700"
+            >
+              <Send className="w-4 h-4" />
+              Prześlij do ZUS
+            </Button>
           </div>
         </div>
       </div>

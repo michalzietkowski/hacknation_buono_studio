@@ -4,7 +4,8 @@ import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { FileText, AlertCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { DocumentStatus } from '@/types/form';
+import { DocumentStatus, UploadedFile } from '@/types/form';
+import { FileUploader } from '../FileUploader';
 
 interface DocumentOption {
   id: string;
@@ -33,11 +34,9 @@ export function Step9Documents() {
   const { state, updateField } = useFormContext();
   const { documents, circumstances, userRole, injury } = state;
 
-  // Build dynamic document list based on form answers
   const getDocumentList = (): DocumentOption[] => {
     const docs = [...baseDocuments];
 
-    // Add police report if accident involved traffic
     if (circumstances.reportedToAuthorities?.includes('police')) {
       docs.push({
         id: 'police_report',
@@ -47,7 +46,6 @@ export function Step9Documents() {
       });
     }
 
-    // Add prosecutor's decision if reported
     if (circumstances.reportedToAuthorities?.includes('prosecutor')) {
       docs.push({
         id: 'prosecutor_decision',
@@ -57,7 +55,6 @@ export function Step9Documents() {
       });
     }
 
-    // Add PIP protocol if reported
     if (circumstances.reportedToAuthorities?.includes('pip')) {
       docs.push({
         id: 'pip_protocol',
@@ -67,7 +64,6 @@ export function Step9Documents() {
       });
     }
 
-    // Add power of attorney if representative
     if (userRole === 'representative') {
       docs.push({
         id: 'power_of_attorney',
@@ -77,7 +73,6 @@ export function Step9Documents() {
       });
     }
 
-    // Add sick leave certificate if unable to work
     if (injury.unableToWork) {
       docs.push({
         id: 'sick_leave',
@@ -97,14 +92,30 @@ export function Step9Documents() {
     return doc?.status || null;
   };
 
+  const getDocumentFiles = (docId: string): UploadedFile[] => {
+    const doc = documents.find((d) => d.documentType === docId);
+    return doc?.files || [];
+  };
+
   const setDocumentStatus = (docId: string, status: DocumentStatus['status']) => {
     const existingIndex = documents.findIndex((d) => d.documentType === docId);
     if (existingIndex >= 0) {
       const newDocs = [...documents];
-      newDocs[existingIndex] = { documentType: docId, status };
+      newDocs[existingIndex] = { ...newDocs[existingIndex], status };
       updateField('documents', newDocs);
     } else {
-      updateField('documents', [...documents, { documentType: docId, status }]);
+      updateField('documents', [...documents, { documentType: docId, status, files: [] }]);
+    }
+  };
+
+  const setDocumentFiles = (docId: string, files: UploadedFile[]) => {
+    const existingIndex = documents.findIndex((d) => d.documentType === docId);
+    if (existingIndex >= 0) {
+      const newDocs = [...documents];
+      newDocs[existingIndex] = { ...newDocs[existingIndex], files };
+      updateField('documents', newDocs);
+    } else {
+      updateField('documents', [...documents, { documentType: docId, status: 'have', files }]);
     }
   };
 
@@ -118,57 +129,72 @@ export function Step9Documents() {
         </p>
       </div>
 
-      <div className="space-y-4">
-        {documentList.map((doc) => (
-          <div key={doc.id} className="step-card space-y-4">
-            <div className="flex items-start gap-3">
-              <FileText className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-              <div className="flex-1">
-                <div className="flex items-center gap-2">
-                  <h3 className="font-semibold text-foreground">{doc.label}</h3>
-                  {doc.recommended && (
-                    <span className="px-2 py-0.5 bg-primary/10 text-primary text-xs rounded-full">
-                      Zalecane
-                    </span>
-                  )}
-                </div>
-                <p className="text-sm text-muted-foreground">{doc.description}</p>
-              </div>
-            </div>
+      <div className="space-y-6">
+        {documentList.map((doc) => {
+          const status = getDocumentStatus(doc.id);
+          const files = getDocumentFiles(doc.id);
 
-            <RadioGroup
-              value={getDocumentStatus(doc.id) || undefined}
-              onValueChange={(value) =>
-                setDocumentStatus(doc.id, value as DocumentStatus['status'])
-              }
-              className="flex flex-wrap gap-3"
-            >
-              {[
-                { value: 'have', label: 'Mam', color: 'primary' },
-                { value: 'dont_have', label: 'Nie mam', color: 'muted' },
-                { value: 'will_send_later', label: 'Doślę później', color: 'warning' },
-              ].map((option) => (
-                <div
-                  key={option.value}
-                  className={cn(
-                    'flex items-center space-x-2 px-4 py-2 rounded-lg border-2 transition-all cursor-pointer',
-                    getDocumentStatus(doc.id) === option.value
-                      ? 'border-primary bg-primary/5'
-                      : 'border-border hover:border-primary/50'
-                  )}
-                >
-                  <RadioGroupItem value={option.value} id={`${doc.id}-${option.value}`} />
-                  <Label
-                    htmlFor={`${doc.id}-${option.value}`}
-                    className="cursor-pointer font-normal"
-                  >
-                    {option.label}
-                  </Label>
+          return (
+            <div key={doc.id} className="step-card space-y-4">
+              <div className="flex items-start gap-3">
+                <FileText className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                <div className="flex-1">
+                  <div className="flex items-center gap-2">
+                    <h3 className="font-semibold text-foreground">{doc.label}</h3>
+                    {doc.recommended && (
+                      <span className="px-2 py-0.5 bg-primary/10 text-primary text-xs rounded-full">
+                        Zalecane
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-sm text-muted-foreground">{doc.description}</p>
                 </div>
-              ))}
-            </RadioGroup>
-          </div>
-        ))}
+              </div>
+
+              <RadioGroup
+                value={status || undefined}
+                onValueChange={(value) =>
+                  setDocumentStatus(doc.id, value as DocumentStatus['status'])
+                }
+                className="flex flex-wrap gap-3"
+              >
+                {[
+                  { value: 'have', label: 'Mam', color: 'primary' },
+                  { value: 'dont_have', label: 'Nie mam', color: 'muted' },
+                  { value: 'will_send_later', label: 'Doślę później', color: 'warning' },
+                ].map((option) => (
+                  <div
+                    key={option.value}
+                    className={cn(
+                      'flex items-center space-x-2 px-4 py-2 rounded-lg border-2 transition-all cursor-pointer',
+                      status === option.value
+                        ? 'border-primary bg-primary/5'
+                        : 'border-border hover:border-primary/50'
+                    )}
+                  >
+                    <RadioGroupItem value={option.value} id={`${doc.id}-${option.value}`} />
+                    <Label
+                      htmlFor={`${doc.id}-${option.value}`}
+                      className="cursor-pointer font-normal"
+                    >
+                      {option.label}
+                    </Label>
+                  </div>
+                ))}
+              </RadioGroup>
+
+              {status === 'have' && (
+                <div className="pt-2">
+                  <FileUploader
+                    files={files}
+                    onChange={(newFiles) => setDocumentFiles(doc.id, newFiles)}
+                    maxFiles={10}
+                  />
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
 
       <div className="bg-secondary/50 rounded-xl p-4 mt-6 flex items-start gap-3">
@@ -176,9 +202,8 @@ export function Step9Documents() {
         <div className="space-y-1">
           <p className="text-sm font-medium text-foreground">Informacja o dokumentach</p>
           <p className="text-sm text-muted-foreground">
-            W wersji V1 dokumenty nie są przesyłane przez aplikację. Zaznacz ich status,
-            a informacja zostanie uwzględniona w generowanym dokumencie. Dokumenty możesz
-            dołączyć przy wysyłce do ZUS.
+            Możesz teraz załączyć pliki do każdego dokumentu (max 10 plików per sekcja).
+            Pliki będą przechowywane lokalnie w przeglądarce do momentu wysłania formularza.
           </p>
         </div>
       </div>

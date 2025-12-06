@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useFormContext } from '@/context/FormContext';
 import { FormNavigation } from '../FormNavigation';
 import { Input } from '@/components/ui/input';
@@ -7,7 +7,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Switch } from '@/components/ui/switch';
 import { Button } from '@/components/ui/button';
-import { MessageSquare } from 'lucide-react';
+import { MessageSquare, AlertTriangle } from 'lucide-react';
 import {
   Select,
   SelectContent,
@@ -15,6 +15,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+
+const situationOptions = [
+  'Praca przy produkcji',
+  'Prace budowlane / remontowe',
+  'Transport / przenoszenie ładunków',
+  'Obsługa maszyny / urządzenia',
+  'Prace biurowe',
+  'Prace magazynowe',
+  'Prace serwisowe / konserwacyjne',
+  'Inna sytuacja',
+];
 
 const directEventOptions = [
   'Potknięcie / poślizgnięcie',
@@ -64,6 +75,24 @@ export function Step7Circumstances() {
   const { state, updateField } = useFormContext();
   const { circumstances, business } = state;
   const [showOpenMode, setShowOpenMode] = useState(circumstances.useOpenMode || false);
+  const [showMachineWarning, setShowMachineWarning] = useState(false);
+
+  // Auto-enable machine usage if PKD has machineUse = 1
+  useEffect(() => {
+    if (business.pkdMachineUse && !circumstances.usedMachine && !circumstances.machineDisabledWarningShown) {
+      updateField('circumstances.usedMachine', true);
+    }
+  }, [business.pkdMachineUse]);
+
+  const handleMachineToggle = (checked: boolean) => {
+    if (!checked && business.pkdMachineUse) {
+      setShowMachineWarning(true);
+      updateField('circumstances.machineDisabledWarningShown', true);
+    } else {
+      setShowMachineWarning(false);
+    }
+    updateField('circumstances.usedMachine', checked);
+  };
 
   const handleEquipmentChange = (equipmentId: string, checked: boolean) => {
     const current = circumstances.protectiveEquipment || [];
@@ -154,17 +183,39 @@ export function Step7Circumstances() {
               </h3>
               {business.pkd && (
                 <p className="text-sm text-muted-foreground">
-                  Podpowiedzi dla PKD: {business.pkd}
+                  Podpowiedzi dla PKD: {business.pkd} - {business.pkdDescription || business.businessScope}
                 </p>
               )}
-              <Textarea
+              <Select
                 value={circumstances.activityBeforeAccident}
-                onChange={(e) =>
-                  updateField('circumstances.activityBeforeAccident', e.target.value)
-                }
-                placeholder="np. wchodziłem na rusztowanie, obsługiwałem wiertarkę, nosiłem materiały budowlane..."
-                className="min-h-[80px]"
-              />
+                onValueChange={(value) => updateField('circumstances.activityBeforeAccident', value)}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Wybierz rodzaj sytuacji" />
+                </SelectTrigger>
+                <SelectContent>
+                  {situationOptions.map((option) => (
+                    <SelectItem key={option} value={option}>
+                      {option}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+
+              {circumstances.activityBeforeAccident === 'Inna sytuacja' && (
+                <div className="space-y-2 animate-fade-in">
+                  <Label htmlFor="activityOther">Opisz sytuację *</Label>
+                  <Textarea
+                    id="activityOther"
+                    value={circumstances.activityBeforeAccidentOther || ''}
+                    onChange={(e) =>
+                      updateField('circumstances.activityBeforeAccidentOther', e.target.value)
+                    }
+                    placeholder="Opisz dokładnie, co robiłeś tuż przed wypadkiem..."
+                    className="min-h-[80px]"
+                  />
+                </div>
+              )}
             </div>
 
             {/* Direct event */}
@@ -187,6 +238,21 @@ export function Step7Circumstances() {
                   ))}
                 </SelectContent>
               </Select>
+
+              {circumstances.directEvent === 'Inne' && (
+                <div className="space-y-2 animate-fade-in">
+                  <Label htmlFor="directEventOther">Opisz zdarzenie *</Label>
+                  <Textarea
+                    id="directEventOther"
+                    value={circumstances.directEventOther || ''}
+                    onChange={(e) =>
+                      updateField('circumstances.directEventOther', e.target.value)
+                    }
+                    placeholder="Opisz dokładnie, co było bezpośrednim zdarzeniem..."
+                    className="min-h-[80px]"
+                  />
+                </div>
+              )}
             </div>
 
             {/* External cause */}
@@ -209,6 +275,21 @@ export function Step7Circumstances() {
                   ))}
                 </SelectContent>
               </Select>
+
+              {circumstances.externalCause === 'Inne' && (
+                <div className="space-y-2 animate-fade-in">
+                  <Label htmlFor="externalCauseOther">Opisz przyczynę *</Label>
+                  <Textarea
+                    id="externalCauseOther"
+                    value={circumstances.externalCauseOther || ''}
+                    onChange={(e) =>
+                      updateField('circumstances.externalCauseOther', e.target.value)
+                    }
+                    placeholder="Opisz dokładnie, jaka była przyczyna zewnętrzna..."
+                    className="min-h-[80px]"
+                  />
+                </div>
+              )}
             </div>
 
             {/* Machine usage */}
@@ -224,9 +305,22 @@ export function Step7Circumstances() {
                 <Switch
                   id="usedMachine"
                   checked={circumstances.usedMachine}
-                  onCheckedChange={(checked) => updateField('circumstances.usedMachine', checked)}
+                  onCheckedChange={handleMachineToggle}
                 />
               </div>
+
+              {showMachineWarning && !circumstances.usedMachine && (
+                <div className="flex items-start gap-3 p-4 bg-warning/10 border border-warning/30 rounded-lg animate-fade-in">
+                  <AlertTriangle className="w-5 h-5 text-warning flex-shrink-0 mt-0.5" />
+                  <div className="space-y-1">
+                    <p className="font-medium text-warning">Uwaga!</p>
+                    <p className="text-sm text-foreground">
+                      Bazując na Twoim PKD ({business.pkd} - {business.pkdDescription}), istnieje duże prawdopodobieństwo, 
+                      że w pracy używane są maszyny lub urządzenia. Czy na pewno nie używałeś żadnego urządzenia?
+                    </p>
+                  </div>
+                </div>
+              )}
 
               {circumstances.usedMachine && (
                 <div className="space-y-4 animate-fade-in">
@@ -249,7 +343,7 @@ export function Step7Circumstances() {
                       />
                     </div>
                   </div>
-                  <div className="flex items-center space-x-4">
+                  <div className="space-y-3">
                     <div className="flex items-center space-x-2">
                       <Checkbox
                         id="machineProperlyWorking"
@@ -274,7 +368,29 @@ export function Step7Circumstances() {
                         Używane zgodnie z instrukcją
                       </Label>
                     </div>
+                    <div className="flex items-center space-x-2">
+                      <Checkbox
+                        id="machineHasCertification"
+                        checked={circumstances.machineHasCertification}
+                        onCheckedChange={(checked) =>
+                          updateField('circumstances.machineHasCertification', checked)
+                        }
+                      />
+                      <Label htmlFor="machineHasCertification" className="font-normal">
+                        Maszyna posiadała wymagane atesty i certyfikaty
+                      </Label>
+                    </div>
                   </div>
+
+                  {circumstances.machineHasCertification === false && (
+                    <div className="flex items-start gap-3 p-4 bg-destructive/10 border border-destructive/30 rounded-lg animate-fade-in">
+                      <AlertTriangle className="w-5 h-5 text-destructive flex-shrink-0 mt-0.5" />
+                      <p className="text-sm text-foreground">
+                        Brak wymaganych atestów i certyfikatów maszyny może mieć istotne znaczenie 
+                        dla postępowania wypadkowego.
+                      </p>
+                    </div>
+                  )}
                 </div>
               )}
             </div>

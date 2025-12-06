@@ -31,6 +31,8 @@ export interface BusinessData {
   regon?: string;
   companyName: string;
   pkd?: string;
+  pkdDescription?: string;
+  pkdMachineUse?: boolean;
   businessScope?: string;
   address: Address;
   phone?: string;
@@ -65,13 +67,18 @@ export interface InjuryData {
 
 export interface AccidentCircumstances {
   activityBeforeAccident: string;
+  activityBeforeAccidentOther?: string;
   directEvent: string;
+  directEventOther?: string;
   externalCause: string;
+  externalCauseOther?: string;
   usedMachine: boolean;
+  machineDisabledWarningShown?: boolean;
   machineName?: string;
   machineType?: string;
   machineProperlyWorking?: boolean;
   machineUsedCorrectly?: boolean;
+  machineHasCertification?: boolean;
   protectiveEquipment: string[];
   protectiveEquipmentOther?: string;
   reportedToAuthorities: string[];
@@ -88,9 +95,18 @@ export interface Witness {
   phone?: string;
 }
 
+export interface UploadedFile {
+  id: string;
+  name: string;
+  size: number;
+  type: string;
+  dataUrl: string;
+}
+
 export interface DocumentStatus {
   documentType: string;
   status: 'have' | 'dont_have' | 'will_send_later';
+  files?: UploadedFile[];
 }
 
 export interface ValidationOverride {

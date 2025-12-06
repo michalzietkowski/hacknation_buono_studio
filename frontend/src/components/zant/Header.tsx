@@ -1,4 +1,5 @@
-import { Info } from 'lucide-react';
+import { Info, Shield } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -23,13 +24,21 @@ export function Header() {
           </div>
         </div>
 
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button variant="ghost" size="sm" className="gap-2">
-              <Info className="w-4 h-4" />
-              O narzędziu
-            </Button>
-          </DialogTrigger>
+        <div className="flex items-center gap-2">
+          <Button variant="outline" size="sm" className="gap-2" asChild>
+            <Link to="/zus">
+              <Shield className="w-4 h-4" />
+              Pracownik ZUS
+            </Link>
+          </Button>
+
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="ghost" size="sm" className="gap-2">
+                <Info className="w-4 h-4" />
+                O narzędziu
+              </Button>
+            </DialogTrigger>
           <DialogContent>
             <DialogHeader>
               <DialogTitle>O narzędziu ZANT</DialogTitle>
@@ -54,8 +63,9 @@ export function Header() {
                 </p>
               </DialogDescription>
             </DialogHeader>
-          </DialogContent>
-        </Dialog>
+            </DialogContent>
+          </Dialog>
+        </div>
       </div>
     </header>
   );
