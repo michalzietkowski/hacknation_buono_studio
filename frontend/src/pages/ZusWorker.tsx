@@ -1,28 +1,38 @@
 import { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { ZusWorkerHeader } from '@/components/zus-worker/ZusWorkerHeader';
-import { CaseList } from '@/components/zus-worker/CaseList';
-import { CaseDetail } from '@/components/zus-worker/CaseDetail';
-import { useCases } from '@/context/CasesContext';
-import { AccidentCase, CaseFilters } from '@/types/zus-worker';
+import { ZusWorkerStartScreen } from '@/components/zus-worker/ZusWorkerStartScreen';
+import { DocumentUploadStep } from '@/components/zus-worker/DocumentUploadStep';
+import { DocumentSummaryStep } from '@/components/zus-worker/DocumentSummaryStep';
+import { ProcessingStep } from '@/components/zus-worker/ProcessingStep';
+import { ResultsStep } from '@/components/zus-worker/ResultsStep';
+import { TestModeInstructions } from '@/components/zus-worker/TestModeInstructions';
+import { UploadedDocument, AnalysisResult } from '@/types/zus-worker-flow';
+
+type FlowStep = 'start' | 'test-mode' | 'upload' | 'summary' | 'processing' | 'results';
 
 export default function ZusWorker() {
-  const [selectedCaseId, setSelectedCaseId] = useState<string | null>(null);
-  const [filters, setFilters] = useState<CaseFilters>({});
-  const { cases, updateCase } = useCases();
+  const [currentStep, setCurrentStep] = useState<FlowStep>('start');
+  const [documents, setDocuments] = useState<UploadedDocument[]>([]);
+  const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);
 
-  const selectedCase = cases.find(c => c.id === selectedCaseId);
-
-  const handleCaseSelect = (caseId: string) => {
-    setSelectedCaseId(caseId);
+  const handleNewCase = () => {
+    setDocuments([]);
+    setAnalysisResult(null);
+    setCurrentStep('upload');
   };
 
-  const handleBackToList = () => {
-    setSelectedCaseId(null);
+  const handleTestMode = () => {
+    setCurrentStep('test-mode');
   };
 
-  const handleCaseUpdate = (updatedCase: AccidentCase) => {
-    updateCase(updatedCase);
+  const handleProcessingComplete = (result: AnalysisResult) => {
+    setAnalysisResult(result);
+    setCurrentStep('results');
+  };
+
+  const handleBackToStart = () => {
+    setCurrentStep('start');
   };
 
   return (
@@ -35,39 +45,54 @@ export default function ZusWorker() {
       <div className="min-h-screen bg-background flex flex-col">
         <ZusWorkerHeader onBackToClient={() => window.location.href = '/'} />
         
-        <div className="flex-1 flex">
-          {/* Left column - Case list */}
-          <div className={`${selectedCase ? 'hidden lg:block lg:w-[35%]' : 'w-full'} border-r border-border bg-card`}>
-            <CaseList 
-              cases={cases}
-              filters={filters}
-              onFiltersChange={setFilters}
-              selectedCaseId={selectedCaseId}
-              onCaseSelect={handleCaseSelect}
-            />
-          </div>
+        {currentStep === 'start' && (
+          <ZusWorkerStartScreen 
+            onNewCase={handleNewCase}
+            onTestMode={handleTestMode}
+          />
+        )}
 
-          {/* Right column - Case detail */}
-          {selectedCase && (
-            <div className="flex-1 bg-background overflow-hidden">
-              <CaseDetail 
-                case={selectedCase}
-                onBack={handleBackToList}
-                onUpdate={handleCaseUpdate}
-              />
-            </div>
-          )}
+        {currentStep === 'test-mode' && (
+          <TestModeInstructions
+            onClose={handleBackToStart}
+            onStartNewCase={handleNewCase}
+          />
+        )}
 
-          {/* Empty state when no case selected (desktop) */}
-          {!selectedCase && (
-            <div className="hidden lg:flex flex-1 items-center justify-center bg-muted/30">
-              <div className="text-center space-y-2">
-                <p className="text-lg text-muted-foreground">Wybierz sprawę z listy</p>
-                <p className="text-sm text-muted-foreground">aby zobaczyć szczegóły</p>
-              </div>
-            </div>
-          )}
-        </div>
+        {currentStep === 'upload' && (
+          <DocumentUploadStep
+            documents={documents}
+            onDocumentsChange={setDocuments}
+            onNext={() => setCurrentStep('summary')}
+            onBack={handleBackToStart}
+          />
+        )}
+
+        {currentStep === 'summary' && (
+          <DocumentSummaryStep
+            documents={documents}
+            onDocumentsChange={setDocuments}
+            onNext={() => setCurrentStep('processing')}
+            onBack={() => setCurrentStep('upload')}
+          />
+        )}
+
+        {currentStep === 'processing' && (
+          <ProcessingStep
+            documents={documents}
+            onComplete={handleProcessingComplete}
+            onError={() => {}}
+            onBack={() => setCurrentStep('summary')}
+          />
+        )}
+
+        {currentStep === 'results' && analysisResult && (
+          <ResultsStep
+            result={analysisResult}
+            onNewCase={handleNewCase}
+            onBack={() => setCurrentStep('summary')}
+          />
+        )}
       </div>
     </>
   );
