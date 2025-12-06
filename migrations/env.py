@@ -3,6 +3,7 @@ from pathlib import Path
 
 from alembic import context
 from sqlalchemy import engine_from_config, pool
+from sqlalchemy.engine.url import make_url
 
 
 # Ensure app package is importable
@@ -16,8 +17,15 @@ from app.models.base import Base  # noqa: E402
 config = context.config
 settings = get_settings()
 
-# Override sqlalchemy.url from env
-config.set_main_option("sqlalchemy.url", settings.DATABASE_URL)
+# Normalize DB URL to use psycopg driver if user passed bare postgres/postgresql
+raw_url = settings.DATABASE_URL
+parsed = make_url(raw_url)
+if parsed.drivername in ("postgres", "postgresql"):
+    parsed = parsed.set(drivername="postgresql+psycopg")
+normalized_url = parsed.render_as_string(hide_password=False)
+
+# Override sqlalchemy.url from env (after normalization)
+config.set_main_option("sqlalchemy.url", normalized_url)
 target_metadata = Base.metadata
 
 
