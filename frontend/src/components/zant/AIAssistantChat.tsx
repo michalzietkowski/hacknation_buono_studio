@@ -6,31 +6,15 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { useAIChat } from '@/context/AIChatContext';
 import { useFormContext } from '@/context/FormContext';
 import { cn } from '@/lib/utils';
+import { callFieldAssist, AssistMessage } from '@/lib/assist';
 
 interface Message {
   role: 'user' | 'assistant';
   content: string;
 }
 
-const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
-
-const STEP_LABELS: Record<number, string> = {
-  0: 'Wybór metody wprowadzania',
-  1: 'Wybór dokumentu',
-  2: 'Kim jesteś w zgłoszeniu',
-  3: 'Dane poszkodowanego',
-  4: 'Dane firmy',
-  5: 'Dane pełnomocnika',
-  6: 'Podstawowe dane wypadku',
-  7: 'Uraz i pomoc medyczna',
-  8: 'Okoliczności wypadku',
-  9: 'Świadkowie',
-  10: 'Dokumenty',
-  11: 'Podsumowanie',
-};
-
 export function AIAssistantChat() {
-  const { isOpen, activeField, activeFieldLabel, closeChat } = useAIChat();
+  const { isOpen, activeField, activeFieldLabel, sessionId, closeChat } = useAIChat();
   const { state } = useFormContext();
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
@@ -65,91 +49,6 @@ export function AIAssistantChat() {
     }
   }, [isOpen, activeField, activeFieldLabel]);
 
-  const buildSystemPrompt = () => {
-    const currentStepLabel = STEP_LABELS[state.currentStep] || `Krok ${state.currentStep}`;
-    
-    let prompt = `Jesteś pomocnym asystentem AI pomagającym użytkownikom wypełnić formularz zgłoszenia wypadku przy pracy w Polsce (dla ZUS).
-
-KONTEKST FORMULARZA:
-- Aktualny krok: ${currentStepLabel} (${state.currentStep}/11)
-- Metoda wprowadzania: ${state.entryMethod === 'manual' ? 'Ręczne wprowadzanie z asystentem' : 'Import dokumentów'}
-- Typ dokumentu: ${state.documentType || 'Nie wybrano'}
-- Rola użytkownika: ${state.userRole === 'injured' ? 'Poszkodowany' : state.userRole === 'representative' ? 'Pełnomocnik' : 'Nie wybrano'}
-
-WPROWADZONE DANE:
-`;
-
-    // Add injured person data
-    if (state.injuredPerson) {
-      const ip = state.injuredPerson;
-      prompt += `\nDane poszkodowanego:
-- Imię: ${ip.firstName || 'Nie podano'}
-- Nazwisko: ${ip.lastName || 'Nie podano'}
-- PESEL: ${ip.pesel || 'Nie podano'}
-- Data urodzenia: ${ip.birthDate || 'Nie podano'}
-- Telefon: ${ip.phone || 'Nie podano'}
-- Adres: ${ip.address?.street || ''} ${ip.address?.houseNumber || ''}, ${ip.address?.postalCode || ''} ${ip.address?.city || ''}, ${ip.address?.country || ''}`;
-    }
-
-    // Add business data
-    if (state.business) {
-      const b = state.business;
-      prompt += `\n\nDane firmy:
-- NIP: ${b.nip || 'Nie podano'}
-- REGON: ${b.regon || 'Nie podano'}
-- Nazwa: ${b.companyName || 'Nie podano'}
-- PKD: ${b.pkd || 'Nie podano'}
-- Adres: ${b.address?.street || ''} ${b.address?.houseNumber || ''}, ${b.address?.postalCode || ''} ${b.address?.city || ''}`;
-    }
-
-    // Add accident data
-    if (state.accidentBasic) {
-      const a = state.accidentBasic;
-      prompt += `\n\nDane wypadku:
-- Data wypadku: ${a.accidentDate || 'Nie podano'}
-- Godzina wypadku: ${a.accidentTime || 'Nie podano'}
-- Miejsce wypadku: ${a.accidentPlace || 'Nie podano'}
-- Kontekst: ${a.accidentContext || 'Nie podano'}`;
-    }
-
-    // Add injury data
-    if (state.injury) {
-      const i = state.injury;
-      prompt += `\n\nDane urazu:
-- Typ urazu: ${i.injuryType || 'Nie podano'}
-- Opis urazu: ${i.injuryDescription || 'Nie podano'}
-- Udzielono pierwszej pomocy: ${i.firstAidProvided ? 'Tak' : 'Nie'}
-- Niezdolność do pracy: ${i.unableToWork ? 'Tak' : 'Nie'}`;
-    }
-
-    // Add witnesses
-    if (state.witnesses && state.witnesses.length > 0) {
-      prompt += `\n\nŚwiadkowie: ${state.witnesses.length} osób`;
-    }
-
-    if (activeFieldLabel) {
-      prompt += `\n\nUŻYTKOWNIK PYTA O POLE: "${activeFieldLabel}"
-Skup się na wyjaśnieniu tego pola i podaj konkretne wskazówki jak je wypełnić.`;
-    }
-
-    prompt += `\n\nWYMAGANE POLA DO WYPEŁNIENIA (lista wszystkich):
-- Dane poszkodowanego: Imię, Nazwisko, PESEL, Data urodzenia, Telefon, Ulica, Nr domu, Kod pocztowy, Miasto, Kraj
-- Dane firmy: NIP, REGON, Nazwa firmy, PKD, Ulica, Nr budynku, Kod pocztowy, Miasto
-- Dane wypadku: Data wypadku, Godzina wypadku, Miejsce wypadku, Kontekst wypadku
-- Uraz: Typ urazu, Opis urazu, Czy udzielono pierwszej pomocy, Czy niezdolność do pracy
-- Okoliczności: Opis okoliczności wypadku
-- Świadkowie: Przynajmniej jeden świadek (opcjonalne, ale zalecane)
-
-ZASADY:
-1. Odpowiadaj po polsku, krótko i konkretnie
-2. Jeśli użytkownik pyta czy formularz jest kompletny, przeanalizuj WSZYSTKIE wprowadzone dane i wylistuj WSZYSTKIE brakujące pola z powyższej listy
-3. Pomagaj w zrozumieniu wymagań prawnych dotyczących zgłoszeń wypadków
-4. Bądź pomocny i cierpliwy
-5. Przy sprawdzaniu kompletności formularza, podawaj listę brakujących pól w czytelnej formie punktowej`;
-
-    return prompt;
-  };
-
   const sendMessage = async () => {
     if (!input.trim() || isLoading) return;
 
@@ -159,42 +58,30 @@ ZASADY:
     setIsLoading(true);
 
     try {
-      if (!OPENAI_API_KEY) {
-        throw new Error('Brak klucza API OpenAI. Ustaw zmienną VITE_OPENAI_API_KEY.');
-      }
-      
-      const response = await fetch('https://api.openai.com/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${OPENAI_API_KEY}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          model: 'gpt-4o-mini',
-          messages: [
-            { role: 'system', content: buildSystemPrompt() },
-            ...messages.map(m => ({ role: m.role, content: m.content })),
-            { role: 'user', content: userMessage }
-          ],
-          max_tokens: 500,
-          temperature: 0.7,
-        }),
+      const history: AssistMessage[] = [
+        ...messages.map(m => ({ role: m.role, content: m.content })),
+        { role: 'user', content: userMessage },
+      ];
+
+      const resp = await callFieldAssist({
+        field_id: activeField || 'general',
+        message: userMessage,
+        form_state: state,
+        history,
+        session_id: sessionId,
       });
 
-      if (!response.ok) {
-        throw new Error('Błąd API');
-      }
-
-      const data = await response.json();
-      const assistantMessage = data.choices[0]?.message?.content || 'Przepraszam, wystąpił błąd.';
-      
+      const assistantMessage = resp.reply || 'Przepraszam, wystąpił błąd.';
       setMessages(prev => [...prev, { role: 'assistant', content: assistantMessage }]);
     } catch (error) {
-      console.error('Error calling OpenAI:', error);
-      setMessages(prev => [...prev, { 
-        role: 'assistant', 
-        content: 'Przepraszam, wystąpił błąd podczas komunikacji z AI. Spróbuj ponownie.' 
-      }]);
+      console.error('Error calling assist API:', error);
+      setMessages(prev => [
+        ...prev,
+        {
+          role: 'assistant',
+          content: 'Przepraszam, wystąpił błąd podczas komunikacji z AI. Spróbuj ponownie.',
+        },
+      ]);
     } finally {
       setIsLoading(false);
     }
