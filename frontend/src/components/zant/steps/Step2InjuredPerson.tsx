@@ -13,21 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-
-function validatePesel(pesel: string): boolean {
-  if (!/^\d{11}$/.test(pesel)) return false;
-  const weights = [1, 3, 7, 9, 1, 3, 7, 9, 1, 3];
-  let sum = 0;
-  for (let i = 0; i < 10; i++) {
-    sum += parseInt(pesel[i]) * weights[i];
-  }
-  const checksum = (10 - (sum % 10)) % 10;
-  return checksum === parseInt(pesel[10]);
-}
-
-function validatePostalCode(code: string): boolean {
-  return /^\d{2}-\d{3}$/.test(code);
-}
+import { cleanDigits, cleanPhone, isPesel, isPhone, isPostalCode } from '@/lib/validation';
 
 export function Step2InjuredPerson() {
   const { state, updateField, addOverride } = useFormContext();
@@ -37,18 +23,20 @@ export function Step2InjuredPerson() {
   const [postalCodeWarning, setPostalCodeWarning] = useState<string | null>(null);
 
   const handlePeselChange = (value: string) => {
-    updateField('injuredPerson.pesel', value);
-    if (value.length === 11 && !validatePesel(value)) {
-      setPeselWarning('PESEL ma nieprawidłową sumę kontrolną');
+    const cleaned = cleanDigits(value).slice(0, 11);
+    updateField('injuredPerson.pesel', cleaned);
+    if (cleaned.length === 11 && !isPesel(cleaned)) {
+      setPeselWarning('PESEL ma nieprawidłowy format (11 cyfr).');
     } else {
       setPeselWarning(null);
     }
   };
 
   const handlePostalCodeChange = (value: string) => {
-    updateField('injuredPerson.address.postalCode', value);
-    if (value.length > 0 && !validatePostalCode(value)) {
-      setPostalCodeWarning('Format kodu pocztowego powinien być XX-XXX');
+    const cleaned = value.replace(/[^0-9-]/g, '').slice(0, 6);
+    updateField('injuredPerson.address.postalCode', cleaned);
+    if (cleaned.length > 0 && !isPostalCode(cleaned)) {
+      setPostalCodeWarning('Format kodu pocztowego powinien być NN-NNN');
     } else {
       setPostalCodeWarning(null);
     }
@@ -85,8 +73,10 @@ export function Step2InjuredPerson() {
                 value={injuredPerson.pesel || ''}
                 onChange={(e) => handlePeselChange(e.target.value)}
                 placeholder="Wprowadź 11-cyfrowy PESEL"
+                inputMode="numeric"
                 maxLength={11}
               />
+              <p className="text-xs text-muted-foreground">Format: 11 cyfr, tylko liczby.</p>
               {peselWarning && (
                 <ValidationWarning
                   message={peselWarning}
@@ -205,9 +195,18 @@ export function Step2InjuredPerson() {
               id="phone"
               type="tel"
               value={injuredPerson.phone || ''}
-              onChange={(e) => updateField('injuredPerson.phone', e.target.value)}
-              placeholder="+48 XXX XXX XXX"
+                onChange={(e) => {
+                  const cleaned = cleanPhone(e.target.value).slice(0, 12);
+                  updateField('injuredPerson.phone', cleaned);
+                }}
+                placeholder="+48 600700800"
+                inputMode="tel"
             />
+              {injuredPerson.phone && !isPhone(injuredPerson.phone) && (
+                <p className="text-sm text-destructive">
+                  Telefon powinien mieć 9 cyfr (opcjonalnie z +48).
+                </p>
+              )}
           </div>
         </div>
 
@@ -250,6 +249,7 @@ export function Step2InjuredPerson() {
                 value={injuredPerson.address.postalCode}
                 onChange={(e) => handlePostalCodeChange(e.target.value)}
                 placeholder="XX-XXX"
+                inputMode="numeric"
               />
               {postalCodeWarning && (
                 <ValidationWarning

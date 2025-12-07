@@ -29,6 +29,7 @@ import {
 } from '@/components/ui/popover';
 import { toast } from 'sonner';
 import { getRandomMachineUsePKD, pkdData, PKDEntry } from '@/data/pkdData';
+import { cleanDigits, cleanPhone, isNip, isRegon, isPhone, isPostalCode } from '@/lib/validation';
 
 function validateNip(nip: string): boolean {
   const cleanNip = nip.replace(/[\s-]/g, '');
@@ -88,10 +89,10 @@ export function Step3Business() {
   };
 
   const handleNipChange = (value: string) => {
-    const cleaned = value.replace(/[\s-]/g, '');
+    const cleaned = cleanDigits(value).slice(0, 10);
     updateField('business.nip', cleaned);
-    if (cleaned.length === 10 && !validateNip(cleaned)) {
-      setNipWarning('NIP ma nieprawidłową sumę kontrolną');
+    if (cleaned && !isNip(cleaned)) {
+      setNipWarning('NIP powinien mieć 10 cyfr.');
     } else {
       setNipWarning(null);
     }
@@ -164,6 +165,7 @@ export function Step3Business() {
                   onChange={(e) => handleNipChange(e.target.value)}
                   placeholder="Wprowadź 10-cyfrowy NIP"
                   maxLength={10}
+                  inputMode="numeric"
                   className="flex-1"
                 />
                 <Button
@@ -177,6 +179,7 @@ export function Step3Business() {
                   {isSearching ? 'Szukam...' : 'Pobierz z CEIDG'}
                 </Button>
               </div>
+              <p className="text-xs text-muted-foreground">Format: 10 cyfr, tylko liczby.</p>
               {nipWarning && (
                 <ValidationWarning
                   message={nipWarning}
@@ -216,10 +219,17 @@ export function Step3Business() {
               <Input
                 id="regon"
                 value={business.regon || ''}
-                onChange={(e) => updateField('business.regon', e.target.value)}
+                onChange={(e) => {
+                  const cleaned = cleanDigits(e.target.value).slice(0, 14);
+                  updateField('business.regon', cleaned);
+                }}
                 placeholder="9 lub 14 cyfr"
                 maxLength={14}
+                inputMode="numeric"
               />
+              {business.regon && !isRegon(business.regon) && (
+                <p className="text-sm text-destructive">REGON powinien mieć 9 lub 14 cyfr.</p>
+              )}
             </div>
           </div>
         </div>
@@ -341,8 +351,18 @@ export function Step3Business() {
                 id="phone"
                 type="tel"
                 value={business.phone || ''}
-                onChange={(e) => updateField('business.phone', e.target.value)}
+                onChange={(e) => {
+                  const cleaned = cleanPhone(e.target.value).slice(0, 12);
+                  updateField('business.phone', cleaned);
+                }}
+                placeholder="+48 600700800"
+                inputMode="tel"
               />
+              {business.phone && !isPhone(business.phone) && (
+                <p className="text-sm text-destructive">
+                  Telefon powinien mieć 9 cyfr (opcjonalnie z +48).
+                </p>
+              )}
             </div>
           </div>
 
@@ -402,9 +422,17 @@ export function Step3Business() {
               <Input
                 id="businessPostalCode"
                 value={business.address.postalCode}
-                onChange={(e) => updateField('business.address.postalCode', e.target.value)}
+                onChange={(e) => {
+                  const cleaned = e.target.value.replace(/[^0-9-]/g, '').slice(0, 6);
+                  updateField('business.address.postalCode', cleaned);
+                }}
                 placeholder="XX-XXX"
+                inputMode="numeric"
               />
+              {business.address.postalCode &&
+                !isPostalCode(business.address.postalCode) && (
+                  <p className="text-sm text-destructive">Kod pocztowy w formacie NN-NNN.</p>
+                )}
             </div>
             <div className="space-y-2">
               <Label htmlFor="businessCity">Miejscowość *</Label>
