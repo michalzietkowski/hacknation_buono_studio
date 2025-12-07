@@ -1,0 +1,59 @@
+Adres do korespondencji osoby poszkodowanej
+Padaj, jeśli adres do korespondencji jest inny niż adres zamieszkania / adres ostatniego miejsca zamieszkania w Polsce / adres miejsca pabytu
+
+[0] adres [1] poste restante [] skrytka pocztowa [0] przegródka pocztowa
+
+Jeśli jako sposób korespondencji wybierzesz:
+
+— poste restante, podaj jedynie kod pocztowy placówki pocztowej oraz w polu Miejscowość wpisz nazwę tej placówki,
+—_ skrytkę pocztową / przegródkę pocztową, w polu Numer domu wpisz numer skrytki/przegródki, w polu Kod pocztowy wpisz
+kod pocztowy placówki oraz w polu Miejscowość wpisz nazwę placówki pocztowej
+
+Ulica |
+Numer domu [_"] Numer lokali
+
+Kod pocztowy [_-"] Miejscowość
+
+Nazwa państwa
+
+Podaj, jeśli Twój adres jest inny niż polski
+
+Adres miejsca prowadzenia pozarolniczej działalności
+Podaj, jeśli poszkadowany prowadzi pozarolniczą działalność albo współpracuje przy prowadzeniu takiej działalności
+
+Ulica
+
+Numer domu Numer lokalu [_]
+Kod Pocztowy Miejscowość [
+AJ
+
+Numer telefonu
+Jeśli podasz tę informację, ułatwi Nam to kontakt w Twojej sprawie.
+
+To pale jest dobrowolne
+
+Adres sprawowania opieki nad dzieckiem w wieku do lat 3
+Podaj, jeśli poszkodowany wykonuje pracę na podstawie umowy uaktywniejącej (iako niania)
+
+Kod pocztowy [_] Miejscowość
+
+Numer domu
+
+Numer telefonu
+
+Jeśli podasz tę informację, ułatwi nam to kontakt w Twojej sprawie.
+To pole jest dabrowolne
+
+Dane osoby, która zawiadamia o wypadku
+Wypełnij, jeśli jesteś inną osabą niż poszkodowany
+
+PESEL | | | |
+Rodzaj, seria i numer dokumentu |
+potwierdzającego tożsamość
+Podaj, jeśli nie masz nadanego numeru PESEL
+
+Imię [
+Nazwisko
+
+Sklad: Poligrafia ZUS/MW-wa; zam. nr 3059/24 Zakład Ubezpieczeń Społecznych w internecie — www.zus.pl Strona 2 z 6
+

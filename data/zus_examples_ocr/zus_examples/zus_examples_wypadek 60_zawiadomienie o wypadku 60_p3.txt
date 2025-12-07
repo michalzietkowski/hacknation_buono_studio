@@ -1,0 +1,66 @@
+EWYP
+
+Data urodzenia [ | | ] | [1] |
+
+dd / mm I rrrr
+
+Numer telefonu
+
+Jeśli podasz tę informację, ułatwi nam to kontakt w Twojej sprawie.
+To pole jast dobrowolne
+
+Adres zamieszkania osoby, która zawiadamia o wypadku
+Wypalnij, jeśli jesteś innq osobą niż poszkodowany
+
+Ulica | |
+Numer domu Numer lokalu [MJ]
+Kod pocztowy Miejscowość
+
+Nazwa państwa |
+
+Podaj, jeśli Twój adres jest inny niż polski
+
+Adres ostatniego miejsca zamieszkania w Polsce / adres miejsca pobytu osoby, która zawiadamia o wypadku
+
+Wypelnij, jeśli jesteś inną osobą niż poszkodowany. Podaj adres ostatniego miejsca zamieszkania w Polsce, jeśli obecnie miaszkasz za granicą,
+ale wcześniej mieszkałeś w Polsce. Jeśli nia masz adresu zamieszkania, podaj adres miejsca pobytu lub adres ostatniego miejsca zamieszkania
+
+w Polsce
+Ulica |
+Numer domu Numer lokalu [1]
+Kod pocztowy [M] Miejscowość |
+
+Adres do korespondencji osoby, która zawiadamia o wypadku
+
+Wypelnij, jeśli jesteś inną osobą niż poszkodowany i Twój adres do koraspondencji jest inny niż adres zamieszkania / adres ostatniego miejsca
+zamieszkania w Polsce / adres miejsca pobytu
+
+m adres CJ poste restante [J skrytka pocztowa [J przegródka pocztowa
+
+Jeśli jako sposób korespondencji wybierzesz:
+
+-_ poste restante, podaj jedynie kod pocztowy placówki pocztowej oraz w polu Miejscowość wpisz nazwę tej placówki,
+
+—_skrytkę pocztową / przegródkę pocztową, w polu Numer domu wpisz numer skrytki/przegródki, w polu Kod pocztowy wpisz
+kod pocztowy placówki oraz w polu Miejscowość wpisz nazwę placówki pocztowej.
+
+Ulica |
+Numer domu Numer lokalu
+Kod pocztowy | Miejscowość
+
+Nazwa państwa
+
+Podaj, jeśli Twój adres jest inny niż polski
+
+Informacja o wypadku
+
+IL
+
+1. Datawypadku |0 I9 0 9 I2 J 2 55 Godzina wypadku | 10:20
+dd ł mm / rrrr
+
+2. Miejsce wypadku zakład pracy,
+3. - Planowana godzina rozpoczęcia pracy Planowana godzina zakończenia pracy | „5.59
+w dniu wypadku " w dniu wypadku s
+
+Skład: Poligrafia ZUS/W-wa; zam. nr 3068/24(E) Zakład Ubezpieczeń Spolecznych w internecie — www.zus.pl Strona 3 z 6

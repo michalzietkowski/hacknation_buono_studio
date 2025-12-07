@@ -1,0 +1,83 @@
+EWYP
+
+Data urodzenia | | l LLLI |
+
+dd I/I m 1 rrr
+
+Numer telefonu
+
+Jeśli podasz tę informację, ulatwi nam lo kontakt w Twojej sprawie.
+To pole jasl dobrowolne
+
+Adres zamieszkania osoby, która zawiadamia o wypadku
+Wypełnij, jeśli jesteś inną osobą niż poszkodowany
+
+Ulica
+
+Numer domu Numer lokalu
+
+|
+
+[|]
+Mescoweść 7]
+|
+
+Kod pocztowy
+
+[LL]
+
+Nazwa państwa
+
+Podaj, jeśli Twój adres jest inny niż polski
+
+Adres ostatniego miejsca zamieszkania w Polsce / adres miejsca pobytu osoby, która zawiadamia o wypadku
+
+Wypelnij, jeśli jesteś inną osobą niż poszkodowany. Podaj adres ostalniego miejsca zamieszkania w Polsce, Jeśli obecnie mieszkasz za granicą,
+ale wcześniej mieszkałeś w Polsce. Jeśli nie masz adresu zamieszkania, podaj adres miejsca pobytu lub adres ostatniego miejsca zamieszkania
+
+w Polsce
+Ulica L 5
+Numer lokalu M]
+
+Numer domu
+
+Kod pocztowy Miejscowość
+
+[l
+
+Adres do korespondencji osoby, która zawiadamia o wypadku
+
+Wypełnij, jeśli jesteś inną osobą niź poszkodowany i Twój adres do korespondencji jest inny niż adres zamieszkania / adres ostatniego miejsca
+zamieszkania w Polsce / adres miejsca pobytu
+
+CJ adres [0] poste restante [J skrytka pocztowa CJ przegródka pocztowa
+
+Jeśli jako sposób korespondencji wybierzesz:
+
+— posle restante, podaj jedynie kod pocztowy placówki pocztowej oraz w polu Miejscowość wpisz nazwę tej placówki,
+— skrytkę pocztową / przegródkę pocztową, w polu Numer domu wpisz numer skrytki/przegródki, w polu Kod pocztowy wpisz
+kod pocztowy placówki oraz w polu Miejscowość wpisz nazwę placówki pocztowej.
+
+Ulica |
+Numer domu |] Numer lokalu
+Kod pocztowy |] Miejscowość
+
+Nazwa państwa
+
+Podaj, jeśli Twój adres jest inny niż polski
+Informacja o wypadku
+
+1. Dała wypadku [415 du | WIO) 25] Godzina wypadku 43: 30
+1 rrrr
+
+dd / mm
+
+JL
+
+2. Miejsce wypadku | |
+
+3. Planowana godzina rozpoczęcia pracy [7:00] Planowana godzina zakończenia pracy |17: so]
+w dniu wypadku w dniu wypadku
+
+Skład: Poligrafia ZUS/W-wa; zam. nr 3069/24 _ Zakład Ubezpieczeń Społecznych w internecie — www.zus.pl Strona 3 z 6
+

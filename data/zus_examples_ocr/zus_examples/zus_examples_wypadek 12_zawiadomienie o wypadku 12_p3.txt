@@ -1,0 +1,78 @@
+EWYP £
+
+Data urodzenia
+dd /ł mm 1 rrrr
+
+Numer telefonu
+
+Jeśli podasz tę informację, ułatwi nam to kontakt w Twojej sprawie.
+To pole jest dobrowolne
+
+Adres zamieszkania osoby, która zawiadamia o wypadku
+Wypełnij, jeśli jesteś inną osobą niż poszkodowany
+
+Ulica
+
+[i
+|
+
+Numer domu Numer lokalu
+Kod pocztowy Miejscowość
+pero Nazwa państwa
+
+Podaj, jeśli Twój adres jest inny niż polski
+
+Adres ostatniego miejsca zamieszkania w Polsce / adres miejsca pobytu osoby, która zawiadamia o wypadku
+
+Wypełnij, Jeśli Jesteś inną osobą niż poszkodowany. Poda] adres ostatniego miejsca zamieszkania w Polsce, jeśli obecnie mleszkasz za granicą,
+ale wcześniej mleszkaleś w Polsce. Jeśli nie masz adresu zamleszkania, podaj adres miejsca pobytu lub adres oslalniego miejsca zamieszkania
+w Polsce
+
+Ullca
+
+Numer lokalu
+
+Kod pocztowy _] Miejscowość
+
+Adres do korespondencji osoby, która zawiadamia o wypadku
+
+Wypelnij, Jeśli jesteś Inną osobą niż poszkodowany I Twój adres do korespondencji jest inny niż adres zamieszkania / adres ostatniego miejsca
+zamieszkania w Polsce / adres miejsca pobytu :
+
+[) adres [J poste restante CJ skrytka pocztowa [l przegródka pocztowa
+
+”—deśli jako sposób korespondencji wybierzesz:
+- poste restanie, podaj jedynie kod pocztowy placówki pocztowej oraz w polu Miejscowość wpisz nazwę tej placówki,
+— skrytkę pocztową / przegródkę pocztową, w polu Numer domu wpisz numer skrytki/przegródki, w polu Kod pocztowy wpisz
+kod pocztowy placówki oraz w polu Miejscowość wpisz nazwę placówki pocztowej.
+
+Numer domu
+
+|
+
+Ulica
+
+|
+
+Numer domu Numer lokalu
+
+Kod pocztowy Miejscowość
+
+Nazwa państwa
+
+[LL
+|
+
+Podaj, Jeśli Twój adres jest Inny niż polski
+Informacja o wypadku
+
+1. Datawypadku | Ą %|0 u] J10)2 s] Godzina wypadku AU 8
+
+dd / mm / rrrr
+
+2. Miejsce wypadku
+3. Planowana godzina rozpoczęcia pracy IWPEZ Planowana godzina zakończenia pracy [M2]
+w dniu wypadku w dniu wypadku
+
+Skład: Poligrafia ZUS/W-wa; zam. nr 3069/24 _ Zakład Ubezpieczeń Społecznych w Internecie — www.zus.pl Strona 3 z 6
+

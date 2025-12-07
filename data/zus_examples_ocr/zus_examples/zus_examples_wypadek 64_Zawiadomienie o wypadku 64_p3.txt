@@ -1,0 +1,91 @@
+EWYP
+
+Data urodzenia
+
+mm / rrrr
+
+Numer telefonu
+ę nam to kontakt w Twojej sprawie,
+
+To pole jast dobrowolne
+Adres zamieszkania osoby, która zawiadamia o wypadku
+Wypełnij, jeśli jesteś inną osobą niż poszkodowany
+
+Ulica
+
+|
+
+Numer domu Numer lokalu
+
+Kod pocztowy
+
+i
+|
+
+Miejscowość
+
+Nazwa państwa
+
+|
+
+Podaj, jeśli Twój adres jest inny niż polski
+
+Adres ostatniego miejsca zamieszkania w Polsce / adres miejsca pobytu osoby, która zawiadamia o wypadku
+Wypełnij, jeśli jesteś inną osobą niż poszkodowany. Podaj adres ostatniego miejsca zamieszkania w Polsce, Jeśli obecnie mieszkasz za granicą,
+
+ale wcześniej mieszkałoś w Polsce. Jeśli nie masz adresu zamieszkania, podaj adres miejsca pobytu lub adres ostatniego miejsca zamieszkania
+w Polsce
+
+Ulica
+
+|
+
+Numer domu Numer lokalu
+
+Kod pocztowy
+
+[i
+|
+
+Miejscowość
+
+Adres do korespondencj| osoby, która zawiadamia o wypadku
+
+Wypalnij, jośli jesteś inną osobą niż poszkodowany | Twój adres do korespondencji Jest Inny niż adres zamieszkania / adres ostatniego miejsca
+zamieszkania w Polsce / adres miejsca pobytu
+
+[J adres [I poste restante CJ skrytka pocztowa
+
+Jeśli jako sposób korespondencji wybierzesz:
+
+— poste restante, podaj jedynie kod pocztowy placówki pocztowej oraz w polu Miejscowość wpisz nazwę tej placówki,
+
+—_ skrytkę pocztową / przegródkę pocztową, w polu Numer domu wpisz numer skrytki/przegródki, w polu Kod pocztowy wpisz
+kod pocztowy placówki oraz w polu Miejscowość wpisz nazwę placówki pocztowej.
+
+przegródka pocztowa
+
+LI
+
+Ulica
+
+Numer domu Numer lokalu
+
+Kod pocztowy Miejscowość
+
+[i
+|
+
+Nazwa państwa
+Podaj, jeśli Twój adres jest Inny niż polski
+
+Informacja o wypadku
+
+1. Dala wypadku Li [0] 5) GT] 4 Y Godzina wypadku |9 39/ 19%
+dd I mm I rrrr
+
+3. Planowana godzina rozpoczęcia pracy Planowana godzina zakończenia pracy L44FTK]" J
+w dniu wypadku w dniu wypadku
+
+Sklad: Poligrafia ZUS/W=wa; zam, nr 3069/24(E) Zakład Ubezpieczeń Społacznych w internecie — www.zus.pl Strona 3 z 6
+

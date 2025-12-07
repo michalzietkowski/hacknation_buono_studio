@@ -1,0 +1,64 @@
+EWYP
+
+Adres do korespondencji osoby poszkodowanej
+Podaj, jeśli adres do korespondencji jest inny niż adres zamieszkania / adres ostatniego miejsca zamieszkania w Polsce / adres miejsca pobytu
+
+adres [] poste restante m skrytka pocztowa przegródka pocztowa
+
+Jeśli jako sposób korespondencji wybierzesz:
+
+— poste restante, podaj jedynie kod pocztowy placówki pocztowej oraz w polu Miejscowość wpisz nazwę tej placówki,
+
+— skrytkę pocztową / przegródkę pocztową, w polu Numer domu wpisz numer skrytki/przegródki, w polu Kod pocztowy wpisz
+kod pocztowy placówki oraz w polu Miejscowość wpisz nazwę placówki pocztowej.
+
+uica [_]
+Numer domu _T |] Numer lokalu
+Kod pocztowy [TLI Miejscowość [--]
+
+Nazwa państwa
+
+Podaj, jeśli Twój adres jest inny niż polski 5
+
+Adres miejsca prowadzenia pozarolniczej działalności m
+
+Podaj, jeśli poszkodowany prowadzi pozarolniczą działalność albo współpracuje przy prowadzeniu takiej działalności
+
+Ulica | |
+Numer lokalu
+Kod pocztowy _T 1 Miejscowość
+
+Numer telefonu
+
+Numer domu
+
+Jeśli podasz tę informację, ułatwi nam to kontakt w Twojej sprawie.
+To pole jest dobrowolne
+
+Adres sprawowania opieki nad dzieckiem w wieku do [at 3
+Podaj, jeśli poszkodowany wykonuje pracę na podstawie umowy uaktywniającej (jako niania)
+
+Ulica |
+
+Numer domu J Numer lokalu
+Kod pocztowy | Miejscowość ! j
+
+Numer telefonu |
+
+Jeśli podasz tę informację, ułatwi nam to kontakt w Twojej sprawie.
+To pole jest dobrowolne
+
+Dane osoby, która zawiadamia o wypadku
+Wypelnij, jeśli jesteś inną osobą niż poszkodowany
+
+pesa. | | | IT ITLTTTTLI]
+
+Rodzaj, seria i numer dokumentu |
+potwierdzającego tożsamość |
+
+Podaj, jeśli nie masz nadanego numeru PESEL
+Imię | | ]
+
+Nazwisko - e
+
+Skład; Poligrafia ZUS/AW-wa; zam. nr 3069/24(E) Zakład Ubezpieczeń Społecznych w internecie — www.zus.pl Strona 2 z 6

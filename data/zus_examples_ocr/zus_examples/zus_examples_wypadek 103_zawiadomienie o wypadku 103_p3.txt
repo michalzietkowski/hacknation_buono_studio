@@ -1,0 +1,61 @@
+EWYP
+
+Data urodzenia
+dd I mm ł rrrr
+
+Numer telefonu
+
+Jeśli podasz lę informację, ulatwi nam lo kontakt w Twojej sprawie.
+To pole jasl dobrowolna
+
+Adres zamieszkania osoby, która zawiadamia o wypadku
+Wypalnij, Jeśli jesteś inną osobą niż poszkodowany
+
+Numer domu Numer lokalu
+
+Nazwa państwa
+Podaj, Jeśli Twój adres jast Inny niż polski
+
+Adres ostatniego miejsca zamieszkania w Polsce / adres miejsca pobytu osoby, która zawiadamia o wypadku
+
+Wypelnij, jeśli jesteś inną osobą niż poszkodowany. Podaj adres ostatniego miejsca zamieszkania w Polsce, jeśli obecnie mieszkasz za granicą,
+ale wcześniej mieszkaleś w Polsce. Jeśli nie masz adresu zamieszkania, podaj adres miejsca pobylu lub adros osłatniago miejsca zamieszkania
+
+w Polsca
+Numer domu | | Numer lokalu M]
+Adres do korespondencji osoby, która zawiadamia o wypadku
+
+ladamiaowypadk ||| 0
+Wypełnij, jeśli jesteś inną osobą niż poszkodowany 1 Twój adres do korespondencji jest inny niż adres zamieszkania / adres osłalniego miejsca
+zamieszkania w Polsca / adres miejsca pobylu
+
+| | adres CJ posle restanie M skrylka pocztowa LJ przegródka poczlowa
+
+Jeśli jako sposób korespondencji wybierzesz:
+
+Kad pocztowy
+
+s—= — poste reslanie, podaj jedynie kod pocztowy placówki pocztowej oraz w polu Miejscowość wpisz nazwę tej placówki,
+
+— skrytkę paczlową / przegródkę pocztową, w polu Numer domu wpisz numar skrytki/przegródki,w polu Kod pocztowy wpisz
+kod pocztowy placówki oraz w polu Miejscowość wpisz nazwę placówki pocztowej.
+
+Ulica
+
+Nazwa państwa
+Podaj, jeśli Twój adres Jost inny niż polski
+
+Informacja.o wypadku
+
+1. Dala wypadku [M514K [20124 | Godzina wypadku
+dd 1 rrr
+
+! mm
+2. Miejsce wypadku
+
+3. Planowana godzina rozpoczęcia pracy Planowana godzina zakończenia pracy
+w dniu wypadku w dniu wypadku
+
+Strona 3 z 6
+
+Skład; Poligrafia ZUS/Wwa:zam.nrJ069/24 — Zaklad Ubezpieczeń Spolecznych w internecie — www.zus.pl

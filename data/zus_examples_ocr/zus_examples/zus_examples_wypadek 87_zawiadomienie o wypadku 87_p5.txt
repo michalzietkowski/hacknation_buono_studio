@@ -1,0 +1,71 @@
+:
+
+Dane świadków wypadku
+
+Świadek wypadku — 1
+Imię
+
+Nazwisko
+Ulica
+
+Numer domu
+Kod pocztowy
+
+Nazwa państwa
+
+Świadek wypadku — 2
+Imię
+
+Nazwisko
+Ulica
+
+Numer domu
+Kod pocztawy
+
+Nazwa państwa
+
+Świadek wypadku — 3
+
+Imię
+Nazwiska
+Ulica
+
+Numer domu
+Kod pocztowy
+
+Nazwa państwa
+
+Załączniki
+
+L=
+M1] Numer lokalu [_-]
+[__]
+
+Miejscowość |
+
+Podaj, jeśli adres śwladka jest inny niż polski
+
+A
+
+Miejscowość L
+
+ii
+
+Podaj, jeśli adres świadka jest inny niż polski
+
+| —
+m za
+L szl
+
+Podaj, Jeśli adres świadka jest inny niż polski
+
+.4 kserokopia karty informacyjnej ze szpitala/ zaświadczenia o udzieleniu pierwszej pomocy z pogotowia ratunkowego wraz
+
+z wywiadem
+
+l] kserokopia postanowienia prokuratury o wszczęciu postępowania karnego lub zawieszeniu/ umorzeniu postępowania
+
+l] kserokopia statystycznej karty zgonu lub zaświadczenie lekarskie stwierdzające przyczynę zgonu, skrócony odpis aktu
+zgonu (w przypadku wypadku ze skutkiem śmiertelnym)
+
+Sklad: Poligrafia ZUS/W-wa; zam. nr 3069/24 Zakład Ubezpieczeń Społecznych w internecie — www.zus.pl Strona 5 z 6

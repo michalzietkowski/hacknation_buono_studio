@@ -1,0 +1,81 @@
+EWYP
+
+Adres miejsca prowadzenia pozarolniczej działalności
+
+Podaj, jeśll poszkodowany prowadzi pozarolniczą działalność ajbo współpracuje przy prowadzeniu takiej działalności
+
+Ulica
+Numer domu
+Kod pocztowy
+
+Numer telefonu
+
+e
+
+Numer lokalu
+
+Miejscowość
+
+Jeśli podasz nam tę informację, ulatwi nam to konlakt w Twojej sprawie.
+To pole Jest dobrowolne
+
+l
+
+Adres sprawowania opiek! nad dzieckiem w wieku.do lat 3
+
+Podaj, Jeśli poszkodowany wykonuje pracę na podstawie umowy uaktywniającej (jako niania)
+
+Ulica
+Numer domu
+Kod pocztowy
+
+Numer telefonu
+
+|
+
+Jeśli podasz nam tę Informację, ułatwi nam to kontakt w Twojej sprawie.
+
+To pole jest dobrowolne
+
+Dane osoby, która zawiadamia o wypadku
+
+Wypełnij, Jeśli jesteś Inną osobą niż poszkodowany
+PESEL
+
+Rodzaj, seria i numer dokumentu
+potwierdzającego tożsamość
+
+Imię
+Nazwisko
+
+Data urodzenia
+
+Numer telefonu
+
+[
+
+r ||.
+Jeśli podasz nam tę Informację, ułatwi nam to kontakt w Twojej sprawie,
+
+Ta pole jest dobrowolne
+
+Adres zamieszkania osoby, która zawiadamia o wypadku
+
+Wypełnij, jeśli jesteś inną osobą niż poszkodowany
+Ulica
+
+Numer domu
+Kod pocztowy
+
+Nazwa państwa
+
+Skład; Poligrafia ZUSAWŁWa; zam, ne 2488/23 Zakład Ubezpieczeń Społecznych w Internecie — www.zus.pl
+
+Numer lakalu
+
+I
+Miejscowość |
+Z EAREEEAENE
+Podaj, jeśli Twój adres jest Inny niż polski .
+
+Strona 2 z 6

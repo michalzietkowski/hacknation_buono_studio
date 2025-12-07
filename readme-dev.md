@@ -58,6 +58,12 @@ Run services:
 - `make alembic-revision msg="..."` – autogenerate migration
 - `make compose-up-migrate` – uruchom db, wykonaj migracje, podnieś api+frontend
 
+## Embedding ingest (Chroma)
+- Dane OCR są w repo: `data/zus_examples_ocr/zus_examples`.
+- Ingest: `uv run python scripts/ingest_chroma_zus.py --data-dir data/zus_examples_ocr/zus_examples --collection zus_cases`
+- Smoke-test bez zapisu: `uv run python scripts/ingest_chroma_zus.py --data-dir data/zus_examples_ocr/zus_examples --collection zus_cases --limit 5 --dry-run`
+- Wymaga uruchomionego Chroma (`CHROMA_URL`, opcjonalnie `CHROMA_AUTH_TOKEN`, `CHROMA_COLLECTION`).
+
 ## ChromaDB (vector store)
 - Docker image: `chromadb/chroma:0.5.23` (compose uses the same tag).
 - Ports: server listens on `8000`; compose maps to host `8001`.

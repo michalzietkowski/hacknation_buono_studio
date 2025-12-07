@@ -1,0 +1,75 @@
+EWYP
+
+Data urodzenia
+dd I mm /ł rrrr
+
+Numer telefonu
+
+Jeśli podasz tę informację, ułatwi nam to kontakt w Twojej sprawie.
+To pole jesl dobrowolne
+
+Adres zamieszkania osoby, która zawiadamia o adku
+Wypelnij, jeśli jesteś inną osobą niż poszkodowany
+
+Ulica
+
+Numer domu Numer lokalu
+
+[l
+|
+
+Kod pocztowy Mlejscowość
+
+Nazwa państwa
+Podaj, jeśli Twój adres jesl inny niż polski
+
+Adres ostatniego miejsca zamieszkania w Polsce / adres miejsca pobytu osoby, która zawladamia o wypadku
+
+Wypełnij, jeśli Jesteś inną osobą niż poszkodowany, Podaj adres ostalniego miejsca zamieszkania w Polsce, jeśli obecnie mieszkasz za granicą,
+
+wę wcześniej mleszkaleś w Polsce. Jeśli nie masz adresu zamieszkania, podaj adres miejsca pobytu lub adres ostalniego miejsca zamieszkania
+w Polsce
+
+Ulica
+
+Numer domu Numer lokalu
+
+Ji
+|
+
+Kod pocztowy Miejscowość
+
+Adres do korespondencji osoby, która zawiadamia o wypadku
+
+Wypełnij, jeśli jesteś Inną osobą niż poszkodowany | Twój adres do korespondencji jest inny niż adres zamieszkania / adres ostalnłego miejsca
+zamieszkania w Polsce / adres miejsca pobylu
+
+[] adres CJ poste restante CJ skrytka pocztowa CJ przegródka pocztowa
+
+Jeśli jako sposób korespondencji wybierzesz:
+
+- poste restante, podaj jedynie kod pocztowy placówki pocztowej oraz w polu Miejscowość wpisz nazwę tej placówki,
+— skrytkę pocztową / przegródkę pocztową, w polu Numer domu wpisz numer skrytki/przegródki, w polu Kod pocziowy wpisz
+kod pocztowy placówki oraz w polu Miejscowość wpisz nazwę placówki pocztowej.
+
+Ulica
+
+Numer domu Numer lokalu
+
+ji
+|
+
+Kod pocztowy Miejscowość
+
+Podaj, jeśli Twój adres jest inny niż polski
+
+Informacja o wypadku bool
++6
+1. Dalawypadku |) [0 ara 0 2157 Godzina wypadku 17 <> |
+dd ł mm ł rrrr
+
+3. Planowana godzina rozpoczęcia pracy [ó4s? |] Planowana godzina zakończenia pracy 146.7]
+w dniu wypadku w dniu wypadku
+
+Skład: Poligrafia ZUSMAŁwa; zam. nr 3069/24 _ Zakład Ubezpieczeń Społecznych w internecie — www.zus.pl Strona 3 z 6
+

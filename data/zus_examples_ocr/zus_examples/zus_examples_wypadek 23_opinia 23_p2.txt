@@ -1,0 +1,31 @@
+Opinia osoby uprawnionej do aprobaty
+
+2347 5
+
+(Data, pieczątka i podpis osoby uprawnionej do aprobaty)
+
+Opinia osoby uprawnionej do superaprobaty?”
+
+(Data, pieczątka i pat
+
+Opinia Konsultanta?
+
+| (Data, pieczątka i podpis konsultanta)
+Opinia Z-cy Dyrektora ds. Świadczeń”
+
+(Data, pieczątka | podpis Z-cy Dyrektora ds. Świadczeń)
+Decyzja osoby uprawnionej do superaprobaty
+
+(Data, pieczątka i padpis osoby uprawnionej do superaprobaty)
+
+1)
+
+niepotrzebne skreślić |
+2]
+
+wypełnić w zależności ad stanu sprawy
+
+l
+
+opo +
+

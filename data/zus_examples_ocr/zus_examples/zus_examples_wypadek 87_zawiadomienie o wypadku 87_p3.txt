@@ -1,0 +1,75 @@
+EWYP
+
+Data urodzenia
+dd / mm /ł trrr
+
+Numer telefonu
+
+Jeśli podasz tę informację, ułatwi nam to kontakt w Twojej sprawie.
+To pole jest dobrowolne
+
+Adres zamieszkania osoby, która zawiadamia o wypadku
+Wypaelnij, jeśli jesteś inną osobą niż poszkodowany
+
+Ulica |
+" ż ]
+Kod pocztowy Miejscowość |
+Nazwa państwa
+
+Podaj, jeśli Twój adres jest inny niż polski
+
+Adres ostatniego miejsca zamieszkania w Polsce / adres miejsca pobytu osoby, która zawiadamia o wypadku
+
+wypelnij, jeśli jesteś inną osobą niż poszkodowany. Podaj adres ostatniego miejsca zamieszkania w Polsce, jeśli obecnie mieszkasz za granicą,
+ale wcześniej mieszkałeś w Polsce. Jeśli nie masz adresu zamieszkania, podaj adres miejsca pobylu lub adres ostatniego mlejsca zamieszkania
+
+w Polsce
+Ulica l
+
+[1 Numer lokalu
+
+Adres do korespondencji osoby, która zawiadamia o wypadku
+
+Wypełnij, jeśli jesteś inną osobą niż poszkodowany | Twój adres do korespondencji jest inny niż adres zamieszkania / adres ostatniego miejsca
+zamieszkania w Polsce / adres miejsca pobytu
+
+adres [LJ poste restante LJ skrytka pocztowa [J przegródka pocztowa
+
+Jeśli jako sposób korespondencji wybierzesz:
+
+— poste restante, podaj jedynie kod pocztowy placówki pocztowej oraz w polu Miejscowość wpisz nazwę tej placówki,
+
+— skrytkę pocztową / przegródkę pocztową, w polu Numer domu wpisz numer skrytki/przegródki, w polu Kod pocztowy wpisz
+kod pocztowy placówki oraz w polu Miejscowość wpisz nazwę placówki pocztowej.
+
+[_
+
+Numer domu
+
+Kod pocztowy
+
+Ulica
+
+Numer domu Numer lokalu
+Kod pocztowy [-] Miejscowość
+
+Nazwa państwa
+
+Podaj, jeśli Twój adres jest inny niż polski
+
+Informacja o wypadku
+
+1. Data wypadku jA Ki O 2 UR (©) ra Godzina wypadku
+mm rri
+
+dd I [I rr
+
+2. Miejsce wypadku | NIEAMLY DŁOGA L5 o) |
+_ Planowana godzina zakończenia pracy [żo22 |
+w dniu wypadku
+
+Sklad: Poligrafia ZUS/W-wa; zam. nr3069/24 _ Zakład Ubezpieczeń Społecznych w internecie — www.zus.pl Strona 3 z 6
+
+3. Planowana godzina rozpoczęcia pracy
+w dniu wypadku
+

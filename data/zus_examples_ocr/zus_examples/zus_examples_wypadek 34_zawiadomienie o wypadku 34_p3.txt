@@ -1,0 +1,65 @@
+EWYP
+
+Data urodzenia
+dd I mm
+
+Numer telefonu |
+
+Jeśli podasz lę informację, ułatwi nam to kontakt w Twojej sprawie.
+To pole jest dobrowolne
+
+Ażr:: zamieszkania osoby, która zawiadamia o wypadku
+
+E
+
+ugęe as $ mną osobą niź poszkodowany
+Numer domu [M] Numer lokalu MJ]
+e Nazwa państwa
+
+Podaj, jeśli Twój adres Jest Inny niż polski
+
+tniego miejsca zamieszkania w Polsce / adres miejsca pobytu osoby, która zawiadamia o wypadku
+
+osobą niż poszkodowany. Podaj adres ostatniego miejsca zamieszkania w Polsce, jeśli obecnie mleszkasz za granicą,
+ś w Polsce. Jeśli nie masz adresu zamleszkania, podaj adres mlejsca pobyłu lub adres ostatniego miejsca zamieszkania
+
+Ulica
+
+Numer domu Numer lokalu
+
+Kod pocztowy Miejscowość
+
+[i
+|
+
+Aares tc korespondencji osoby, która zawiadamia o wypadku
+
+4 neż poszkodowany I Twój adres do korespondencji Jest Inny niż adres zamieszkania / adres ostatniego miejsca
+miejsca pobytu
+
+WTZ i | posie restante m skrytka pocztowa [LJ przegródka pocztowa
+
+2 sposzce *zrespondencji wybierzesz:
+i jgdynie kod pocztowy placówki pocztowej oraz w polu Miejscowość wpisz nazwę tej placówki,
+
+;* przegródkę pocziową, w polu Numer domu wpisz numer skrytki/przegródki, w polu Kod pocztowy wpisz
+mocztowy płacówki oraz w polu Miejscowość wpisz nazwę placówki pocztowej.
+
+Ulica | *
+Numer domu [|] Numer lokalu
+Kod pocztowy ] Miejscowość
+
+Nazwa państwa
+
+Podaj, jeśli Twój adres Jest Inny niż polski
+
+2 o wypadku
+
+IU
+
+Godzina wypadku
+- dd I mm 1. mr
+3 z rezpoczęcia prac Planowana godzina zakończenia prac
+w dniu wypadku
+
+Zakład Ubezpieczeń Społecznych w Intemecle — www.zus.pl Strona 3 z 6

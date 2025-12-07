@@ -1,0 +1,75 @@
+ma EWYP
+
+Data urodzenia [] 5 l | si J
+
+dd / mm /ł rrr
+
+Numer telefonu
+
+Jeśll podasz tę informację, ułatwi nam to koniak w Twojej sprawie.
+To pole jest dobrowolne "
+
+Adres zamieszkania osoby, która zawiadamia o wypadku
+Wypełnij, Jeśli jeslsś inną osobą niż poszkodowany
+
+Ulica
+
+Numer domu Numer lokalu
+
+[i
+|
+
+Kod pocztowy Miejscowość
+Nazwa państwa
+Podaj, jeśli Twój adres jest Inny niż polski
+
+Adres ostatniego miejsca zamieszkania w Polsce / adres miejsca pobytu osoby, która zawiadamia o wypadku
+
+Wypełnij, jeśli jesteś inną osobą niż poszkodowany. Podaj adras ostatniego mlejsca zamieszkania w Polsce, Jeśli obecnie mieszkasz za granicą,
+ale wczośniej mieszkaleś w Polsce. Jeśli nie masz adresu zamieszkania, podaj adres miejsca pobytu lub adres ostalniego miejsca zamieszkania
+w Palsce
+
+Ulica
+
+Numer domu Numer lokalu
+
+[i
+|
+
+Kod pocztowy Miejscowość
+
+Adres do korespondencji osoby, która zawiadamia o wypadku
+
+Wypełnij, jeśli jesteś inną osobą niż poszkodowany i Twój adres do korespondencji jest inny niż adres zamleszkania / adres oslalniego mlejsca
+zamieszkania w Polsce / adres miejsca pobytu
+
+[J adres [J posle restante CJ skrytka pocztowa [0] przegródka pocztowa
+
+Jeśli jako sposób korespondencji wybierzesz:
+
+— poste restante, podaj jedynie kod pocztowy placówki pocztowej oraz w polu Miejscowość wpisz nazwę tej placówki,
+
+— skrytkę pocztową / przegródkę pocztową, w polu Numer domu wpisz numer skrytkl/przegródki, w polu Kod poczlowy wpisz
+kod pocztowy placówki oraz w polu Miejscowość wpisz nazwę placówki pocztowej.
+
+Ulica
+
+Kod pocztowy [M] Miejscowość
+
+Nazwa państwa [ |
+Podaj, jeśli Twój adres jest inny niż polski
+
+uj *
+Informacja o wypadku. _ w Mi 44 G UROLBE (6 puodlo
+1. Dała wypadku [0 | 6|0/|3|2/0|2|/5 Godzina wypadku
+dd / mm I rrrr
+
+2. Miejsce wypadku |ELEKTROWNIA WODNA '*''""""*""
+
+Planowana godzina zakończenia pracy
+w dniu wypadku
+
+3. Planowana godzina rozpoczęcia pracy
+w dnlu wypadku
+
+Sslad: Posgrafia ZUS/AW wa; zam. nr 3066/24(E) Zakłąd Ubezpieczań Społecznych w Internecie — www.zus.pl Strona 3 z 6

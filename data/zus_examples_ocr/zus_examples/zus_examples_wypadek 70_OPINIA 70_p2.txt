@@ -1,0 +1,12 @@
+Opinia osoby uprawnionej do aprobaty
+
+Opinia osoby uprawnionej do superaprobaty”
+
+| (Data, pi osoby uprawnionej do superaprobaty)
+
+Opinia Konsultanta”
+
+wisssi a A
+
+3) 4
+; niepotrzebne skreślić.

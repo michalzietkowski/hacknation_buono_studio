@@ -1,0 +1,73 @@
+EWYP
+
+Data urodzenia
+dd ł mm I rrr
+
+Numer telefonu
+
+Jeśli podasz tę informację, ułatwi nam to kontakt w Twojej sprawie.
+To pole jest dobrowolne
+
+Adres zamieszkania osoby, która zawiadamia o adku
+Wypełnij, jeśli jesteś inną osobą niż poszkodowany
+
+_
+_]
+
+Numer domu Numer lokalu
+
+Podaj, jeśli Twój adres jest inny nz polski
+
+Kod pocztowy
+
+A Nazwa państwa
+
+Adres ostatniego miejsca zamieszkania w Polsce / adres miejsca pobytu osoby, która zawiadamia o wypadku
+
+pzd dc ooh | weak odk AK | hokadich
+wypełnij, jeśli jesteś inną osobą niz poszkodowany. Podaj adres ostatniego miejsca zamieszkania w Polsce, jeśli obecnie mieszkasz za granicą,
+ale wcześniej mieszkałeś w Polsce, Jeśli nie masz adresu zamieszkania, podaj adres miejsca pobytu lub adres ostatniego miejsca zamieszkania
+
+w Polsce
+Ulica
+
+Numer domu
+
+Numer lokalu
+
+[i
+|
+
+Kod pocztowy Miejscowość
+
+Adres do korespondencji osoby, która zawiadamia o wypadku
+
+Wypełnij, jeśli jesteś innq osobą niz poszkodowany i Iwój adres do korespondencji jest inny niż adres zamieszkania / adres ostatniego miejsca
+zamieszkania w Polsce / adres miejsca pobylu
+
+LI adres [] poste restante [J skrytka pocztowa [LJ przegródka pocztowa
+
+Jeśli jako sposób korespondencji wybierzesz:
+3 restante, podaj jedynie kod pocztowy placówki pocztowej oraz w polu Miejscowość wpisz nazwę tej placówki,
+ką pocziową | przegiódkę pocziową, w polu Numer dou wpisz nuinier skiytkliprzegródki, w poiu Kad pocztowy wpisz
+
+kod pocztowy placówki oraz w polu Miejscowość wpisz nazwę placówki pocztowej.
+Ulica
+
+Numer domu
+
+Kod pocztowy Miejscowość
+
+Nazwa państwa
+Podaj, jeśli Twój adres jest inny niz polski
+Informacja o wypadku
+
+1. Data wypadku [o [7 [o[s[2]o|2 [5] Godzina wypadku
+d
+
+d I mm I rerr
+2. Miejsce wypadku -
+3. Planowana godzina rozpoczęcia pracy [,- 2 ] Planowana godzina zakończenia oracy [rz zz
+w dniu wypadku 0.00 | w dniu wypadku NY
+
+Sklad: Pokgrańa ZUSMiwa; zam. rv 3069/24 Zakład Ubezpieczeń Społecznych w internecie — www.zus.pl Strona 3 z 6

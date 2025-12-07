@@ -1,0 +1,43 @@
+7. Organ, który prowadził postępowanie w sprawie wypadku
+
+Podaj nazwę i adres organu, który prowadzil postępowanie w sprawia wypadku (np. policja, prokuratura)
+
+8. Czy wypadek powstał podczas obsługi maszyn, urządzeń: [J TAK pa NIE
+
+Jeśli TAK, podaj czy maszyna, urządzenie były sprawne i użytkowane zgodnie z zasadami producenta i w jaki sposób
+
+Dane świadków wypadku
+
+SEDEZRE NEW NEON zinc a a nn i
+Świadek wypadku — 1
+Imię |
+Nazwisko i |
+
+Numer domu L__D Numer lokalu
+
+(
+
+Nazwa państwa
+
+|
+
+Podaj, jeśli adres śwladka jest Inny niż polski
+
+Świadek wypadku — 2
+
+Imię
+
+Nazwisko
+
+Ulica
+
+Numer domu [MJ Numer lokalu [|]
+
+Kod pocztowy Miejscowość R
+
+Nazwa państwa
+Podaj, Jeśli adres świadka Jest inny niż potski
+
+Skład; Poligrafia ZUS/W-wa; zam. nr2488/23 _ Zakład Ubózpieczeń Społecznych w internecie — www.zus.pl
+
+Strona 4 z 6

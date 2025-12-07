@@ -1,0 +1,79 @@
+. EWYP
+
+Data urodzenia
+dd / mm I rrr
+
+Numer telefonu
+Jeśli podasz tę informację, ułatwi nam to kontakt w Twojej sprawie.
+To pole jest dobrowolne
+
+Adres zamieszkania osoby, która zawiadamia o wypadku
+Wypełnij, jeśli jesteś inną osobą niż poszkodowany
+
+Ulica
+
+Numer domu Numer lokalu
+
+Kod pocztowy Miejscowość
+
+Ji
+|
+
+Nazwa państwa
+Podaj, jeśli Twój adres jest inny niż polski
+
+Adres ostatniego miejsca zamieszkania w Polsce / adres miejsca pobytu osoby, która zawiadamia o wypadku
+
+Wypałnij, Jeśli jesteś inną osobą niż poszkodowany. Podaj adres ostatniego miejsca zamieszkania w Polsce, jeśli obecnie mieszkasz za granicą,
+ale wcześniej mieszkałeś w Polsce. Jeśli nle masz adresu zamieszkania, podaj adres miejsca pobytu lub adres ostatniego miejsca zamieszkania
+w Polsce
+
+Ulica
+
+Numer domu Numer lokalu
+
+Kod pocztowy Miejscowość
+
+[i
+|
+
+Adres do korespondencji osoby, która zawiadamia o wypadku
+
+Wypełnij, jeśli jesteś inną osobą niż poszkodowany I Twój adres do korespondencji jest inny niż adres zamieszkania / adres ostatniego miejsca
+zamieszkania w Polsce / adres miejsca pobytu
+
+[0 adres [1] poste restante CJ skrytka pocztowa [l] przegródka pocztowa
+
+Jeśli jako sposób korespondencji wybierzesz:
+
+— poste restante, podaj jedynie kod pocztowy placówki pocztowej oraz w polu Miejscowość wpisz nazwę tej placówki,
+
+—_skrytkę pocztową / przegródkę pocztową, w polu Numer domu wpisz numer skrytki/przegródki, w polu Kod pocztowy wpisz
+kod pocztowy placówki oraz w polu Miejscowość wpisz nazwę placówki pocztowej.
+
+Ulica
+
+Numer domu Numer lokalu
+
+[i
+|
+
+Kod pocztowy Miejscowość
+
+Nazwa państwa
+
+kJ
+
+odaj, jeśli Twój adres jest inny niż polski
+Informacja o wypadku
+
+1. Data wypadku >l0| ; s] Godzina wypadku Pe) 4t
+
+dd I/I mm / rrer
+
+2. _ Miejsce wypadku
+3. - Planowana godzina rozpoczęcia pracy Planowana godzina zakończenia pracy 67]
+w dniu wypadku w dniu wypadku zz
+
+Sklad: Poligrafia ZUS/W-wa; zam. nr3069/24 _ Zakład Ubezpieczeń Społecznych w internecie — www.zus.pl Strona 3 z 6
+

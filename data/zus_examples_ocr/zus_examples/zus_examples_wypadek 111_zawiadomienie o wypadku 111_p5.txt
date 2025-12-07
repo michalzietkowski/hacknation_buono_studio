@@ -1,0 +1,78 @@
+EWYP
+
+Dane świadków wypadku
+
+Świadek wypadku — 1
+
+Imię .
+
+Nazwisko
+Ulica
+
+Numer domu
+Kod pocztowy
+
+Nazwa państwa
+
+Świadek wypadku — 2
+
+Imię
+Nazwisko
+Ulica
+
+Numer domu
+Kod pocztowy
+
+Nazwa państwa
+
+Świadek wypadku — 3
+
+Imię
+Nazwisko
+Ulica
+
+Numer domu
+Kod pocztowy
+
+Nazwa państwa
+
+Załączniki
+
+[
+l
+mea Numer lokalu [M]
+
+Miejscowość
+
+Podaj, jeśli adres świadka |est inny niż polski
+
+|
+
+- | Numer lokalu -]
+Miejscowość
+
+— —-—-———L--]
+
+Podaj, jeśli adres Świadka jest inny niż polski
+
+Numer lokalu
+
+Miejscowość |
+
+LJ
+
+m
+
+laj, Jeśli adres świadka jest Inny niż polski
+
+b] kserokopia karty informacyjnej ze szpitala/ zaświadczenia o udzialeniu pierwszej pomocy z pogotowia ratunkowego wraz
+
+z wywiadem
+
+CJ kserokopia postanowienia prokuratury o wszczęciu postępowania karnego lub zawieszeniu/ umorzeniu postępowania
+
+- kserokopia statystycznej karty zgonu lub zaświadczenie lekarskie stwierdzające przyczynę zgonu, skrócony odpis aklu
+zgonu (w przypadku wypadku ze skutkiem śmiertelnym)
+
+Skład: Poligrafia ZUS/AW-wa; zam. nr 3068/24(E) Zakład Ubezpieczeń Społecznych w internecie — www.zus.pl Strona 5 z 6
+

@@ -1,0 +1,43 @@
+|: EWYP
+
+Adres do k i osoby poszkodowanej
+Podaj, jeśli adres do korespondencji jest Inny niż adres zamieszkania / adres ostatniego mlejsca zamieszkania w Polsca / adres miejsca pobytu
+
+adiea [1] postę restante [J skrytka pocztowa [0] przegródka pocztowa
+
+J posób korespondencji wyblerzesz:
+i re zy podaj jedynie kod pocztowy placówki pocztowej oraz w polu Miejscowość wpisz nazwę tej placówki,
+
+— skrytkę pocztową / przegródkę pocztową, w polu Numer domu wpisz numer RR, w polu Kod pocztowy wpisz
+kod pocztowy placówki oraz w polu Miejscowość wpisz ni łacówki
+
+adres Jest Inny niż pol]
+
+Adres miejsca prowadzenia pozarolniczej działalności
+Podaj, jeśli poszkodowany prowadzi pozarolniczą działalność albo współpracuje przy prowadzeniu tąkiej działalności
+
+Ulica
+Numer domu
+
+Kod pocztowy
+
+Numer telefonu
+
+—Adres sprawowania opieki nad dzieckiem w wieku do lat 3
+Podaj, jeśli poszkodowany wykonuje pracą na podstawia umowy uaktywniającej (jako niania)
+
+Numer domu [|] Numer lokalu [1
+
+Jeśli podasz tę informację, ułatwi nam to kontakt w Twojej sprawie.
+
+To pole jest dobrowolna
+
+-Dane osoby, która zawiadamia o wypadku
+Wypełnij. jeśli jesteś inną osobą niż poszkodowany
+Rodzaj, seria i numer dokumentu
+potwerdzjącego tożsamość | 0]
+Podaj, jaśli nia masz nadanego numeru PESEL
+
+sida: Polgrata ZUS/AW maz zam.nr206%4 _ Zakład Ubezpieczeń Społecznych w Intemecie — www.zus.pl
+
+Strona 2 z 6

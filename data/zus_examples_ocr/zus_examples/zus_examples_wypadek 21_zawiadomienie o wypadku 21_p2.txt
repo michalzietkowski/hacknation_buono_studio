@@ -1,0 +1,75 @@
+EWYP
+
+T
+Adres do korespondencji osoby poszkodowane, M
+Podźj, Jeśli adres do korespondencji Jest inny niż adres zamieszkania / adres osłalniego miejsca zamieszkania w Pol.
+
+LJ aures LI poste restante LI skrytka pocztowa LJ przegródka pocztowa
+
+daśli jako sposób korespondencji wybierzesz:
+LJ gwi resiante, podaj jedynie kad pocztowy placówki pocztowej oraz w polu Miejscowość wpisz nazwę tej placówki,
+
+„| skrytkę pocztową / przegródkę pocztową, w polu Nurnar domu wpisz numer skrytki/przegródki, w polu Kod pocztowy wpisz
+| kod pocztowy placówki oraz w połu Miejscowość wpisz nazwę placówki pocztowej,
+j -
+
+> WRA
+
+Nazwa państwa
+
+lsce / adres miejsca pobytu
+
+Podaj, jeśli Twój adres jest inny niż polski
+
+Adres miejsca prowadzenia pozarolniczej działalności
+Podaj, jeśli poszkodowany prowadzi pozarolniczą działalność albo współpracuje przy prowadzeniu takiej działalności
+
+| Ulica
+| | ET p
+ik
+
+Namer domu Numer lokalu R
+
+Kod pocztowy | Miejscowość L
+
+Numer telefonu | i z
+Jeśli podasz tę informację, ulatwi ham h kontakt w Twojej sprawie.
+
+| i To pole jest dobrowolne i
+i i
+
+Li
+
+ie 1 ł
+Adres sprawowania opieki nad dzieckiem w wleku do lat 3 BS
+
+Podaj, jeśli poszkodowany wykonuje pracą na podstawie umowy uaktywniającej (jako niania)
+
+Ulica
+Ra Numer domu Numof lokali [_-—_]
+| H
+
+Numer telefonu
+
+Jeśli podasz tę informację, ułatwi nam to kontakt w Twojej sprawie.
+Ta pole jest dobrowolne
+
+Dane osoby, która zawiadamia o adku li | *
+
+Wynełnij, Jeśli jesteś Inną osobą niż poszkodowany
+If
+
+|
+
+PESEL
+
+Rodzaj, seria i numer dokumantu
+potwierdzającego tożsamość
+Podaj, jeśli nie masz nadanego numeru PESEL
+
+Imię
+
+Nazwisko
+
+Sklad: Polgrała ZUS/Wawa; zam. nr 3069/24 Zakład Ubezpieczeń Społacznych w Internecie — www.zus.pl Strona 2z6
+

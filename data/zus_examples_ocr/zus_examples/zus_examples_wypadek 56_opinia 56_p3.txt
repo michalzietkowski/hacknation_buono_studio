@@ -1,0 +1,14 @@
+2)
+
+Opinia Konsultanta
+
+Y(Data, pleczątka i podpis konsultanta)
+
+"Opinia Z-cy Dyrektora ds. Świadczeń?)
+
+(Data, pleczątka I podpis Z-cy Dyrektora ds. Śwladczeń)
+Decyzja osoby uprawnionej do superaprobaty
+(Data, pieczątka | podpis osoby uprawnionej do superaprobaty)
+1) niepotrzebne skreślić
+2) wypelnić w zależności ad stanu sprawy
+

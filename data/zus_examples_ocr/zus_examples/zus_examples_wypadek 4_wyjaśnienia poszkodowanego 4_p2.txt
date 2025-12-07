@@ -1,0 +1,4 @@
+4, Wypadek powstał podczas obsługi maszyn i/lub
+= nazwa, typ urządzenia, data produkcji ,
+
+= ozy urządzenie była sprawne | użytkowane zgodnie z znsn:

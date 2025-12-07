@@ -1,0 +1,69 @@
+EWYP
+
+Data urodzenia
+dd I mm / rrr
+
+Numer telafonu
+
+Jośli podasz ię Informację, uloiwi nam to kontakt w Twojoj sprawlo.
+Ta pala Jaat dobrowolna
+
+Adres zamieszkania osoby, która zawiadamia o wypadku
+Wypalnij, Jeśli jesteś Inną osobą niż poszkodowany
+
+Ulica
+
+|
+
+Nazwa państwa
+
+SĄ Podaj, Jośli Twój adras jast Inny niż polski
+
+Adros ostatniego mlojsca zamieszkania w Polsce / adras miajsca pobytu osoby, która zawiadamia o wypadku
+
+Wypelnij, jeśli Jastaś Inną osobą niż poszkodowany. Podaj adros oslalniego miejsca zamieszkania w Polsca, jaśll obachlo mloszkasz za grańlcą,
+
+ala wczaśniej mloszkalaś'w Polaco. Jośli nlo masz adrosu zamloszkania, poda) ndras mlojsca pobyłu lub adros ostatniego mlejsca zamieszkania
+w Polsco
+
+Ulica
+
+Numer domu Numer lokalu
+
+[i
+|
+
+Kod poczlowy Miejscówość
+
+Adres do korespondencji osoby, która zawiadamia o wypadku
+
+Wypalnij, jaśl! jestaś Inną osobą niż poszkodowany I Twój adras do korospondencji Jost Inny niż adrae zamloszkania /-adras ostatniago miojsca
+zamiaszkania w Polsce / adros mlojsca pobylu
+
+| adres LJ posle rastanta LJ skrylka pocztowa LI przegródka pocztowa
+
+Jaśli jako sposób korespondencji wyblerzesz:
+
+"NN -_ posła restante, podaj jedynie kod pocztowy placówki pocztowej oraz w polu Miejscowość wpisz nazwę toj placówki,
+—_skrylkę pocztową / przegródkę pocztową, w polu Numer domu wpisz numar.skrytkiiprzagródki, w polu Kod pocztowy wpisz
+kod pocztowy placówki oraz w polu Miejscowość wpisz nazwę placówki pocztowej.
+
+Numer domu M] Numer lokalu LJ
+
+Nazwa państwa
+Podaj, jaśli Twój adres jast Inny niż polski
+
+Informacja o wypadku
+
+1. Dała wypadku LOA4A5 Godzina wypadku
+d - m
+
+do / mm] ł
+
+2. Miejscowypadku | LOPAUSKO HM NMIEJSCOHOŚCI
+3. - Planowana godzina rozpoczęcia pracy Planowana godzlna zakończenia pracy
+w dniu wypadku FZYZ2J
+
+w dnlu wypadku
+
+SWad: Poligrafa ZUSAN=wa; zam. rr 3069/24 _ Zakład Ubozplaczoń Spolacznych w Intomecia — www.zus.pl Strona 3 z 6

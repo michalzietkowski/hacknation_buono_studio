@@ -1,0 +1,58 @@
+EWYP
+
+Data urodzenia
+dd / mm I rrrr
+
+Numer telefonu
+
+Jeśli podasz ię informację, ułatwi nam to kontakt w Twojej sprawie.
+To pole jest dobrowolne
+
+Adres zamieszkania osoby, która zawiadamia o wypadku
+Wypmelnij, jeśli jesteś inną osobą niż poszkodowany
+
+Ulica |
+Kod pocztowy |] Miejscowość
+
+Nazwa państwa
+Podaj, jeśli Twój adres jest inny niż polski
+
+Adres ostatniego miejsca zamieszkania w Polsce / adres miejsca pobytu osoby, która zawiadamia o wypadku
+
+Wypełnij, jeśli jesteś inną osobą niż poszkodowany. Podaj adres ostalniego miejsca zamieszkania w Polsce, jeśli obecnie mieszkasz za granicą,
+ale wcześniej mieszkałeś w Polsce. Jeśll nie masz adresu zamieszkania, podaj adres miejsca pobytu lub adres ostainiego miejsca zamieszkania
+
+w Polsce
+Kod pocztowy LJ Miejscowość
+
+Adres do korespondencji osoby, która zawiadamia o wypadku
+
+Wypelnij, jeśli jesteś inną osobą niż poszkodowany | Twój adres do korespondencji jest inny niż adres zamieszkania / adres ostatniego miejsca
+zamieszkania w Polsce / adres miejsca pobytu
+
+[0] adres [J poste restante [] skrytka pocztowa [J przegródka pocztowa
+
+„„. Jeśli jako sposób korespondencji wybierzesz:
+" 3 poste restante, podaj jedynie kod pocztowy placówki pocztowej oraz w polu Miejscowość wpisz nazwę tej placówki,
+— skrytkę pocztową / przegródkę pocztową, w polu Numer domu wpisz numer skrytki/przegródki, w polu Kod pocztowy wpisz
+kod pocztowy placówki oraz w polu Miejscowość wpisz nazwę placówki pocztowej.
+
+Ulica
+Kod pocztowy DJ] Miejscowość
+
+Nazwa państwa
+Podaj, Jeśli Twój adres jest inny niż polski
+
+Informacja o wypadku
+
+1. Data wypadku [A>loG Ale! ł 5 | Godzina wypadku
+
+dd / mm I rrrr
+
+2. Mlejsce wypadku
+
+3. Planowana godzina rozpoczęcia pracy Planowana godzina zakończenia pracy LPA
+w dniu wypadku w dniu wypadku
+
+Skład: Poligrafia ZUS/W-wa; zam. nr 3069/24 _ Zakład Ubezpieczeń Spolecznych w internecie — www.zus.pl Strona 3 7
+

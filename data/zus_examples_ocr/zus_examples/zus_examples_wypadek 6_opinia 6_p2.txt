@@ -1,0 +1,20 @@
+Opinia osoby uprawnionej do superaprobaty” ;
+
+(Data, pieczątka i podpis osoby uprawnionej do superaprobaty)
+
+Opinia Konsultanta”
+
+(Data, pieczątka i podpis konsultanta)
+
+Opinia Z-cy Dyrektora ds. Świadczeń”
+
+(Data, pieczątka i podpis Z-cy Dyrckiora ds. Świndczeń)
+
+Decyzja osoby uprawnionej do superaprobaty TG WE
+ó0Z; ZA 9. AP PPREALODARE MAL. UE EDE ||
+
+(Data, pieczątka i podpis osoby uprawnionej do superaprobaty)
+
+* niepotrzebne skreślić
+
+ść wypełnić w zależności od

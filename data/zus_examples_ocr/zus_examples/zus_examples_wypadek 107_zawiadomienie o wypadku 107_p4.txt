@@ -1,0 +1,45 @@
+EWYP.
+
+7. Organ, który prowadzi! postępowanie w sprawie wypadku
+
+Podaj nazwę | adres organu, który prowadzil postępowanie w sprawie wypadku (Policja P+okuralura, inne)
+
+8, Czy wypadek powstał podczas obsługi maszyn, urządzeń: Bd TAK [l] NIE
+
+Aetjaewie yo Sp Vau n
+
+ML 042 ule [4
+elo. poeduleq
+
+Jeśli TAK, podaj czy maszyna, urządzenie byly sprawne i użyłkowane zgodnie z zasadami producenta i w Jaki sposób
+
+9. Czy maszyna, urządzenie posiada atest/ deklarację zgodności: BZ TAK [J NIE
+10. Czy maszyna, urządzenie zostalo wpisane do ewidencji środków trwałych: CJ TAK B<] NIE
+Dane świadków wypadku
+
+Śwladek wypadku — 1
+
+Imię
+Ulica
+Numer domu [1] Numer lokalu |
+Kad pocztowy [ i . | Miejscowość | | |
+
+Podaj, jeśli adres Śwladka Jest Inny niż polski
+
+Świadek wypadku — 2
+Nazwisko |]
+Ulica
+Numer domu
+
+Numer lokalu [_]
+Miejscowość
+
+Podaj, jeśll adres świadka jest inny niż palski
+
+Kod pocztowy
+
+Nazwa państwa
+
+JiJJ
+
+Zaklad Ubezpleczeń Społecznych w iatetnecie — www.zus.pl Strona 4 z 6

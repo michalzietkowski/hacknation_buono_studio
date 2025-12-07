@@ -1,0 +1,8 @@
+Wypadek powstał podczas obsługi maszyn i/lub urządzenia: tak / nie*
+- nazwa, typ urządzenia, data produkcji ECCE
+
+— oży urządzenie było sprawne i użytkowane zgodnie z zasadami producenta (w jaki
+
+sposób):
+
+3

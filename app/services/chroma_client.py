@@ -23,18 +23,26 @@ def get_chroma_client():
     settings = get_settings()
     host, port, use_ssl = _parse_chroma_url(settings.CHROMA_URL)
 
-    auth_settings = None
+    # Disable noisy/buggy telemetry if present
+    try:
+        import chromadb.telemetry.product.posthog as _ph_module
+
+        _ph_module.posthog.capture = lambda *args, **kwargs: None  # type: ignore
+    except Exception:
+        pass
+
+    client_settings = ChromaSettings(anonymized_telemetry=False)
     if settings.CHROMA_AUTH_TOKEN:
-        auth_settings = ChromaSettings(
-            chroma_client_auth_provider="chromadb.auth.token_authn.TokenAuthClientProvider",
-            chroma_client_auth_credentials=settings.CHROMA_AUTH_TOKEN,
+        client_settings.chroma_client_auth_provider = (
+            "chromadb.auth.token_authn.TokenAuthClientProvider"
         )
+        client_settings.chroma_client_auth_credentials = settings.CHROMA_AUTH_TOKEN
 
     return chromadb.HttpClient(
         host=host,
         port=port,
         ssl=use_ssl,
-        settings=auth_settings,
+        settings=client_settings,
     )
 
 

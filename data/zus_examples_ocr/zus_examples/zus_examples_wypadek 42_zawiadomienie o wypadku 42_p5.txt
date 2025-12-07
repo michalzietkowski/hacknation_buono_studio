@@ -1,0 +1,76 @@
+EWYP
+
+wiazanie moglo Ez EZ
+
+Dane świadków wypadku
+
+Świadek wypadku — 1
+|
+Nazwisko
+Ulica
+Numer domu
+Kod pocztowy
+
+Nazwa państwa
+
+ELI LLL
+
+© WU eg zuraw wia pamana Hm pzm
+
+Świadek wypadku — 2
+
+Imię
+
+Nazwisko
+
+|
+
+Ulica
+
+I
+
+Numer domu
+
+Numer lokalu 1
+
+Kod pocztowy Miejscowość
+
+|
+
+Nazwa państwa
+
+Jil
+|
+
+Podaj, jeśli adres świadka jest inny niż polski
+
+Świadek wypadku — 3
+Imię
+
+|
+
+Nazwisko
+
+|
+
+Ulica
+
+Podaj, jeśli adres świadka jesl inny niż polski
+
+|
+
+Kod pocztowy
+
+Nazwa państwa
+
+Załączniki
+
+kserokopia karty informacyjnej ze szpitala/ zaświadczenia o udzieleniu pierwszej pomocy z pogotowia ralunkowego wraz
+z wywiadem
+
+LJ kserokopia postanowienia prokuratury o wszczęciu postępowania karnego lub zawieszeniu/ umorzeniu postępowania
+
+LJ kserokopia statystycznej karty zgonu lub zaświadczenie lekarskie stwierdzające przyczynę zgonu, skrócony odpis aktu
+zgonu (w przypadku wypadku ze skulkiem śmiertelnym)
+
+Skład: Poligrafia ZUSAN:wa; zam. nr 3069/24(E) Zakład Ubezpieczeń Społecznych w Intemecie — www.zus.pl Strona 5 z 6

@@ -1,0 +1,50 @@
+EWYP
+
+Adres do korespondencji osoby poszkodowanej
+Podaj, Jeśli adres do korespondencji jest Inny niż adres zamieszkania / adres ostatniego miejsca zamieszkania w Polsca / adres miejsca pobytu
+
+DA adres [0] poste restante LJ skrytka pocztowa | przegródka pocztowa
+
+Jeśli jako sposób korespondencji wybierzesz:
+
+— poste restante, podaj jedynie kod pocztowy placówki pocztowej oraz w polu Miejscowość wpisz nazwę tej placówki,
+
+—_skrytkę pocztową / przegródkę pocztową, w polu Numer domu wpisz numer skrytki/przegródki, w polu Kod pocztowy wpisz
+kod pocztowy placówki oraz w polu Miejscowość wpisz nazwę placówki pocztowej.
+
+Ulica
+Numer domu M] Numer lokalu
+Kod pocztowy M] Miejscowość
+
+Nazwa państwa
+
+Podaj, jeśii Twój adres jest Inny niż polski o o —
+
+Adres mlejsca prowadzenia pozarolniczej działalności
+Podaj, jeśli poszkodowany prowadzi pozarolniczą działalność albo współpracuje przy prowadzeniu takiej działalności
+
+Numer domu
+
+Kod pocztowy |
+
+Numer telefonu
+Jeśli podasz tę informację, ulatwi nam to kontakt w Twojej sprawie.
+To pole jest dobrowolne
+
+Adres sprawowania opieki nad dzieckiem w wieku do lat 3
+Podaj, jeśli poszkodowany wykonuje pracę na podstawie umawy uaktywniającej (Jako niania)
+
+Numer domu LJ Numer lokału [1
+
+Numer telefonu
+
+Jeśli podasz tę Informację, ułatwi nam to koniaki w Twojej sprawie,
+To pole jest dobrowolna
+
+Dane osoby, która zawiadamia o wypadku
+wypełnij, jeśli jesteś inną osobą niż poszkodowany
+Rodzaj, saria | numer dokumentu
+potwierdzającego tożsamość
+Podaj, jeśli nio masz nadanago numoru PESEL
+
+Skład; Poligrafia ZUSMYwa; zam, ne 306024/E) Zaklad Ubezpieczeń Spolecznych w Internecie — www.zus.pl Strona 226

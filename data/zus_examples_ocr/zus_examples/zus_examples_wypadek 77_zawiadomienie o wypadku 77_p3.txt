@@ -1,0 +1,68 @@
+EWYP
+
+paauodzens [] LTLLLLI
+
+dd I mm I rrrr
+
+Numer telefonu |
+
+Jeśli podasz lę informację, ulatwi nam to kontakt w Twojej sprawie.
+To pole jest dobrowolne
+
+Adres zamieszkania osoby, która zawiadamia o wypadku
+Wypelnij, jeśli jesteś inną asobą niż poszkodowany
+
+Ulica [_ |]
+Numer domu [1 Numer lokalu [M]
+[1 Miejscowość
+ę Nazwa państwa EM
+
+Podaj, jeśli Twój adres jest inny niż polski
+
+= Kad pocztowy
+
+Adres ostatniego miejsca zamieszkania w Polsce / adres miejsca pobytu osoby, która zawiadamia o wypadku
+
+Wypełnij, jeśli jesteś inną osobą niż poszkodowany. Podaj adres ostatniego miejsca zamieszkania w Polsce, jeśli obecnie mieszkasz za granicą,
+ale wcześniej mieszkaleś w Polsce. Jeśli nie masz adresu zamieszkania, podaj adres miejsca pobyłu lub adres oslalniego miejsca zamieszkania
+
+w Polsce
+Ulica
+Numer domu EA Numer lokalu [M]
+Kod pocztowy | Miejscowość
+
+Adres do korespondencji osoby, która zawiadamia o wypadku
+
+Wypelnij, jeśli jesteś inną osobą niż poszkodowany i Twój adres do korespondencji jest inny niż adres zamieszkania / adres oslalniego miejsca
+zamieszkania w Polsce / adres miejsca pobytu
+
+— adres [l] poste restanie [] skrytka pocztowa l przegródka pocztowa
+
+„— Jeśli jako sposób korespondencji wybierzesz:
+— poste restanie, podaj jedynie kod pocztowy placówki pocztowej oraz W polu Miejscowość wpisz nazwę tej placówki,
+— skrytkę poczlową / przegródkę pocztową, w polu Numer domu wpisz numer skrytki/przegródki, w polu Kod pocztowy wpisz
+
+kod pocztowy placówki oraz w polu Miejscowość wpisz nazwę placówki pocztowej.
+
+Ulica
+
+Numer domu
+
+Nazwa państwa |]
+
+Kod pocztowy
+
+Podaj, jeśli Twój adres jest inny niż polski
+
+Informacja o wypadku
+4. Data wypadku [zlo zlo] olols] Godzina wypadku
+dd I mm I rrr
+
+2. Miejsce wypadku 5
+| ———— U
+
+3. Planowana godzina rozpoczęcia pracy Planowana godzina zakończenia pracy
+w dniu wypadku w dniu wypadku
+
+Sklad: Poligrafia ZUS/W-wa; zam. nr 3069/24 _ Zakład Ubezpieczeń Spolecznych w internecie — www.zus.pl Strona 3 z 6
+

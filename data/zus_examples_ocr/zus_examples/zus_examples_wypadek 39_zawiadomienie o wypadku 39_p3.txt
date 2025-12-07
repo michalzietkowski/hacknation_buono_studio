@@ -1,0 +1,64 @@
+EWYP
+
+Data urodzenia
+
+Numer telefonu
+
+jej sprawie.
+
+Adres zamieszkania osoby, która zawiadamia o wypadku
+Wypelnij, jeśli jesteś Inną osabą niż poszkadowany
+
+Ulica
+
+Numer lokalu [=]
+
+Podaj, jeśli Twój adres Jest inny niż palski
+
+Numer domu
+
+z LIE
+i Kod pocztowy
+
+Nazwa państwa
+
+Adres ostatniego miejsca zamieszkania w Polsce / adres miejsca pobytu osoby, która zawiadamia o wypadku
+
+Wypełnij, jeśli jasteś inną osobą niż poszkodowany. Podaj adres oslalniego mlejsca zamieszkania w Polsce, jeśli obecnie mieszkasz za granicą,
+A wześniej mleszkaleś w Polsce, Jeśli nle masz adresu zamieszkania, podaj adres miejsca pobytu lub adres ostatniego miejsca zamieszkania
+w Polsce
+
+Ulica
+J „0. Numer domu
+-
+
+Kod.pocztowy
+
+Numer lokalu |NPRZSK
+Adres do korespondencji osoby, która zawiadamia o wypadku
+
+Wypelnij, Jaśli jesteś Inną osobą niż poszkodowany. I Twój adres do korespondencji jest Inny niż adres zamieszkania / adres ostatniego mlejsca
+zamieszkania w Polsce / adres miejsca pobytu
+
+adres LJ poste restante EF] skrytka pocztowa Ea] przegródka pocztowa
+
+Jeśli jako sposób korespondencji wybierzesz:
+
+— .poste restanle, .podaj jedynie kod pocztowy placówki pocztowej oraz w polu Miejscowość wpisz nazwę tej placówki,
+
+— 'skrytkę. pocztową / przegródkę pocztową, w.polu Numer domu wpisz numer skrytki/przegródki, w polu Kod pocztowy wpisz
+kod.pocztowy placówki oraz w polu Miejscowość wpisz nazwę placówki pocztowej.
+
+Ś Numer. lokalu |OAGHH
+
+Nazwa państwa
+
+EP
+
+B
+
+Ulica
+
+Numer domu
+
+Podaj, jeśli Twój adres jest inny. niż polski
