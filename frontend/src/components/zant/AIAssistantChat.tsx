@@ -21,6 +21,7 @@ export function AIAssistantChat() {
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const lastFieldLabelRef = useRef<string | null>(null);
 
   useEffect(() => {
     if (isOpen && inputRef.current) {
@@ -34,20 +35,31 @@ export function AIAssistantChat() {
     }
   }, [messages]);
 
-  // Reset messages when field changes
+  // Initial welcome message once when chat opens (if no history yet)
   useEffect(() => {
-    if (isOpen && activeFieldLabel) {
-      setMessages([{
-        role: 'assistant',
-        content: `Cześć! Widzę, że masz pytanie dotyczące pola "${activeFieldLabel}". W czym mogę Ci pomóc?`
-      }]);
-    } else if (isOpen && !activeField) {
-      setMessages([{
-        role: 'assistant',
-        content: 'Cześć! Jestem asystentem AI, który pomoże Ci wypełnić zgłoszenie wypadku. Możesz mnie zapytać o dowolne pole formularza lub poprosić o sprawdzenie, czy wniosek jest kompletny.'
-      }]);
+    if (isOpen && messages.length === 0) {
+      const intro = activeFieldLabel
+        ? `Cześć! Skupiamy się teraz na polu "${activeFieldLabel}". Zadaj pytanie lub podaj dane, a pomogę je poprawnie wpisać.`
+        : 'Cześć! Pomogę Ci wypełnić zgłoszenie wypadku. Zadaj pytanie lub poproś o sprawdzenie braków.';
+      setMessages([{ role: 'assistant', content: intro }]);
+      lastFieldLabelRef.current = activeFieldLabel || null;
     }
-  }, [isOpen, activeField, activeFieldLabel]);
+  }, [isOpen, messages.length, activeFieldLabel]);
+
+  // When field changes during an open chat, append a short note but keep history
+  useEffect(() => {
+    if (!isOpen) return;
+    if (!activeFieldLabel) return;
+    if (lastFieldLabelRef.current === activeFieldLabel) return;
+    lastFieldLabelRef.current = activeFieldLabel;
+    setMessages((prev) => [
+      ...prev,
+      {
+        role: 'assistant',
+        content: `Przechodzimy do pola "${activeFieldLabel}". Podaj dane w wymaganym formacie, a jeśli coś jest niejasne – dopytam.`,
+      },
+    ]);
+  }, [isOpen, activeFieldLabel]);
 
   const sendMessage = async () => {
     if (!input.trim() || isLoading) return;
