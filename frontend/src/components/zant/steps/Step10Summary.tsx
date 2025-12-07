@@ -17,6 +17,7 @@ import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
 import { AccidentCase } from '@/types/zus-worker';
 import { useNavigate } from 'react-router-dom';
+import { generateNotificationPdf, generateNotificationDocx } from '@/lib/documentGenerator';
 
 interface SummarySection {
   title: string;
@@ -274,10 +275,14 @@ export function Step10Summary() {
     section.fields.filter((field) => field.hasOverride).map((field) => ({ ...field, section: section.title }))
   );
 
-  const handleGenerateDocuments = () => {
-    toast.success('Dokumenty zostały wygenerowane!', {
-      description: 'Za chwilę rozpocznie się pobieranie.',
-    });
+  const handleGenerateDocuments = (format: 'pdf' | 'docx') => {
+    if (format === 'pdf') {
+      generateNotificationPdf(state);
+      toast.success('Pobieram PDF', { description: 'Dokument został wygenerowany.' });
+    } else {
+      generateNotificationDocx(state);
+      toast.success('Pobieram DOCX', { description: 'Dokument został wygenerowany.' });
+    }
   };
 
   const handleSubmitToZus = () => {
@@ -424,11 +429,11 @@ export function Step10Summary() {
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <Button onClick={handleGenerateDocuments} className="gap-2">
+              <Button onClick={() => handleGenerateDocuments('pdf')} className="gap-2">
                 <Download className="w-4 h-4" />
                 Pobierz PDF
               </Button>
-              <Button variant="outline" onClick={handleGenerateDocuments} className="gap-2">
+              <Button variant="outline" onClick={() => handleGenerateDocuments('docx')} className="gap-2">
                 <FileText className="w-4 h-4" />
                 Pobierz DOCX (edytowalny)
               </Button>
