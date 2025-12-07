@@ -5,7 +5,16 @@ const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api
 export interface PipelineRunResponse {
   case_id: string;
   status: string;
+  stage?: string;
   result?: any;
+}
+
+export interface PipelineStatusResponse {
+  case_id: string;
+  status: string;
+  stage?: string;
+  result?: any;
+  error?: string | null;
 }
 
 export async function triggerPipelineAnalysis(documents: UploadedDocument[]): Promise<PipelineRunResponse> {
@@ -32,6 +41,15 @@ export async function triggerPipelineAnalysis(documents: UploadedDocument[]): Pr
   }
 
   return (await res.json()) as PipelineRunResponse;
+}
+
+export async function fetchPipelineStatus(caseId: string): Promise<PipelineStatusResponse> {
+  const res = await fetch(`${API_BASE}/pipeline/case/${caseId}/status`);
+  if (!res.ok) {
+    const message = await res.text();
+    throw new Error(message || `Pipeline status error (${res.status})`);
+  }
+  return (await res.json()) as PipelineStatusResponse;
 }
 
 const toBool = (value: unknown): boolean => {
@@ -144,8 +162,44 @@ export function mapPipelineResultToAnalysisResult(
 const recommendationFallback = (opinionText: string) =>
   opinionText || 'Brak szczegółowej rekomendacji – sprawdź wynik pipeline.';
 
-export async function runAnalysisWithMapping(documents: UploadedDocument[]): Promise<AnalysisResult> {
-  const response = await triggerPipelineAnalysis(documents);
-  return mapPipelineResultToAnalysisResult(response, documents);
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+/**
+ * Start pipeline and poll its status until completion/failure.
+ * Calls onStageChange whenever backend reports a new stage.
+ */
+export async function runAnalysisWithPolling(
+  documents: UploadedDocument[],
+  onStageChange?: (stage: string) => void,
+  pollIntervalMs = 1200,
+): Promise<AnalysisResult> {
+  const runResponse = await triggerPipelineAnalysis(documents);
+  const caseId = runResponse.case_id;
+  if (runResponse.stage && onStageChange) {
+    onStageChange(runResponse.stage);
+  }
+
+  // Fast path: if backend already completed (unlikely), return immediately
+  if (runResponse.status === 'completed' && runResponse.result) {
+    return mapPipelineResultToAnalysisResult(runResponse, documents);
+  }
+
+  while (true) {
+    await delay(pollIntervalMs);
+    const status = await fetchPipelineStatus(caseId);
+    if (status.stage && onStageChange) {
+      onStageChange(status.stage);
+    }
+
+    if (status.status === 'failed') {
+      throw new Error(status.error || 'Pipeline failed');
+    }
+    if (status.status === 'completed' && status.result) {
+      return mapPipelineResultToAnalysisResult(
+        { case_id: status.case_id, status: status.status, stage: status.stage, result: status.result },
+        documents,
+      );
+    }
+  }
 }
 

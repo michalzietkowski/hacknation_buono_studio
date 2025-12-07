@@ -14,7 +14,18 @@ class DocumentUploadMeta(BaseModel):
 class PipelineRunResponse(BaseModel):
     case_id: str
     status: str
+    stage: Optional[str] = None
     result: Optional[dict[str, Any]] = None
+
+    model_config = {"from_attributes": True}
+
+
+class PipelineStatusResponse(BaseModel):
+    case_id: str
+    status: str
+    stage: Optional[str] = None
+    result: Optional[dict[str, Any]] = None
+    error: Optional[str] = None
 
     model_config = {"from_attributes": True}
 

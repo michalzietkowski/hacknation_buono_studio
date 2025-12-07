@@ -1,4 +1,5 @@
 import json
+import time
 
 import pytest
 from fastapi.testclient import TestClient
@@ -52,12 +53,22 @@ def test_pipeline_run_stores_case_and_documents(client):
 
     assert response.status_code == 201
     body = response.json()
-    assert body["status"] == "completed"
-    assert body["result"]["files"] == 1
+    assert body["case_id"]
+    assert body["status"] in ("processing", "completed")
 
     db = TestingSessionLocal()
     try:
-        assert db.query(AnalysisCase).count() == 1
+        # allow background task to finish
+        for _ in range(10):
+            case = db.query(AnalysisCase).first()
+            if case and case.status == "completed":
+                break
+            time.sleep(0.05)
+            db.expire_all()
+
+        case = db.query(AnalysisCase).first()
+        assert case is not None
+        assert case.status in ("processing", "completed")
         assert db.query(AnalysisDocument).count() == 1
     finally:
         db.close()

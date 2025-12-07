@@ -85,6 +85,8 @@ Run services:
 - OCR stub: `app/pipeline/ingestion/ocr_pipeline.py` (pytesseract).
 - Prompt/runner stub: extractor/legal/opinion/card w `app/pipeline/...`.
 - Skrypt OCR: `scripts/run_ocr_examples.sh` (domyślne źródło `/app/data/raw/zus_examples`, wyniki w `data/ocr/zus_examples`), używa `uv run` + pdf2image.
+- Logi pipeline: INFO na stdout; po OCR logowane są strony i długość tekstu (`case_id`, nazwy plików). Podgląd: `docker compose logs -f api` albo lokalnie `uv run uvicorn ...` + logi z konsoli.
+- Progress frontend: `POST /api/v1/pipeline/run` zwraca `case_id`; status/polling po `GET /api/v1/pipeline/case/{id}/status` (status: processing/completed/failed, stage: received/ocr/classified/extracting/legal_reasoning/opinion/completed).
 
 ## Schemat bazy (ZUS wypadki)
 - Dokument: `docs/db_schema.md` – ERD, tabele (multi-tenant), mapowanie SQLAlchemy i notatki migracyjne.

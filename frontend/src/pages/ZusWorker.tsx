@@ -8,7 +8,7 @@ import { ProcessingStep } from '@/components/zus-worker/ProcessingStep';
 import { ResultsStep } from '@/components/zus-worker/ResultsStep';
 import { TestModeInstructions } from '@/components/zus-worker/TestModeInstructions';
 import { UploadedDocument, AnalysisResult } from '@/types/zus-worker-flow';
-import { runAnalysisWithMapping } from '@/lib/pipeline';
+import { runAnalysisWithPolling } from '@/lib/pipeline';
 
 type FlowStep = 'start' | 'test-mode' | 'upload' | 'summary' | 'processing' | 'results';
 
@@ -16,7 +16,10 @@ export default function ZusWorker() {
   const [currentStep, setCurrentStep] = useState<FlowStep>('start');
   const [documents, setDocuments] = useState<UploadedDocument[]>([]);
   const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);
-  const startAnalysis = useCallback(() => runAnalysisWithMapping(documents), [documents]);
+  const startAnalysis = useCallback(
+    (onStageChange?: (stage: string) => void) => runAnalysisWithPolling(documents, onStageChange),
+    [documents],
+  );
 
   const handleNewCase = () => {
     setDocuments([]);

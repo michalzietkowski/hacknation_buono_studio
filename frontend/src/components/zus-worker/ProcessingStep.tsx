@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils';
 
 interface ProcessingStepProps {
   documents: UploadedDocument[];
-  startAnalysis: () => Promise<AnalysisResult>;
+  startAnalysis: (onStageChange?: (stage: string) => void) => Promise<AnalysisResult>;
   onComplete: (result: AnalysisResult) => void;
   onError: () => void;
   onBack: () => void;
@@ -42,23 +42,41 @@ export function ProcessingStep({ documents, startAnalysis, onComplete, onError, 
   });
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+  const stageToState = (stage?: string): ProcessingState => {
+    switch (stage) {
+      case 'received':
+      case 'ocr':
+        return { ocr: 'in_progress', analysis: 'pending', generation: 'pending' };
+      case 'classified_pending':
+      case 'classified':
+      case 'extracting':
+      case 'legal_reasoning':
+        return { ocr: 'completed', analysis: 'in_progress', generation: 'pending' };
+      case 'opinion':
+        return { ocr: 'completed', analysis: 'completed', generation: 'in_progress' };
+      case 'completed':
+        return { ocr: 'completed', analysis: 'completed', generation: 'completed' };
+      default:
+        return { ocr: 'pending', analysis: 'pending', generation: 'pending' };
+    }
+  };
+
+  const handleStageChange = (stage: string) => {
+    setState(stageToState(stage));
+  };
+
   const runProcessing = async () => {
     setErrorMessage(null);
-    setState({
-      ocr: 'pending',
-      analysis: 'pending',
-      generation: 'pending',
-    });
+    setState(stageToState('received'));
 
     try {
-      setState((prev) => ({ ...prev, ocr: 'in_progress', analysis: 'in_progress' }));
-      const result = await startAnalysis();
-      setState({ ocr: 'completed', analysis: 'completed', generation: 'completed' });
+      const result = await startAnalysis(handleStageChange);
+      setState(stageToState('completed'));
       await new Promise((resolve) => setTimeout(resolve, 200));
       onComplete(result);
     } catch (error: any) {
       setErrorMessage(error?.message || 'Wystąpił błąd podczas przetwarzania. Spróbuj ponownie.');
-      setState((prev) => ({ ...prev, analysis: 'error', generation: 'error' }));
+      setState((prev) => ({ ...prev, analysis: 'error', generation: 'error', ocr: prev.ocr === 'pending' ? 'error' : prev.ocr }));
       onError();
     }
   };

@@ -30,4 +30,5 @@ Both workflows trigger on pushes to `main` and via manual dispatch.
 - Backend posiada gotowe modele SQLAlchemy (angielskie atrybuty, polskie nazwy kolumn); po migracji będzie można dodać API do wypełniania formularzy i generowania zgłoszeń do ZUS.
 - Migracje Alembic: uruchom `uv run alembic upgrade head` (lokalnie lub jako post-deploy hook w Render z poprawnym `DATABASE_URL`).
 - Upload i analiza dokumentów wypadku: na froncie wybierz pliki → „Uruchom analizę”; wysyłka trafia na `POST /api/v1/pipeline/run` (multipart), pliki zapisują się w bazie, a backend uruchamia pipeline (OCR + ekstrakcja + opinia) i zwraca `case_id` wraz z wynikiem.
+- Logi pipeline (OCR, klasyfikacja, generacja) lecą na stdout; w Dockerze podejrzyj `docker compose logs -f api`. Postęp na froncie: `GET /api/v1/pipeline/case/{id}/status` zwraca `status` i `stage`.
 
