@@ -10,6 +10,7 @@ docker compose up --build
 
 - Frontend: http://localhost:3000  
 - Backend: http://localhost:8000 (API prefix `/api/v1`)
+- Vector DB: Chroma at http://localhost:8001 (from `docker compose up`)
 
 Environment defaults are embedded for local compose. To enable real LLM responses, provide `OPENAI_API_KEY` in your environment (e.g., export before `docker compose up`).
 
@@ -20,6 +21,7 @@ Environment defaults are embedded for local compose. To enable real LLM response
 
 - Backend Render deploy: `.github/workflows/deploy-render.yml` (secrets: `RENDER_API_KEY`, `RENDER_SERVICE_ID`, optional `RENDER_BRANCH`).
 - Frontend Render deploy: `.github/workflows/deploy-frontend-render.yml` (secrets: `RENDER_FRONTEND_API_KEY`, `RENDER_FRONTEND_SERVICE_ID`, optional `RENDER_FRONTEND_BRANCH`).
+- Chroma Render deploy: create a Web Service from image `chromadb/chroma:0.5.23`, port `8000`, persistent disk 25GB at `/chroma/.chroma`, env `CHROMA_SERVER_HTTP_PORT=8000` and `ANONYMIZED_TELEMETRY=false`; health check `GET /api/v1/heartbeat`. Point backend env `CHROMA_URL` to this URL (plus `CHROMA_AUTH_TOKEN` if you enable token auth).
 
 Both workflows trigger on pushes to `main` and via manual dispatch.
 

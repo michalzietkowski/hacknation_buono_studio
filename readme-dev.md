@@ -4,6 +4,7 @@
 - Backend: FastAPI + LangChain/LangGraph, uv for deps, Docker/Docker Compose.
 - Frontend: React + Vite (TypeScript), npm, Docker/nginx for production build.
 - DB: Postgres (via docker-compose).
+- Vector DB: Chroma (Dockerized, HTTP server mode).
 
 ## Prerequisites
 - Docker + Docker Compose
@@ -23,6 +24,7 @@ Run services:
 - Backend (hot reload): `uv run uvicorn app.main:app --reload --host 0.0.0.0 --port 8000`
 - Frontend (Vite dev): `cd frontend && npm run dev -- --host --port 3000`
 - Full stack with DB (no hot reload for frontend): `docker compose up --build`
+- Only Chroma: `docker compose up chroma` (served at http://localhost:8001, data in `chroma_data` volume)
 
 ## Environment
 - Backend: `.env` (defaults in `app/core/config.py`)
@@ -30,6 +32,9 @@ Run services:
   - `OPENAI_API_KEY` (needed for real LLM responses)
   - `FRONTEND_ORIGIN` (default `http://localhost:3000`)
   - `ASSIST_HISTORY_LIMIT` (optional, default 30) – how many turns to retain per session
+  - `CHROMA_URL` (default `http://localhost:8000`; compose sets `http://chroma:8000`, host reachability via `http://localhost:8001`)
+  - `CHROMA_COLLECTION` (default `cases`)
+  - `CHROMA_AUTH_TOKEN` (optional, token auth header for Chroma HttpClient)
 - Frontend: `.env.example` → `.env.local`
   - `VITE_API_BASE_URL` (default `http://localhost:8000/api/v1`; compose build uses `http://api:8000/api/v1`)
 
@@ -52,6 +57,20 @@ Run services:
 - `make migrate` – apply Alembic migrations (`uv run alembic upgrade head`)
 - `make alembic-revision msg="..."` – autogenerate migration
 - `make compose-up-migrate` – uruchom db, wykonaj migracje, podnieś api+frontend
+
+## ChromaDB (vector store)
+- Docker image: `chromadb/chroma:0.5.23` (compose uses the same tag).
+- Ports: server listens on `8000`; compose maps to host `8001`.
+- Persistence: mount a volume to `/chroma/.chroma` (compose uses named volume `chroma_data`).
+- Telemetry: `ANONYMIZED_TELEMETRY=false` set in compose.
+- Auth (optional): set `CHROMA_AUTH_TOKEN` in backend; configure server-side token auth per Chroma docs (token provider).
+- Render setup (Web Service):
+  - Image: `chromadb/chroma:0.5.23` (public Docker).
+  - Port: `8000` (Render `PORT` env inferred from Dockerfile, expose this).
+  - Persistent disk: 25GB mounted at `/chroma/.chroma`.
+  - Env: `CHROMA_SERVER_HTTP_PORT=8000`, `ANONYMIZED_TELEMETRY=false` (optional token auth per above).
+  - Health check: `GET /api/v1/heartbeat` (Render can use this path).
+- Backend → Chroma on Render: set `CHROMA_URL` to the Chroma service URL (e.g., `https://<chroma>.onrender.com`), and `CHROMA_AUTH_TOKEN` if enabled.
 
 ## ZANT II – pipeline OCR/LLM (szkielet)
 - Schemat danych: `docs/DATA_SCHEMA.md`, Pydantic: `app/pipeline/extraction/schema.py`.

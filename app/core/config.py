@@ -12,6 +12,11 @@ class Settings(BaseSettings):
     # Database (default for docker-compose; override with env var for local)
     DATABASE_URL: str = "postgresql+psycopg://user:password@localhost:5432/app"
     
+    # Vector store (Chroma)
+    CHROMA_URL: str = "http://localhost:8000"
+    CHROMA_AUTH_TOKEN: str | None = None
+    CHROMA_COLLECTION: str = "cases"
+    
     # LLM
     OPENAI_API_KEY: str | None = None
     ASSIST_HISTORY_LIMIT: int = 30
