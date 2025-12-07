@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { ZusWorkerHeader } from '@/components/zus-worker/ZusWorkerHeader';
 import { ZusWorkerStartScreen } from '@/components/zus-worker/ZusWorkerStartScreen';
@@ -8,6 +8,7 @@ import { ProcessingStep } from '@/components/zus-worker/ProcessingStep';
 import { ResultsStep } from '@/components/zus-worker/ResultsStep';
 import { TestModeInstructions } from '@/components/zus-worker/TestModeInstructions';
 import { UploadedDocument, AnalysisResult } from '@/types/zus-worker-flow';
+import { runAnalysisWithMapping } from '@/lib/pipeline';
 
 type FlowStep = 'start' | 'test-mode' | 'upload' | 'summary' | 'processing' | 'results';
 
@@ -15,6 +16,7 @@ export default function ZusWorker() {
   const [currentStep, setCurrentStep] = useState<FlowStep>('start');
   const [documents, setDocuments] = useState<UploadedDocument[]>([]);
   const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);
+  const startAnalysis = useCallback(() => runAnalysisWithMapping(documents), [documents]);
 
   const handleNewCase = () => {
     setDocuments([]);
@@ -80,8 +82,9 @@ export default function ZusWorker() {
         {currentStep === 'processing' && (
           <ProcessingStep
             documents={documents}
+            startAnalysis={startAnalysis}
             onComplete={handleProcessingComplete}
-            onError={() => {}}
+            onError={() => setCurrentStep('summary')}
             onBack={() => setCurrentStep('summary')}
           />
         )}

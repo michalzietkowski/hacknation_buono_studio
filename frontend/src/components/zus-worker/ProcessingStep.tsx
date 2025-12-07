@@ -7,6 +7,7 @@ import { cn } from '@/lib/utils';
 
 interface ProcessingStepProps {
   documents: UploadedDocument[];
+  startAnalysis: () => Promise<AnalysisResult>;
   onComplete: (result: AnalysisResult) => void;
   onError: () => void;
   onBack: () => void;
@@ -18,25 +19,22 @@ const stages = [
     title: 'Odczytywanie dokumentów (OCR)',
     description: 'Konwersja skanów i plików PDF na tekst',
     icon: FileSearch,
-    duration: 2000,
   },
   {
     key: 'analysis' as const,
     title: 'Analiza zdarzenia',
     description: 'Ocena zgodności z definicją wypadku przy pracy',
     icon: Brain,
-    duration: 2500,
   },
   {
     key: 'generation' as const,
     title: 'Tworzenie dokumentów',
     description: 'Generowanie karty wypadku i opinii',
     icon: FileText,
-    duration: 2000,
   },
 ];
 
-export function ProcessingStep({ documents, onComplete, onError, onBack }: ProcessingStepProps) {
+export function ProcessingStep({ documents, startAnalysis, onComplete, onError, onBack }: ProcessingStepProps) {
   const [state, setState] = useState<ProcessingState>({
     ocr: 'pending',
     analysis: 'pending',
@@ -53,36 +51,22 @@ export function ProcessingStep({ documents, onComplete, onError, onBack }: Proce
     });
 
     try {
-      // Stage 1: OCR
-      setState(prev => ({ ...prev, ocr: 'in_progress' }));
-      await new Promise(resolve => setTimeout(resolve, stages[0].duration));
-      setState(prev => ({ ...prev, ocr: 'completed' }));
-
-      // Stage 2: Analysis
-      setState(prev => ({ ...prev, analysis: 'in_progress' }));
-      await new Promise(resolve => setTimeout(resolve, stages[1].duration));
-      setState(prev => ({ ...prev, analysis: 'completed' }));
-
-      // Stage 3: Generation
-      setState(prev => ({ ...prev, generation: 'in_progress' }));
-      await new Promise(resolve => setTimeout(resolve, stages[2].duration));
-      setState(prev => ({ ...prev, generation: 'completed' }));
-
-      // Mock result generation
-      const mockResult: AnalysisResult = generateMockResult(documents);
-      
-      // Short delay before showing results
-      await new Promise(resolve => setTimeout(resolve, 500));
-      onComplete(mockResult);
-    } catch (error) {
-      setErrorMessage('Wystąpił błąd podczas przetwarzania. Spróbuj ponownie.');
+      setState((prev) => ({ ...prev, ocr: 'in_progress', analysis: 'in_progress' }));
+      const result = await startAnalysis();
+      setState({ ocr: 'completed', analysis: 'completed', generation: 'completed' });
+      await new Promise((resolve) => setTimeout(resolve, 200));
+      onComplete(result);
+    } catch (error: any) {
+      setErrorMessage(error?.message || 'Wystąpił błąd podczas przetwarzania. Spróbuj ponownie.');
+      setState((prev) => ({ ...prev, analysis: 'error', generation: 'error' }));
       onError();
     }
   };
 
   useEffect(() => {
     runProcessing();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [startAnalysis]);
 
   const getStageStatus = (key: 'ocr' | 'analysis' | 'generation'): ProcessingStatus => state[key];
 
@@ -121,27 +105,33 @@ export function ProcessingStep({ documents, onComplete, onError, onBack }: Proce
 
               return (
                 <div key={stage.key} className="relative">
-                  <div className={cn(
-                    "flex items-start gap-4 p-4 rounded-lg transition-all",
-                    isActive && "bg-primary/5 border border-primary/20",
-                    isCompleted && "bg-green-500/5",
-                    status === 'error' && "bg-destructive/5 border border-destructive/20"
-                  )}>
-                    <div className={cn(
-                      "w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 transition-colors",
-                      isActive && "bg-primary/10",
-                      isCompleted && "bg-green-500/10",
-                      status === 'pending' && "bg-muted",
-                      status === 'error' && "bg-destructive/10"
-                    )}>
+                  <div
+                    className={cn(
+                      'flex items-start gap-4 p-4 rounded-lg transition-all',
+                      isActive && 'bg-primary/5 border border-primary/20',
+                      isCompleted && 'bg-green-500/5',
+                      status === 'error' && 'bg-destructive/5 border border-destructive/20',
+                    )}
+                  >
+                    <div
+                      className={cn(
+                        'w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 transition-colors',
+                        isActive && 'bg-primary/10',
+                        isCompleted && 'bg-green-500/10',
+                        status === 'pending' && 'bg-muted',
+                        status === 'error' && 'bg-destructive/10',
+                      )}
+                    >
                       {renderIcon(stage)}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className={cn(
-                        "font-medium",
-                        isActive && "text-primary",
-                        isCompleted && "text-green-700 dark:text-green-400"
-                      )}>
+                      <h3
+                        className={cn(
+                          'font-medium',
+                          isActive && 'text-primary',
+                          isCompleted && 'text-green-700 dark:text-green-400',
+                        )}
+                      >
                         {stage.title}
                       </h3>
                       <p className="text-sm text-muted-foreground">{stage.description}</p>
@@ -151,17 +141,14 @@ export function ProcessingStep({ documents, onComplete, onError, onBack }: Proce
                         </div>
                       )}
                     </div>
-                    {isCompleted && (
-                      <span className="text-xs text-green-600 font-medium">Ukończono</span>
-                    )}
+                    {isCompleted && <span className="text-xs text-green-600 font-medium">Ukończono</span>}
                   </div>
 
                   {/* Connector line */}
                   {!isLast && (
-                    <div className={cn(
-                      "absolute left-10 top-16 w-0.5 h-6",
-                      isCompleted ? "bg-green-500/30" : "bg-border"
-                    )} />
+                    <div
+                      className={cn('absolute left-10 top-16 w-0.5 h-6', isCompleted ? 'bg-green-500/30' : 'bg-border')}
+                    />
                   )}
                 </div>
               );
@@ -187,97 +174,4 @@ export function ProcessingStep({ documents, onComplete, onError, onBack }: Proce
       </Card>
     </div>
   );
-}
-
-// Mock result generator
-function generateMockResult(documents: UploadedDocument[]): AnalysisResult {
-  const hasHandwritten = documents.some(d => d.form === 'handwritten');
-  
-  return {
-    caseId: `ZUS/${new Date().getFullYear()}/${Date.now().toString().slice(-6)}`,
-    timestamp: new Date().toISOString(),
-    qualityWarnings: hasHandwritten 
-      ? ['Niektóre dokumenty zawierają pismo odręczne - jakość odczytu może być obniżona.'] 
-      : undefined,
-    accidentCard: {
-      injuredPerson: {
-        firstName: 'Jan',
-        lastName: 'Kowalski',
-        pesel: '85010112345',
-        birthDate: '1985-01-01',
-        address: 'ul. Przykładowa 15, 00-001 Warszawa',
-        position: 'Operator maszyn CNC',
-      },
-      employer: {
-        name: 'Zakład Produkcyjny METALEX Sp. z o.o.',
-        nip: '1234567890',
-        regon: '123456789',
-        address: 'ul. Przemysłowa 10, 00-002 Warszawa',
-        pkd: '25.62.Z - Obróbka mechaniczna elementów metalowych',
-      },
-      accident: {
-        date: '2024-01-15',
-        time: '10:30',
-        place: 'Hala produkcyjna nr 2, stanowisko obróbki',
-        placeType: 'Miejsce stałego wykonywania pracy',
-        activityDuringAccident: 'Obsługa tokarki CNC przy obróbce elementów stalowych',
-        directEvent: 'Wyrwanie obrabianego elementu z uchwytu tokarki',
-        externalCause: 'Uderzenie przez wyrzucony element metalowy',
-      },
-      injury: {
-        type: 'Uraz mechaniczny - złamanie',
-        bodyPart: 'Prawa ręka - przedramię',
-        description: 'Złamanie kości promieniowej prawego przedramienia z przemieszczeniem',
-        firstAidProvided: true,
-      },
-      witnesses: [
-        { name: 'Adam Nowak', address: 'ul. Robotnicza 5, 00-003 Warszawa' },
-        { name: 'Piotr Wiśniewski', address: 'ul. Fabryczna 8, 00-004 Warszawa' },
-      ],
-      qualification: {
-        isWorkAccident: true,
-        justification: 'Zdarzenie spełnia wszystkie przesłanki wypadku przy pracy zgodnie z art. 3 ust. 1 ustawy o ubezpieczeniu społecznym z tytułu wypadków przy pracy i chorób zawodowych.',
-        legalBasis: 'Art. 3 ust. 1 ustawy z dnia 30 października 2002 r. o ubezpieczeniu społecznym z tytułu wypadków przy pracy i chorób zawodowych (Dz.U. 2022 poz. 2189)',
-      },
-    },
-    opinion: {
-      factualState: `W dniu 15 stycznia 2024 r. około godziny 10:30 Jan Kowalski, zatrudniony na stanowisku operatora maszyn CNC w Zakładzie Produkcyjnym METALEX Sp. z o.o., doznał urazu podczas wykonywania obowiązków służbowych. 
-
-Poszkodowany obsługiwał tokarkę CNC przy obróbce elementów stalowych. W trakcie pracy doszło do wyrwania obrabianego elementu z uchwytu tokarki. Element uderzył poszkodowanego w prawą rękę, powodując złamanie kości promieniowej prawego przedramienia z przemieszczeniem.
-
-Na miejscu zdarzenia udzielono pierwszej pomocy. Poszkodowany został przewieziony do szpitala, gdzie przeprowadzono niezbędne zabiegi medyczne.`,
-      
-      evidenceMaterial: `1. Zawiadomienie o wypadku z dnia 15.01.2024 r.
-2. Wyjaśnienia poszkodowanego Jana Kowalskiego
-3. Zeznania świadków: Adama Nowaka i Piotra Wiśniewskiego
-4. Dokumentacja medyczna z SOR
-5. Protokół oględzin miejsca zdarzenia`,
-
-      definitionAnalysis: {
-        suddenness: {
-          met: true,
-          justification: 'Zdarzenie miało charakter nagły - wyrwanie elementu z uchwytu tokarki i uderzenie poszkodowanego nastąpiło w ułamku sekundy, bez możliwości przewidzenia i uniknięcia.',
-        },
-        externalCause: {
-          met: true,
-          justification: 'Przyczyną zewnętrzną był wyrzucony element metalowy, który uderzył poszkodowanego. Przyczyna ta znajdowała się poza organizmem poszkodowanego.',
-        },
-        injury: {
-          met: true,
-          justification: 'W wyniku zdarzenia poszkodowany doznał złamania kości promieniowej prawego przedramienia z przemieszczeniem, co stanowi uraz w rozumieniu przepisów.',
-        },
-        workRelation: {
-          met: true,
-          justification: 'Zdarzenie nastąpiło podczas wykonywania przez poszkodowanego zwykłych czynności pracowniczych na rzecz pracodawcy, w miejscu i czasie pracy.',
-        },
-      },
-      
-      conclusion: {
-        isWorkAccident: true,
-        summary: `Na podstawie zgromadzonego materiału dowodowego oraz przeprowadzonej analizy stwierdzam, że zdarzenie z dnia 15 stycznia 2024 r. spełnia wszystkie przesłanki wypadku przy pracy określone w art. 3 ust. 1 ustawy z dnia 30 października 2002 r. o ubezpieczeniu społecznym z tytułu wypadków przy pracy i chorób zawodowych.
-
-Zdarzenie cechowało się nagłością, zostało wywołane przyczyną zewnętrzną, nastąpiło w związku z pracą oraz spowodowało uraz. W związku z powyższym rekomenduję uznanie zdarzenia za wypadek przy pracy.`,
-      },
-    },
-  };
 }

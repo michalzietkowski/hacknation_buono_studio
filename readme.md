@@ -27,4 +27,5 @@ Both workflows trigger on pushes to `main` and via manual dispatch.
 - Przygotowany schemat bazy dla zgłoszeń wypadków i wyjaśnień poszkodowanego (multi-tenant, załączniki, pytania warunkowe) – patrz `docs/db_schema.md`.
 - Backend posiada gotowe modele SQLAlchemy (angielskie atrybuty, polskie nazwy kolumn); po migracji będzie można dodać API do wypełniania formularzy i generowania zgłoszeń do ZUS.
 - Migracje Alembic: uruchom `uv run alembic upgrade head` (lokalnie lub jako post-deploy hook w Render z poprawnym `DATABASE_URL`).
+- Upload i analiza dokumentów wypadku: na froncie wybierz pliki → „Uruchom analizę”; wysyłka trafia na `POST /api/v1/pipeline/run` (multipart), pliki zapisują się w bazie, a backend uruchamia pipeline (OCR + ekstrakcja + opinia) i zwraca `case_id` wraz z wynikiem.
 

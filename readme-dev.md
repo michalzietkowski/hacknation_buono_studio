@@ -37,6 +37,7 @@ Run services:
 - `/api/v1/assist/field` – form support assistant (body: `field_id`, `message`, optional `form_state`, optional `history` of `{role, content}`, optional `session_id` to persist context server-side); returns `reply` string.
 - `/api/v1/agent-chat/completion` – general agent chat (existing).
 - `/api/v1/chat/completion` – basic echo/LLM chat (stub unless `OPENAI_API_KEY` set).
+- `/api/v1/pipeline/run` – multipart upload (`files[]`, `documents_meta` JSON array with `{id,name,type,form,otherDescription}`) saves BLOBs to DB (`analysis_documents` + `analysis_cases`) and runs the accident pipeline; returns `case_id`, status, and pipeline output.
 
 ## Render deploys
 - Backend workflow: `.github/workflows/deploy-render.yml` expects `RENDER_API_KEY`, `RENDER_SERVICE_ID`, optional `RENDER_BRANCH`.
@@ -65,7 +66,7 @@ Run services:
 - Modele dodane w `app/models/` (Base + enumy + wypadki, pytania dynamiczne, załączniki).
 - Migracje (po konfiguracji Alembic):
   - `uv run alembic revision --autogenerate -m "init accident schema"`
-  - `uv run alembic upgrade head`
+  - `uv run alembic upgrade head` (wymagane nowe tabele `analysis_cases`/`analysis_documents` dla uploadu plików)
 
 ## Migracje lokalnie (docker compose)
 1. `docker compose up -d --build db`
